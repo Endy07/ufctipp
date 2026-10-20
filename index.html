@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#151a22">
+  <title>UFC Tipp</title>
+  <meta name="description" content="Baráti tippjáték az UFC-estre: tippeld meg, ki nyeri a meccseket.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='30,4 70,4 96,30 96,70 70,96 30,96 4,70 4,30' fill='%23151a22' stroke='%23d23b3b' stroke-width='8'/%3E%3C/svg%3E">
+</head>
+<body>
+  <header class="top">
+    <div class="top__event">
+      <span class="top__name" id="eventName">UFC</span>
+      <span class="top__sub" id="eventSub"></span>
+    </div>
+    <button class="top__me" id="meBtn" type="button" hidden></button>
+  </header>
+
+  <div class="demo-banner" id="demoBanner" hidden>Demó mód: az adatok csak ebben a böngészőben vannak.</div>
+
+  <main id="view" tabindex="-1"></main>
+
+  <nav class="tabs" id="tabs" hidden>
+    <a href="#kartya" data-tab="kartya">Meccsek</a>
+    <a href="#ranglista" data-tab="ranglista">Ranglista</a>
+    <a href="#admin" data-tab="admin" id="adminTab" hidden>Admin</a>
+  </nav>
+
+  <div class="sheet" id="sheet" hidden>
+    <div class="sheet__backdrop" data-close></div>
+    <section class="sheet__panel" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+      <button class="sheet__close" type="button" data-close aria-label="Bezárás">×</button>
+      <div id="sheetBody"></div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

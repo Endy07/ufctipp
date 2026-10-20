@@ -1,0 +1,3759 @@
+{
+    "event": {
+        "slug": "ufc-333",
+        "title": "UFC 333: Volkanovski vs Evloev",
+        "url": "https://www.ufc.com/event/ufc-333",
+        "sections": [
+            {
+                "key": "main",
+                "start": 1792864800
+            },
+            {
+                "key": "prelims",
+                "start": 1792857600
+            },
+            {
+                "key": "early",
+                "start": 1792850400
+            }
+        ],
+        "scrapedAt": "2026-10-20T23:15:14+00:00",
+        "source": "UFC.com (hivatalos esemény- és versenyzőoldalak)"
+    },
+    "fights": [
+        {
+            "id": 13063,
+            "card": "main",
+            "weightClass": "Featherweight Title Bout",
+            "titleBout": true,
+            "a": {
+                "slug": "alexander-volkanovski",
+                "name": "Alexander Volkanovski",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2026-01/VOLKANOVSKI_ALEXANDER_L_BELT_01-31.png?itok=3qNxrgq4",
+                "country": "Australia",
+                "flag": "https://ufc.com/images/flags/AU.PNG",
+                "rank": "C",
+                "odds": "-110"
+            },
+            "b": {
+                "slug": "movsar-evloev",
+                "name": "Movsar Evloev",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2025-01/5/EVLOEV_MOVSAR_R_01-20.png?itok=cpiJumzn",
+                "country": "Russia",
+                "flag": "https://ufc.com/images/flags/RU.PNG",
+                "rank": "#1",
+                "odds": "-110"
+            },
+            "order": 1
+        },
+        {
+            "id": 13064,
+            "card": "main",
+            "weightClass": "Bantamweight Title Bout",
+            "titleBout": true,
+            "a": {
+                "slug": "petr-yan",
+                "name": "Petr Yan",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2025-12/YAN_PETR_L_BELT_04-09.png?itok=JNq7gX3A",
+                "country": "Russia",
+                "flag": "https://ufc.com/images/flags/RU.PNG",
+                "rank": "C",
+                "odds": "-"
+            },
+            "b": {
+                "slug": "merab-dvalishvili",
+                "name": "Merab Dvalishvili",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2022-08/DVALISHVILI_MERAB_R_08-20.png?itok=zSea1zIt",
+                "country": "Georgia",
+                "flag": "https://ufc.com/images/flags/GE.PNG",
+                "rank": "#1",
+                "odds": "-"
+            },
+            "order": 2
+        },
+        {
+            "id": 13066,
+            "card": "main",
+            "weightClass": "Flyweight Bout",
+            "titleBout": false,
+            "a": {
+                "slug": "loneer-kavanagh",
+                "name": "Lone’er Kavanagh",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2025-03/KAVANAGH_LONEER_L_03-22.png?itok=_veRL6Og",
+                "country": "England",
+                "flag": "https://ufc.com/images/flags/EN.PNG",
+                "rank": "#6",
+                "odds": "-105"
+            },
+            "b": {
+                "slug": "ramazan-temirov",
+                "name": "Ramazan Temirov",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2026-07/TEMIROV_RAMAZAN_R_07-25.png?itok=mTV8xLSo",
+                "country": "Uzbekistan",
+                "flag": "https://ufc.com/images/flags/UZ.PNG",
+                "rank": "#10",
+                "odds": "-115"
+            },
+            "order": 3
+        },
+        {
+            "id": 13125,
+            "card": "main",
+            "weightClass": "Heavyweight Bout",
+            "titleBout": false,
+            "a": {
+                "slug": "alexander-volkov",
+                "name": "Alexander Volkov",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2026-05/VOLKOV_ALEXANDER_L_05-09.png?itok=kdHGCtDI",
+                "country": "Russia",
+                "flag": "https://ufc.com/images/flags/RU.PNG",
+                "rank": "#2",
+                "odds": "-120"
+            },
+            "b": {
+                "slug": "rizvan-kuniev",
+                "name": "Rizvan Kuniev",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2026-07/KUNIEV_RIZVAN_R_02-07.png?itok=qMQIRmwO",
+                "country": "Russia",
+                "flag": "https://ufc.com/images/flags/RU.PNG",
+                "rank": "#7",
+                "odds": "+100"
+            },
+            "order": 4
+        },
+        {
+            "id": 13215,
+            "card": "main",
+            "weightClass": "Featherweight Bout",
+            "titleBout": false,
+            "a": {
+                "slug": "aaron-pico",
+                "name": "Aaron Pico",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2025-08/PICO_AARON_R_08-16.png?itok=c4FjhSRf",
+                "country": "United States",
+                "flag": "https://ufc.com/images/flags/US.PNG",
+                "rank": "#11",
+                "odds": "-105"
+            },
+            "b": {
+                "slug": "losene-keita",
+                "name": "Losene Keita",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2026-03/KEITA_LOSENE_R_03-21.png?itok=FsuKPcwQ",
+                "country": "Belgium",
+                "flag": "https://ufc.com/images/flags/BE.PNG",
+                "rank": "",
+                "odds": "-115"
+            },
+            "order": 5
+        },
+        {
+            "id": 13065,
+            "card": "prelims",
+            "weightClass": "Light Heavyweight Bout",
+            "titleBout": false,
+            "a": {
+                "slug": "azamat-murzakanov",
+                "name": "Azamat Murzakanov",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2026-04/MURZAKANOV_AZAMAT_L_04-11.png?itok=Ivep7_PI",
+                "country": "Russia",
+                "flag": "https://ufc.com/images/flags/RU.PNG",
+                "rank": "#7",
+                "odds": "-220"
+            },
+            "b": {
+                "slug": "dominick-reyes",
+                "name": "Dominick Reyes",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2025-09/REYES_DOMINICK_R_09-27.png?itok=Svdf4K4D",
+                "country": "United States",
+                "flag": "https://ufc.com/images/flags/US.PNG",
+                "rank": "#8",
+                "odds": "+180"
+            },
+            "order": 6
+        },
+        {
+            "id": 13081,
+            "card": "prelims",
+            "weightClass": "Light Heavyweight Bout",
+            "titleBout": false,
+            "a": {
+                "slug": "nikita-krylov",
+                "name": "Nikita Krylov",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2026-07/KRYLOV_NIKITA_L_07-11.png?itok=QAVNE3gG",
+                "country": "Russia",
+                "flag": "https://ufc.com/images/flags/RU.PNG",
+                "rank": "#15",
+                "odds": "+350"
+            },
+            "b": {
+                "slug": "abdulrakhman-yakhyaev",
+                "name": "Abdul Rakhman Yakhyaev",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2026-06/YAKHYAEV_ABDUL_RAKHMAN_L_06-27.png?itok=5uUIUgLu",
+                "country": "Türkiye",
+                "flag": "https://ufc.com/images/flags/TR.PNG",
+                "rank": "",
+                "odds": "-450"
+            },
+            "order": 7
+        },
+        {
+            "id": 13082,
+            "card": "prelims",
+            "weightClass": "Middleweight Bout",
+            "titleBout": false,
+            "a": {
+                "slug": "abus-magomedov",
+                "name": "Abus Magomedov",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2026-06/MAGOMEDOV_ABUS_L_06-27.png?itok=xmOlGKCh",
+                "country": "Germany",
+                "flag": "https://ufc.com/images/flags/DE.PNG",
+                "rank": "#12",
+                "odds": "-120"
+            },
+            "b": {
+                "slug": "cam-rowston",
+                "name": "Cam Rowston",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2026-04/ROWSTON_CAM_L_05-02.png?itok=JIk0-RqX",
+                "country": "Australia",
+                "flag": "https://ufc.com/images/flags/AU.PNG",
+                "rank": "",
+                "odds": "+100"
+            },
+            "order": 8
+        },
+        {
+            "id": 13067,
+            "card": "prelims",
+            "weightClass": "Lightweight Bout",
+            "titleBout": false,
+            "a": {
+                "slug": "grant-dawson",
+                "name": "Grant Dawson",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2026-05/DAWSON_GRANT_L_05-09.png?itok=aw_R2HhN",
+                "country": "United States",
+                "flag": "https://ufc.com/images/flags/US.PNG",
+                "rank": "",
+                "odds": "-125"
+            },
+            "b": {
+                "slug": "nurullo-aliev",
+                "name": "Nurullo Aliev",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2025-01/2/ALIEV_NURULLO_R_01-11.png?itok=CbowQZhN",
+                "country": "Tajikistan",
+                "flag": "https://ufc.com/images/flags/TJ.PNG",
+                "rank": "",
+                "odds": "+105"
+            },
+            "order": 9
+        },
+        {
+            "id": 13221,
+            "card": "early",
+            "weightClass": "Bantamweight Bout",
+            "titleBout": false,
+            "a": {
+                "slug": "colby-thicknesse",
+                "name": "Colby Thicknesse",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2026-04/THICKNESSE_COLBY_L_05-02.png?itok=yt5lSRWc",
+                "country": "Australia",
+                "flag": "https://ufc.com/images/flags/AU.PNG",
+                "rank": "",
+                "odds": "+400"
+            },
+            "b": {
+                "slug": "asaf-chopurov",
+                "name": "Asaf Chopurov",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/image/fighter_images/SHADOW_Fighter_fullLength_BLUE.png?VersionId=1Jeml9w1QwZqmMUJDg8qTrTk7fFhqUra&itok=BgqHA24D",
+                "country": "Russia",
+                "flag": "https://ufc.com/images/flags/RU.PNG",
+                "rank": "",
+                "odds": "-550"
+            },
+            "order": 10
+        },
+        {
+            "id": 13220,
+            "card": "early",
+            "weightClass": "Middleweight Bout",
+            "titleBout": false,
+            "a": {
+                "slug": "abubakar-vagaev",
+                "name": "Abubakar Vagaev",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2026-07/VAGAEV_ABUBAKAR_L_07-25.png?itok=zGrbs9xS",
+                "country": "Russia",
+                "flag": "https://ufc.com/images/flags/RU.PNG",
+                "rank": "",
+                "odds": "-190"
+            },
+            "b": {
+                "slug": "jacob-malkoun",
+                "name": "Jacob Malkoun",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2026-02/MALKOUN_JACOB_R_01-31.png?itok=QRiNqiy2",
+                "country": "Australia",
+                "flag": "https://ufc.com/images/flags/AU.PNG",
+                "rank": "",
+                "odds": "+160"
+            },
+            "order": 11
+        },
+        {
+            "id": 13224,
+            "card": "early",
+            "weightClass": "Featherweight Bout",
+            "titleBout": false,
+            "a": {
+                "slug": "bolaji-oki",
+                "name": "Bolaji Oki",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2026-03/OKI_BOLAJI_L_03-14.png?itok=2twcXGCg",
+                "country": "Belgium",
+                "flag": "https://ufc.com/images/flags/BE.PNG",
+                "rank": "",
+                "odds": "+110"
+            },
+            "b": {
+                "slug": "daniel-santos",
+                "name": "Daniel Santos",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2026-05/SANTOS_DANIEL_R_05-16.png?itok=DI8K-2rm",
+                "country": "Brazil",
+                "flag": "https://ufc.com/images/flags/BR.PNG",
+                "rank": "",
+                "odds": "-130"
+            },
+            "order": 12
+        },
+        {
+            "id": 13225,
+            "card": "early",
+            "weightClass": "Lightweight Bout",
+            "titleBout": false,
+            "a": {
+                "slug": "kody-steele",
+                "name": "Kody Steele",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2025-02/STEELE_KODY_R_02-08.png?itok=VaUZ3prR",
+                "country": "United States",
+                "flag": "https://ufc.com/images/flags/US.PNG",
+                "rank": "",
+                "odds": "-155"
+            },
+            "b": {
+                "slug": "noah-gugnon",
+                "name": "Noah Gugnon",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2026-07/GUGNON_NOAH_R_08-01.png?itok=sZcTloZ7",
+                "country": "France",
+                "flag": "https://ufc.com/images/flags/FR.PNG",
+                "rank": "",
+                "odds": "+130"
+            },
+            "order": 13
+        },
+        {
+            "id": 13226,
+            "card": "early",
+            "weightClass": "Women's Strawweight Bout",
+            "titleBout": false,
+            "a": {
+                "slug": "iasmin-lucindo",
+                "name": "Iasmin Lucindo",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2025-08/LUCINDO_IASMIN_L_08-09.png?itok=RKpxCqp1",
+                "country": "Brazil",
+                "flag": "https://ufc.com/images/flags/BR.PNG",
+                "rank": "",
+                "odds": "-350"
+            },
+            "b": {
+                "slug": "nicolle-caliari",
+                "name": "Nicolle Caliari",
+                "image": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2026-05/CALIARI_NICOLLE_R_05-16.png?itok=dGcdqlO9",
+                "country": "Brazil",
+                "flag": "https://ufc.com/images/flags/BR.PNG",
+                "rank": "",
+                "odds": "+275"
+            },
+            "order": 14
+        }
+    ],
+    "athletes": {
+        "alexander-volkanovski": {
+            "slug": "alexander-volkanovski",
+            "url": "https://www.ufc.com/athlete/alexander-volkanovski",
+            "name": "Alexander Volkanovski",
+            "nickname": "The Great",
+            "division": "Featherweight Division",
+            "record": {
+                "w": 28,
+                "l": 4,
+                "d": 0
+            },
+            "tags": [
+                "Featherweight Division",
+                "#2 PFP",
+                "Active",
+                "Title Holder"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-01/VOLKANOVSKI_ALEXANDER_L_BELT_01-31.png?itok=hfZR81xh",
+            "hero": {
+                "Wins by Knockout": 13,
+                "Wins by Submission": 3,
+                "First Round Finishes": 7
+            },
+            "totals": {
+                "Sig. Strikes Landed": 1815,
+                "Sig. Strikes Attempted": 3178,
+                "Takedowns Landed": 16,
+                "Takedowns Attempted": 97
+            },
+            "accuracy": {
+                "striking": 57,
+                "takedown": 16
+            },
+            "rates": {
+                "Sig. Str. Landed": "5.99",
+                "Sig. Str. Absorbed": "3.31",
+                "Takedown avg": "1.63",
+                "Submission avg": "0.20",
+                "Sig. Str. Defense": "59%",
+                "Takedown Defense": "69%",
+                "Knockdown Avg": "0.30",
+                "Average fight time": "16:50"
+            },
+            "bars": {
+                "Standing": {
+                    "n": 1387,
+                    "pct": 76
+                },
+                "Clinch": {
+                    "n": 154,
+                    "pct": 8
+                },
+                "Ground": {
+                    "n": 274,
+                    "pct": 15
+                },
+                "KO/TKO": {
+                    "n": 13,
+                    "pct": 46
+                },
+                "DEC": {
+                    "n": 12,
+                    "pct": 43
+                },
+                "SUB": {
+                    "n": 3,
+                    "pct": 11
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 1180,
+                    "pct": 65
+                },
+                "body": {
+                    "n": 188,
+                    "pct": 10
+                },
+                "leg": {
+                    "n": 447,
+                    "pct": 25
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "Shellharbour, Australia",
+                "Trains at": "Freestyle Fighting Gym",
+                "Age": "38",
+                "Height": "66.00",
+                "Weight": "158.30",
+                "Octagon Debut": "Oct. 15, 2016",
+                "Reach": "71.50",
+                "Leg reach": "36.00"
+            },
+            "heightCm": 168,
+            "reachCm": 182,
+            "legReachCm": 91,
+            "weightKg": 71.8,
+            "age": 38,
+            "lastFights": [
+                {
+                    "opponent": "Lopes",
+                    "date": "Jan. 31, 2026",
+                    "result": "win",
+                    "round": "5",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                },
+                {
+                    "opponent": "Lopes",
+                    "date": "Apr. 12, 2025",
+                    "result": "win",
+                    "round": "5",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                },
+                {
+                    "opponent": "Topuria",
+                    "date": "Feb. 17, 2024",
+                    "result": "loss",
+                    "round": "2",
+                    "time": "3:32",
+                    "method": "KO/TKO"
+                }
+            ]
+        },
+        "movsar-evloev": {
+            "slug": "movsar-evloev",
+            "url": "https://www.ufc.com/athlete/movsar-evloev",
+            "name": "Movsar Evloev",
+            "nickname": "",
+            "division": "Featherweight Division",
+            "record": {
+                "w": 20,
+                "l": 0,
+                "d": 0
+            },
+            "tags": [
+                "#1 Featherweight Division",
+                "Active"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/EVLOEV_MOVSAR_L_03-21.png?itok=X2qAuG7T",
+            "hero": {
+                "Wins by Knockout": 3,
+                "Wins by Submission": 4,
+                "First Round Finishes": 2
+            },
+            "totals": {
+                "Sig. Strikes Landed": 625,
+                "Sig. Strikes Attempted": 1312,
+                "Takedowns Landed": 5,
+                "Takedowns Attempted": 97
+            },
+            "accuracy": {
+                "striking": 48,
+                "takedown": 5
+            },
+            "rates": {
+                "Sig. Str. Landed": "3.91",
+                "Sig. Str. Absorbed": "2.80",
+                "Takedown avg": "4.78",
+                "Submission avg": "0.19",
+                "Sig. Str. Defense": "61%",
+                "Takedown Defense": "61%",
+                "Knockdown Avg": "0.00",
+                "Average fight time": "16:00"
+            },
+            "bars": {
+                "Standing": {
+                    "n": 470,
+                    "pct": 75
+                },
+                "Clinch": {
+                    "n": 50,
+                    "pct": 8
+                },
+                "Ground": {
+                    "n": 105,
+                    "pct": 17
+                },
+                "KO/TKO": {
+                    "n": 3,
+                    "pct": 15
+                },
+                "DEC": {
+                    "n": 13,
+                    "pct": 65
+                },
+                "SUB": {
+                    "n": 4,
+                    "pct": 20
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 479,
+                    "pct": 77
+                },
+                "body": {
+                    "n": 94,
+                    "pct": 15
+                },
+                "leg": {
+                    "n": 52,
+                    "pct": 8
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "Ingushetia, Russia",
+                "Trains at": "American Top Team",
+                "Fighting style": "Freestyle",
+                "Age": "32",
+                "Height": "67.00",
+                "Weight": "145.00",
+                "Octagon Debut": "Apr. 20, 2019",
+                "Reach": "72.50",
+                "Leg reach": "36.00"
+            },
+            "heightCm": 170,
+            "reachCm": 184,
+            "legReachCm": 91,
+            "weightKg": 65.8,
+            "age": 32,
+            "lastFights": [
+                {
+                    "opponent": "Murphy",
+                    "date": "Mar. 21, 2026",
+                    "result": "win",
+                    "round": "5",
+                    "time": "5:00",
+                    "method": "Decision - Majority"
+                },
+                {
+                    "opponent": "Sterling",
+                    "date": "Dec. 7, 2024",
+                    "result": "win",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                },
+                {
+                    "opponent": "Allen",
+                    "date": "Jan. 20, 2024",
+                    "result": "win",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                }
+            ]
+        },
+        "petr-yan": {
+            "slug": "petr-yan",
+            "url": "https://www.ufc.com/athlete/petr-yan",
+            "name": "Petr Yan",
+            "nickname": "No Mercy",
+            "division": "Bantamweight Division",
+            "record": {
+                "w": 20,
+                "l": 5,
+                "d": 0
+            },
+            "tags": [
+                "Bantamweight Division",
+                "#4 PFP",
+                "Active",
+                "Title Holder"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-12/YAN_PETR_L_BELT_04-09.png?itok=rEIQhNvw",
+            "hero": {
+                "Wins by Knockout": 7,
+                "Wins by Submission": 1,
+                "First Round Finishes": 3
+            },
+            "totals": {
+                "Sig. Strikes Landed": 1456,
+                "Sig. Strikes Attempted": 2652,
+                "Takedowns Landed": null,
+                "Takedowns Attempted": 65
+            },
+            "accuracy": {
+                "striking": 55,
+                "takedown": 0
+            },
+            "rates": {
+                "Sig. Str. Landed": "5.16",
+                "Sig. Str. Absorbed": "4.24",
+                "Takedown avg": "1.70",
+                "Submission avg": "0.11",
+                "Sig. Str. Defense": "60%",
+                "Takedown Defense": "86%",
+                "Knockdown Avg": "0.53",
+                "Average fight time": "17:38"
+            },
+            "bars": {
+                "Standing": {
+                    "n": 1086,
+                    "pct": 75
+                },
+                "Clinch": {
+                    "n": 176,
+                    "pct": 12
+                },
+                "Ground": {
+                    "n": 194,
+                    "pct": 13
+                },
+                "KO/TKO": {
+                    "n": 7,
+                    "pct": 35
+                },
+                "DEC": {
+                    "n": 12,
+                    "pct": 60
+                },
+                "SUB": {
+                    "n": 1,
+                    "pct": 5
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 1008,
+                    "pct": 69
+                },
+                "body": {
+                    "n": 276,
+                    "pct": 19
+                },
+                "leg": {
+                    "n": 172,
+                    "pct": 12
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "Krasnoyarsk Krai, Russia",
+                "Fighting style": "Boxer",
+                "Age": "33",
+                "Height": "67.50",
+                "Weight": "135.00",
+                "Octagon Debut": "Jun. 23, 2018",
+                "Reach": "67.00",
+                "Leg reach": "38.00"
+            },
+            "heightCm": 171,
+            "reachCm": 170,
+            "legReachCm": 97,
+            "weightKg": 61.2,
+            "age": 33,
+            "lastFights": [
+                {
+                    "opponent": "Dvalishvili",
+                    "date": "Dec. 6, 2025",
+                    "result": "win",
+                    "round": "5",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                },
+                {
+                    "opponent": "McGhee",
+                    "date": "Jul. 26, 2025",
+                    "result": "win",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                },
+                {
+                    "opponent": "Figueiredo",
+                    "date": "Nov. 23, 2024",
+                    "result": "win",
+                    "round": "5",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                }
+            ]
+        },
+        "merab-dvalishvili": {
+            "slug": "merab-dvalishvili",
+            "url": "https://www.ufc.com/athlete/merab-dvalishvili",
+            "name": "Merab Dvalishvili",
+            "nickname": "The Machine",
+            "division": "Bantamweight Division",
+            "record": {
+                "w": 21,
+                "l": 5,
+                "d": 0
+            },
+            "tags": [
+                "#1 Bantamweight Division",
+                "#9 PFP",
+                "Active"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2022-08/DVALISHVILI_MERAB_L_08-20.png?itok=UNfxCucB",
+            "hero": {
+                "Wins by Knockout": 3,
+                "Wins by Submission": 2
+            },
+            "totals": {
+                "Sig. Strikes Landed": 1322,
+                "Sig. Strikes Attempted": 3181,
+                "Takedowns Landed": 17,
+                "Takedowns Attempted": 338
+            },
+            "accuracy": {
+                "striking": 42,
+                "takedown": 5
+            },
+            "rates": {
+                "Sig. Str. Landed": "4.42",
+                "Sig. Str. Absorbed": "2.80",
+                "Takedown avg": "5.97",
+                "Submission avg": "0.35",
+                "Sig. Str. Defense": "54%",
+                "Takedown Defense": "76%",
+                "Knockdown Avg": "0.05",
+                "Average fight time": "17:36"
+            },
+            "bars": {
+                "Standing": {
+                    "n": 841,
+                    "pct": 64
+                },
+                "Clinch": {
+                    "n": 197,
+                    "pct": 15
+                },
+                "Ground": {
+                    "n": 284,
+                    "pct": 21
+                },
+                "KO/TKO": {
+                    "n": 3,
+                    "pct": 14
+                },
+                "DEC": {
+                    "n": 16,
+                    "pct": 76
+                },
+                "SUB": {
+                    "n": 2,
+                    "pct": 10
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 880,
+                    "pct": 67
+                },
+                "body": {
+                    "n": 229,
+                    "pct": 17
+                },
+                "leg": {
+                    "n": 213,
+                    "pct": 16
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "Tbilisi, Georgia",
+                "Trains at": "Team Serra/Longo",
+                "Fighting style": "Freestyle",
+                "Age": "35",
+                "Height": "66.00",
+                "Weight": "135.00",
+                "Octagon Debut": "Dec. 9, 2017",
+                "Reach": "68.00",
+                "Leg reach": "38.00"
+            },
+            "heightCm": 168,
+            "reachCm": 173,
+            "legReachCm": 97,
+            "weightKg": 61.2,
+            "age": 35,
+            "lastFights": [
+                {
+                    "opponent": "Yan",
+                    "date": "Dec. 6, 2025",
+                    "result": "loss",
+                    "round": "5",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                },
+                {
+                    "opponent": "Sandhagen",
+                    "date": "Oct. 4, 2025",
+                    "result": "win",
+                    "round": "5",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                },
+                {
+                    "opponent": "O'Malley",
+                    "date": "Jun. 7, 2025",
+                    "result": "win",
+                    "round": "3",
+                    "time": "4:42",
+                    "method": "Submission"
+                }
+            ]
+        },
+        "loneer-kavanagh": {
+            "slug": "loneer-kavanagh",
+            "url": "https://www.ufc.com/athlete/loneer-kavanagh",
+            "name": "Lone’er Kavanagh",
+            "nickname": "",
+            "division": "Flyweight Division",
+            "record": {
+                "w": 10,
+                "l": 2,
+                "d": 0
+            },
+            "tags": [
+                "#6 Flyweight Division",
+                "Active"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-03/KAVANAGH_LONEER_L_03-22.png?itok=TudzQ-4b",
+            "hero": {
+                "Wins by Knockout": 4,
+                "Wins by Submission": 1,
+                "First Round Finishes": 2
+            },
+            "totals": {
+                "Sig. Strikes Landed": 333,
+                "Sig. Strikes Attempted": 660,
+                "Takedowns Landed": null,
+                "Takedowns Attempted": 13
+            },
+            "accuracy": {
+                "striking": 50,
+                "takedown": 0
+            },
+            "rates": {
+                "Sig. Str. Landed": "4.13",
+                "Sig. Str. Absorbed": "3.94",
+                "Takedown avg": "1.12",
+                "Submission avg": "0.37",
+                "Sig. Str. Defense": "54%",
+                "Takedown Defense": "83%",
+                "Knockdown Avg": "0.37",
+                "Average fight time": "13:27"
+            },
+            "bars": {
+                "Standing": {
+                    "n": 270,
+                    "pct": 81
+                },
+                "Clinch": {
+                    "n": 25,
+                    "pct": 8
+                },
+                "Ground": {
+                    "n": 38,
+                    "pct": 11
+                },
+                "KO/TKO": {
+                    "n": 4,
+                    "pct": 40
+                },
+                "DEC": {
+                    "n": 5,
+                    "pct": 50
+                },
+                "SUB": {
+                    "n": 1,
+                    "pct": 10
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 187,
+                    "pct": 56
+                },
+                "body": {
+                    "n": 84,
+                    "pct": 25
+                },
+                "leg": {
+                    "n": 62,
+                    "pct": 19
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "London, England",
+                "Trains at": "GB Top Team",
+                "Fighting style": "Kickboxer",
+                "Age": "27",
+                "Height": "66.00",
+                "Weight": "126.00",
+                "Octagon Debut": "Nov. 23, 2024",
+                "Reach": "67.00",
+                "Leg reach": "36.50"
+            },
+            "heightCm": 168,
+            "reachCm": 170,
+            "legReachCm": 93,
+            "weightKg": 57.2,
+            "age": 27,
+            "lastFights": [
+                {
+                    "opponent": "Royval",
+                    "date": "Jul. 11, 2026",
+                    "result": "loss",
+                    "round": "3",
+                    "time": "3:40",
+                    "method": "Submission"
+                },
+                {
+                    "opponent": "Moreno",
+                    "date": "Feb. 28, 2026",
+                    "result": "win",
+                    "round": "5",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                },
+                {
+                    "opponent": "Johnson",
+                    "date": "Aug. 23, 2025",
+                    "result": "loss",
+                    "round": "2",
+                    "time": "4:35",
+                    "method": "KO/TKO"
+                }
+            ]
+        },
+        "ramazan-temirov": {
+            "slug": "ramazan-temirov",
+            "url": "https://www.ufc.com/athlete/ramazan-temirov",
+            "name": "Ramazan Temirov",
+            "nickname": "Temurlan",
+            "division": "Flyweight Division",
+            "record": {
+                "w": 20,
+                "l": 3,
+                "d": 0
+            },
+            "tags": [
+                "#10 Flyweight Division",
+                "Active"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-11/TEMIROV_RAMAZAN_L_10-12.png?itok=K_Er6WPQ",
+            "hero": {
+                "Wins by Knockout": 12,
+                "Wins by Submission": 1,
+                "First Round Finishes": 11
+            },
+            "totals": {
+                "Sig. Strikes Landed": 105,
+                "Sig. Strikes Attempted": 255,
+                "Takedowns Landed": null,
+                "Takedowns Attempted": 2
+            },
+            "accuracy": {
+                "striking": 41,
+                "takedown": 0
+            },
+            "rates": {
+                "Sig. Str. Landed": "4.73",
+                "Sig. Str. Absorbed": "3.65",
+                "Takedown avg": "0.68",
+                "Submission avg": "0.00",
+                "Sig. Str. Defense": "62%",
+                "Takedown Defense": "100%",
+                "Knockdown Avg": "3.38",
+                "Average fight time": "07:24"
+            },
+            "bars": {
+                "Standing": {
+                    "n": 91,
+                    "pct": 87
+                },
+                "Clinch": {
+                    "n": 9,
+                    "pct": 9
+                },
+                "Ground": {
+                    "n": 5,
+                    "pct": 5
+                },
+                "KO/TKO": {
+                    "n": 12,
+                    "pct": 60
+                },
+                "DEC": {
+                    "n": 7,
+                    "pct": 35
+                },
+                "SUB": {
+                    "n": 1,
+                    "pct": 5
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 85,
+                    "pct": 81
+                },
+                "body": {
+                    "n": 18,
+                    "pct": 17
+                },
+                "leg": {
+                    "n": 2,
+                    "pct": 2
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "Karshi, Uzbekistan",
+                "Trains at": "Legion Fight Club",
+                "Fighting style": "Striker",
+                "Age": "29",
+                "Height": "64.00",
+                "Weight": "125.50",
+                "Octagon Debut": "Oct. 12, 2024",
+                "Reach": "63.00",
+                "Leg reach": "36.00"
+            },
+            "heightCm": 163,
+            "reachCm": 160,
+            "legReachCm": 91,
+            "weightKg": 56.9,
+            "age": 29,
+            "lastFights": [
+                {
+                    "opponent": "Erceg",
+                    "date": "Jul. 25, 2026",
+                    "result": "win",
+                    "round": "1",
+                    "time": "4:21",
+                    "method": "KO/TKO"
+                },
+                {
+                    "opponent": "Johnson",
+                    "date": "Mar. 1, 2025",
+                    "result": "win",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                },
+                {
+                    "opponent": "Vergara",
+                    "date": "Oct. 12, 2024",
+                    "result": "win",
+                    "round": "1",
+                    "time": "2:50",
+                    "method": "KO/TKO"
+                }
+            ]
+        },
+        "alexander-volkov": {
+            "slug": "alexander-volkov",
+            "url": "https://www.ufc.com/athlete/alexander-volkov",
+            "name": "Alexander Volkov",
+            "nickname": "Drago",
+            "division": "Heavyweight Division",
+            "record": {
+                "w": 40,
+                "l": 11,
+                "d": 0
+            },
+            "tags": [
+                "#2 Heavyweight Division",
+                "Active"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/VOLKOV_ALEXANDER_L_05-09.png?itok=Z7Pt4p3a",
+            "hero": {
+                "Wins by Knockout": 24,
+                "Wins by Submission": 4,
+                "First Round Finishes": 17
+            },
+            "totals": {
+                "Sig. Strikes Landed": 1336,
+                "Sig. Strikes Attempted": 2305,
+                "Takedowns Landed": 5,
+                "Takedowns Attempted": 16
+            },
+            "accuracy": {
+                "striking": 58,
+                "takedown": 31
+            },
+            "rates": {
+                "Sig. Str. Landed": "4.84",
+                "Sig. Str. Absorbed": "2.90",
+                "Takedown avg": "0.54",
+                "Submission avg": "0.22",
+                "Sig. Str. Defense": "54%",
+                "Takedown Defense": "69%",
+                "Knockdown Avg": "0.22",
+                "Average fight time": "13:09"
+            },
+            "bars": {
+                "Standing": {
+                    "n": 1091,
+                    "pct": 82
+                },
+                "Clinch": {
+                    "n": 155,
+                    "pct": 12
+                },
+                "Ground": {
+                    "n": 90,
+                    "pct": 7
+                },
+                "KO/TKO": {
+                    "n": 24,
+                    "pct": 60
+                },
+                "DEC": {
+                    "n": 12,
+                    "pct": 30
+                },
+                "SUB": {
+                    "n": 4,
+                    "pct": 10
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 767,
+                    "pct": 57
+                },
+                "body": {
+                    "n": 315,
+                    "pct": 24
+                },
+                "leg": {
+                    "n": 254,
+                    "pct": 19
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "Moscow, Russia",
+                "Trains at": "Global Fight Gym",
+                "Fighting style": "Brazilian Jiu-Jitsu",
+                "Age": "37",
+                "Height": "79.00",
+                "Weight": "261.50",
+                "Octagon Debut": "Nov. 19, 2016",
+                "Reach": "80.00",
+                "Leg reach": "47.50"
+            },
+            "heightCm": 201,
+            "reachCm": 203,
+            "legReachCm": 121,
+            "weightKg": 118.6,
+            "age": 37,
+            "lastFights": [
+                {
+                    "opponent": "Cortes Acosta",
+                    "date": "May. 9, 2026",
+                    "result": "win",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                },
+                {
+                    "opponent": "Almeida",
+                    "date": "Oct. 25, 2025",
+                    "result": "win",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Split"
+                },
+                {
+                    "opponent": "Gane",
+                    "date": "Dec. 7, 2024",
+                    "result": "loss",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Split"
+                }
+            ]
+        },
+        "rizvan-kuniev": {
+            "slug": "rizvan-kuniev",
+            "url": "https://www.ufc.com/athlete/rizvan-kuniev",
+            "name": "Rizvan Kuniev",
+            "nickname": "",
+            "division": "Heavyweight Division",
+            "record": {
+                "w": 14,
+                "l": 3,
+                "d": 1
+            },
+            "tags": [
+                "#7 Heavyweight Division",
+                "Active"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-07/KUNIEV_RIZVAN_L_07-25.png?itok=PSzxdGmY",
+            "hero": {
+                "Wins by Knockout": 7,
+                "Wins by Submission": 2,
+                "First Round Finishes": 4
+            },
+            "totals": {
+                "Sig. Strikes Landed": 247,
+                "Sig. Strikes Attempted": 450,
+                "Takedowns Landed": null,
+                "Takedowns Attempted": 4
+            },
+            "accuracy": {
+                "striking": 55,
+                "takedown": 0
+            },
+            "rates": {
+                "Sig. Str. Landed": "4.32",
+                "Sig. Str. Absorbed": "2.22",
+                "Takedown avg": "0.79",
+                "Submission avg": "0.00",
+                "Sig. Str. Defense": "49%",
+                "Takedown Defense": "94%",
+                "Knockdown Avg": "0.52",
+                "Average fight time": "11:26"
+            },
+            "bars": {
+                "Standing": {
+                    "n": 138,
+                    "pct": 56
+                },
+                "Clinch": {
+                    "n": 77,
+                    "pct": 31
+                },
+                "Ground": {
+                    "n": 32,
+                    "pct": 13
+                },
+                "KO/TKO": {
+                    "n": 7,
+                    "pct": 50
+                },
+                "DEC": {
+                    "n": 5,
+                    "pct": 36
+                },
+                "SUB": {
+                    "n": 2,
+                    "pct": 14
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 173,
+                    "pct": 70
+                },
+                "body": {
+                    "n": 58,
+                    "pct": 23
+                },
+                "leg": {
+                    "n": 16,
+                    "pct": 6
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "Makhachkala, Dagestan, Russia",
+                "Trains at": "American Top Team",
+                "Age": "34",
+                "Height": "76.00",
+                "Weight": "264.50",
+                "Octagon Debut": "Feb. 22, 2025",
+                "Reach": "76.00",
+                "Leg reach": "41.00"
+            },
+            "heightCm": 193,
+            "reachCm": 193,
+            "legReachCm": 104,
+            "weightKg": 120,
+            "age": 34,
+            "lastFights": [
+                {
+                    "opponent": "Fortune",
+                    "date": "Jul. 25, 2026",
+                    "result": "win",
+                    "round": "3",
+                    "time": "1:12",
+                    "method": "KO/TKO"
+                },
+                {
+                    "opponent": "Almeida",
+                    "date": "Feb. 7, 2026",
+                    "result": "win",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                },
+                {
+                    "opponent": "Blaydes",
+                    "date": "Jun. 21, 2025",
+                    "result": "loss",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Split"
+                }
+            ]
+        },
+        "aaron-pico": {
+            "slug": "aaron-pico",
+            "url": "https://www.ufc.com/athlete/aaron-pico",
+            "name": "Aaron Pico",
+            "nickname": "",
+            "division": "Featherweight Division",
+            "record": {
+                "w": 14,
+                "l": 5,
+                "d": 0
+            },
+            "tags": [
+                "#11 Featherweight Division",
+                "Active"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/PICO_AARON_R_08-16.png?itok=90xvvwSZ",
+            "hero": {
+                "Wins by Knockout": 9,
+                "Wins by Submission": 2,
+                "First Round Finishes": 7
+            },
+            "totals": {
+                "Sig. Strikes Landed": 113,
+                "Sig. Strikes Attempted": 210,
+                "Takedowns Landed": 2,
+                "Takedowns Attempted": 16
+            },
+            "accuracy": {
+                "striking": 54,
+                "takedown": 13
+            },
+            "rates": {
+                "Sig. Str. Landed": "6.16",
+                "Sig. Str. Absorbed": "3.11",
+                "Takedown avg": "6.54",
+                "Submission avg": "0.00",
+                "Sig. Str. Defense": "45%",
+                "Takedown Defense": "",
+                "Knockdown Avg": "0.00",
+                "Average fight time": "09:11"
+            },
+            "bars": {
+                "Standing": {
+                    "n": 97,
+                    "pct": 86
+                },
+                "Clinch": {
+                    "n": 9,
+                    "pct": 8
+                },
+                "Ground": {
+                    "n": 7,
+                    "pct": 6
+                },
+                "KO/TKO": {
+                    "n": 9,
+                    "pct": 64
+                },
+                "DEC": {
+                    "n": 3,
+                    "pct": 21
+                },
+                "SUB": {
+                    "n": 2,
+                    "pct": 14
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 86,
+                    "pct": 76
+                },
+                "body": {
+                    "n": 16,
+                    "pct": 14
+                },
+                "leg": {
+                    "n": 11,
+                    "pct": 10
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "Whittier, United States",
+                "Trains at": "Jackson Wink MMA Academy - NM",
+                "Fighting style": "Boxing",
+                "Age": "29",
+                "Height": "68.00",
+                "Weight": "145.00",
+                "Octagon Debut": "Jul. 26, 2025",
+                "Reach": "70.50"
+            },
+            "heightCm": 173,
+            "reachCm": 179,
+            "legReachCm": null,
+            "weightKg": 65.8,
+            "age": 29,
+            "lastFights": [
+                {
+                    "opponent": "Freire",
+                    "date": "Apr. 11, 2026",
+                    "result": "win",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                },
+                {
+                    "opponent": "Murphy",
+                    "date": "Aug. 16, 2025",
+                    "result": "loss",
+                    "round": "1",
+                    "time": "3:21",
+                    "method": "KO/TKO"
+                }
+            ]
+        },
+        "losene-keita": {
+            "slug": "losene-keita",
+            "url": "https://www.ufc.com/athlete/losene-keita",
+            "name": "Losene Keita",
+            "nickname": "Black Panther",
+            "division": "Featherweight Division",
+            "record": {
+                "w": 17,
+                "l": 2,
+                "d": 0
+            },
+            "tags": [
+                "Featherweight Division",
+                "Active"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-09/KEITA_LOSENE_L_09-05.png?itok=Z3OSFQv8",
+            "hero": {
+                "Wins by Knockout": 11,
+                "First Round Finishes": 6
+            },
+            "totals": {
+                "Sig. Strikes Landed": 70,
+                "Sig. Strikes Attempted": 149
+            },
+            "accuracy": {
+                "striking": 47,
+                "takedown": null
+            },
+            "rates": {
+                "Sig. Str. Landed": "3.91",
+                "Sig. Str. Absorbed": "3.97",
+                "Takedown avg": "0.00",
+                "Submission avg": "0.00",
+                "Sig. Str. Defense": "65%",
+                "Takedown Defense": "100%",
+                "Knockdown Avg": "1.68",
+                "Average fight time": "08:57"
+            },
+            "bars": {
+                "Standing": {
+                    "n": 62,
+                    "pct": 89
+                },
+                "Clinch": {
+                    "n": 0,
+                    "pct": 0
+                },
+                "Ground": {
+                    "n": 8,
+                    "pct": 11
+                },
+                "KO/TKO": {
+                    "n": 11,
+                    "pct": 65
+                },
+                "DEC": {
+                    "n": 6,
+                    "pct": 35
+                },
+                "SUB": {
+                    "n": 0,
+                    "pct": 0
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 52,
+                    "pct": 74
+                },
+                "body": {
+                    "n": 15,
+                    "pct": 21
+                },
+                "leg": {
+                    "n": 3,
+                    "pct": 4
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "Guinea",
+                "Trains at": "Lamiro Fight Club",
+                "Fighting style": "MMA",
+                "Age": "28",
+                "Height": "69.00",
+                "Weight": "149.00",
+                "Octagon Debut": "Sep. 6, 2025",
+                "Reach": "71.50",
+                "Leg reach": "42.50"
+            },
+            "heightCm": 175,
+            "reachCm": 182,
+            "legReachCm": 108,
+            "weightKg": 67.6,
+            "age": 28,
+            "lastFights": [
+                {
+                    "opponent": "Naimov",
+                    "date": "Sep. 5, 2026",
+                    "result": "win",
+                    "round": "1",
+                    "time": "2:54",
+                    "method": "KO/TKO"
+                },
+                {
+                    "opponent": "Wood",
+                    "date": "Mar. 21, 2026",
+                    "result": "loss",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Split"
+                }
+            ]
+        },
+        "azamat-murzakanov": {
+            "slug": "azamat-murzakanov",
+            "url": "https://www.ufc.com/athlete/azamat-murzakanov",
+            "name": "Azamat Murzakanov",
+            "nickname": "Professional",
+            "division": "Light Heavyweight Division",
+            "record": {
+                "w": 16,
+                "l": 1,
+                "d": 0
+            },
+            "tags": [
+                "#7 Light Heavyweight Division",
+                "Active"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/MURZAKANOV_AZAMAT_L_04-11.png?itok=mqQa9nra",
+            "hero": {
+                "Wins by Knockout": 12,
+                "Wins by Submission": 1,
+                "First Round Finishes": 10
+            },
+            "totals": {
+                "Sig. Strikes Landed": 292,
+                "Sig. Strikes Attempted": 518,
+                "Takedowns Landed": 1,
+                "Takedowns Attempted": 15
+            },
+            "accuracy": {
+                "striking": 56,
+                "takedown": 7
+            },
+            "rates": {
+                "Sig. Str. Landed": "4.40",
+                "Sig. Str. Absorbed": "3.20",
+                "Takedown avg": "0.68",
+                "Submission avg": "0.23",
+                "Sig. Str. Defense": "56%",
+                "Takedown Defense": "89%",
+                "Knockdown Avg": "1.58",
+                "Average fight time": "08:17"
+            },
+            "bars": {
+                "Standing": {
+                    "n": 203,
+                    "pct": 70
+                },
+                "Clinch": {
+                    "n": 18,
+                    "pct": 6
+                },
+                "Ground": {
+                    "n": 71,
+                    "pct": 24
+                },
+                "KO/TKO": {
+                    "n": 12,
+                    "pct": 75
+                },
+                "DEC": {
+                    "n": 3,
+                    "pct": 19
+                },
+                "SUB": {
+                    "n": 1,
+                    "pct": 6
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 206,
+                    "pct": 71
+                },
+                "body": {
+                    "n": 75,
+                    "pct": 26
+                },
+                "leg": {
+                    "n": 11,
+                    "pct": 4
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "Nalchik, Russia",
+                "Trains at": "K Dojo Warrior Tribe",
+                "Fighting style": "MMA",
+                "Age": "37",
+                "Height": "70.00",
+                "Weight": "205.50",
+                "Octagon Debut": "Nov. 20, 2021",
+                "Reach": "71.50",
+                "Leg reach": "41.00"
+            },
+            "heightCm": 178,
+            "reachCm": 182,
+            "legReachCm": 104,
+            "weightKg": 93.2,
+            "age": 37,
+            "lastFights": [
+                {
+                    "opponent": "Costa",
+                    "date": "Apr. 11, 2026",
+                    "result": "loss",
+                    "round": "3",
+                    "time": "1:23",
+                    "method": "KO/TKO"
+                },
+                {
+                    "opponent": "Rakic",
+                    "date": "Oct. 25, 2025",
+                    "result": "win",
+                    "round": "1",
+                    "time": "3:11",
+                    "method": "KO/TKO"
+                },
+                {
+                    "opponent": "Ribeiro",
+                    "date": "Jun. 7, 2025",
+                    "result": "win",
+                    "round": "1",
+                    "time": "3:25",
+                    "method": "KO/TKO"
+                }
+            ]
+        },
+        "dominick-reyes": {
+            "slug": "dominick-reyes",
+            "url": "https://www.ufc.com/athlete/dominick-reyes",
+            "name": "Dominick Reyes",
+            "nickname": "The Devastator",
+            "division": "Light Heavyweight Division",
+            "record": {
+                "w": 16,
+                "l": 5,
+                "d": 0
+            },
+            "tags": [
+                "#8 Light Heavyweight Division",
+                "Active"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/REYES_DOMINICK_L_04-11.png?itok=7HSVtv1p",
+            "hero": {
+                "Wins by Knockout": 10,
+                "Wins by Submission": 2,
+                "First Round Finishes": 11
+            },
+            "totals": {
+                "Sig. Strikes Landed": 588,
+                "Sig. Strikes Attempted": 1096,
+                "Takedowns Landed": 1,
+                "Takedowns Attempted": 7
+            },
+            "accuracy": {
+                "striking": 54,
+                "takedown": 14
+            },
+            "rates": {
+                "Sig. Str. Landed": "4.99",
+                "Sig. Str. Absorbed": "3.40",
+                "Takedown avg": "0.25",
+                "Submission avg": "0.25",
+                "Sig. Str. Defense": "50%",
+                "Takedown Defense": "83%",
+                "Knockdown Avg": "0.89",
+                "Average fight time": "07:51"
+            },
+            "bars": {
+                "Standing": {
+                    "n": 440,
+                    "pct": 75
+                },
+                "Clinch": {
+                    "n": 60,
+                    "pct": 10
+                },
+                "Ground": {
+                    "n": 88,
+                    "pct": 15
+                },
+                "KO/TKO": {
+                    "n": 10,
+                    "pct": 63
+                },
+                "DEC": {
+                    "n": 4,
+                    "pct": 25
+                },
+                "SUB": {
+                    "n": 2,
+                    "pct": 13
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 331,
+                    "pct": 56
+                },
+                "body": {
+                    "n": 141,
+                    "pct": 24
+                },
+                "leg": {
+                    "n": 116,
+                    "pct": 20
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "Apple Valley, United States",
+                "Trains at": "Cobra Kai Victorville",
+                "Fighting style": "Kickboxer",
+                "Age": "36",
+                "Height": "76.00",
+                "Weight": "206.00",
+                "Octagon Debut": "Jun. 26, 2017",
+                "Reach": "77.00",
+                "Leg reach": "43.50"
+            },
+            "heightCm": 193,
+            "reachCm": 196,
+            "legReachCm": 110,
+            "weightKg": 93.4,
+            "age": 36,
+            "lastFights": [
+                {
+                    "opponent": "Walker",
+                    "date": "Apr. 11, 2026",
+                    "result": "win",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Split"
+                },
+                {
+                    "opponent": "Ulberg",
+                    "date": "Sep. 27, 2025",
+                    "result": "loss",
+                    "round": "1",
+                    "time": "4:27",
+                    "method": "KO/TKO"
+                },
+                {
+                    "opponent": "Krylov",
+                    "date": "Apr. 12, 2025",
+                    "result": "win",
+                    "round": "1",
+                    "time": "2:24",
+                    "method": "KO/TKO"
+                }
+            ]
+        },
+        "nikita-krylov": {
+            "slug": "nikita-krylov",
+            "url": "https://www.ufc.com/athlete/nikita-krylov",
+            "name": "Nikita Krylov",
+            "nickname": "The Miner",
+            "division": "Light Heavyweight Division",
+            "record": {
+                "w": 31,
+                "l": 12,
+                "d": 0
+            },
+            "tags": [
+                "#15 Light Heavyweight Division",
+                "Active"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-07/KRYLOV_NIKITA_L_07-11.png?itok=G-SKEXs5",
+            "hero": {
+                "Wins by Knockout": 13,
+                "Wins by Submission": 16,
+                "First Round Finishes": 23
+            },
+            "totals": {
+                "Sig. Strikes Landed": 689,
+                "Sig. Strikes Attempted": 1271,
+                "Takedowns Landed": 1,
+                "Takedowns Attempted": 60
+            },
+            "accuracy": {
+                "striking": 54,
+                "takedown": 2
+            },
+            "rates": {
+                "Sig. Str. Landed": "4.38",
+                "Sig. Str. Absorbed": "2.75",
+                "Takedown avg": "2.19",
+                "Submission avg": "1.14",
+                "Sig. Str. Defense": "48%",
+                "Takedown Defense": "53%",
+                "Knockdown Avg": "0.57",
+                "Average fight time": "07:09"
+            },
+            "bars": {
+                "Standing": {
+                    "n": 408,
+                    "pct": 59
+                },
+                "Clinch": {
+                    "n": 156,
+                    "pct": 23
+                },
+                "Ground": {
+                    "n": 125,
+                    "pct": 18
+                },
+                "KO/TKO": {
+                    "n": 13,
+                    "pct": 42
+                },
+                "DEC": {
+                    "n": 2,
+                    "pct": 6
+                },
+                "SUB": {
+                    "n": 16,
+                    "pct": 52
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 406,
+                    "pct": 59
+                },
+                "body": {
+                    "n": 171,
+                    "pct": 25
+                },
+                "leg": {
+                    "n": 112,
+                    "pct": 16
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "Donetsk, Ukraine",
+                "Trains at": "Fight Club No1 - Moscow, Russia",
+                "Fighting style": "Karate",
+                "Age": "34",
+                "Height": "75.00",
+                "Weight": "205.50",
+                "Octagon Debut": "Sep. 1, 2013",
+                "Reach": "77.50",
+                "Leg reach": "44.50"
+            },
+            "heightCm": 191,
+            "reachCm": 197,
+            "legReachCm": 113,
+            "weightKg": 93.2,
+            "age": 34,
+            "lastFights": [
+                {
+                    "opponent": "Whittaker",
+                    "date": "Jul. 11, 2026",
+                    "result": "loss",
+                    "round": "3",
+                    "time": "1:01",
+                    "method": "KO/TKO"
+                },
+                {
+                    "opponent": "Bukauskas",
+                    "date": "Jan. 24, 2026",
+                    "result": "win",
+                    "round": "3",
+                    "time": "4:57",
+                    "method": "KO/TKO"
+                },
+                {
+                    "opponent": "Guskov",
+                    "date": "Jul. 26, 2025",
+                    "result": "loss",
+                    "round": "1",
+                    "time": "4:18",
+                    "method": "KO/TKO"
+                }
+            ]
+        },
+        "abdulrakhman-yakhyaev": {
+            "slug": "abdulrakhman-yakhyaev",
+            "url": "https://www.ufc.com/athlete/abdulrakhman-yakhyaev",
+            "name": "Abdul Rakhman Yakhyaev",
+            "nickname": "The Hunter",
+            "division": "Light Heavyweight Division",
+            "record": {
+                "w": 10,
+                "l": 0,
+                "d": 0
+            },
+            "tags": [
+                "Light Heavyweight Division",
+                "Active"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/YAKHYAEV_ABDUL_RAKHMAN_L_06-27.png?itok=r25ouJ0s",
+            "hero": {
+                "Wins by Knockout": 4,
+                "Wins by Submission": 5,
+                "First Round Finishes": 8
+            },
+            "totals": {
+                "Sig. Strikes Landed": 35,
+                "Sig. Strikes Attempted": 51,
+                "Takedowns Landed": 3,
+                "Takedowns Attempted": 4
+            },
+            "accuracy": {
+                "striking": 69,
+                "takedown": 75
+            },
+            "rates": {
+                "Sig. Str. Landed": "8.64",
+                "Sig. Str. Absorbed": "2.22",
+                "Takedown avg": "11.11",
+                "Submission avg": "7.41",
+                "Sig. Str. Defense": "59%",
+                "Takedown Defense": "100%",
+                "Knockdown Avg": "11.11",
+                "Average fight time": "01:01"
+            },
+            "bars": {
+                "Standing": {
+                    "n": 13,
+                    "pct": 37
+                },
+                "Clinch": {
+                    "n": 1,
+                    "pct": 3
+                },
+                "Ground": {
+                    "n": 21,
+                    "pct": 60
+                },
+                "KO/TKO": {
+                    "n": 4,
+                    "pct": 40
+                },
+                "DEC": {
+                    "n": 1,
+                    "pct": 10
+                },
+                "SUB": {
+                    "n": 5,
+                    "pct": 50
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 31,
+                    "pct": 89
+                },
+                "body": {
+                    "n": 3,
+                    "pct": 9
+                },
+                "leg": {
+                    "n": 1,
+                    "pct": 3
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "Russia",
+                "Trains at": "MMA Nuemberg",
+                "Fighting style": "MMA",
+                "Age": "25",
+                "Height": "74.00",
+                "Weight": "205.00",
+                "Octagon Debut": "Nov. 22, 2025",
+                "Reach": "78.00",
+                "Leg reach": "44.00"
+            },
+            "heightCm": 188,
+            "reachCm": 198,
+            "legReachCm": 112,
+            "weightKg": 93,
+            "age": 25,
+            "lastFights": [
+                {
+                    "opponent": "Walker",
+                    "date": "Jun. 27, 2026",
+                    "result": "win",
+                    "round": "1",
+                    "time": "0:08",
+                    "method": "KO/TKO"
+                },
+                {
+                    "opponent": "Ribeiro",
+                    "date": "Apr. 4, 2026",
+                    "result": "win",
+                    "round": "1",
+                    "time": "2:52",
+                    "method": "Submission"
+                },
+                {
+                    "opponent": "Cerqueira",
+                    "date": "Nov. 22, 2025",
+                    "result": "win",
+                    "round": "1",
+                    "time": "0:33",
+                    "method": "Submission"
+                }
+            ]
+        },
+        "abus-magomedov": {
+            "slug": "abus-magomedov",
+            "url": "https://www.ufc.com/athlete/abus-magomedov",
+            "name": "Abus Magomedov",
+            "nickname": "",
+            "division": "Middleweight Division",
+            "record": {
+                "w": 29,
+                "l": 7,
+                "d": 1
+            },
+            "tags": [
+                "#12 Middleweight Division",
+                "Active"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/MAGOMEDOV_ABUS_L_06-27.png?itok=SLmzXjWp",
+            "hero": {
+                "Wins by Knockout": 14,
+                "Wins by Submission": 8,
+                "First Round Finishes": 16
+            },
+            "totals": {
+                "Sig. Strikes Landed": 239,
+                "Sig. Strikes Attempted": 491,
+                "Takedowns Landed": null,
+                "Takedowns Attempted": 22
+            },
+            "accuracy": {
+                "striking": 49,
+                "takedown": 0
+            },
+            "rates": {
+                "Sig. Str. Landed": "3.06",
+                "Sig. Str. Absorbed": "3.34",
+                "Takedown avg": "2.50",
+                "Submission avg": "0.58",
+                "Sig. Str. Defense": "56%",
+                "Takedown Defense": "100%",
+                "Knockdown Avg": "0.38",
+                "Average fight time": "09:46"
+            },
+            "bars": {
+                "Standing": {
+                    "n": 207,
+                    "pct": 87
+                },
+                "Clinch": {
+                    "n": 8,
+                    "pct": 3
+                },
+                "Ground": {
+                    "n": 24,
+                    "pct": 10
+                },
+                "KO/TKO": {
+                    "n": 14,
+                    "pct": 48
+                },
+                "DEC": {
+                    "n": 7,
+                    "pct": 24
+                },
+                "SUB": {
+                    "n": 8,
+                    "pct": 28
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 135,
+                    "pct": 56
+                },
+                "body": {
+                    "n": 74,
+                    "pct": 31
+                },
+                "leg": {
+                    "n": 30,
+                    "pct": 13
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "Argun, Russia",
+                "Fighting style": "MMA",
+                "Age": "36",
+                "Height": "74.00",
+                "Weight": "185.50",
+                "Octagon Debut": "Sep. 3, 2022",
+                "Reach": "78.00",
+                "Leg reach": "43.00"
+            },
+            "heightCm": 188,
+            "reachCm": 198,
+            "legReachCm": 109,
+            "weightKg": 84.1,
+            "age": 36,
+            "lastFights": [
+                {
+                    "opponent": "Oleksiejczuk",
+                    "date": "Jun. 27, 2026",
+                    "result": "win",
+                    "round": "1",
+                    "time": "3:25",
+                    "method": "Submission"
+                },
+                {
+                    "opponent": "Pyfer",
+                    "date": "Oct. 4, 2025",
+                    "result": "loss",
+                    "round": "2",
+                    "time": "1:46",
+                    "method": "Submission"
+                },
+                {
+                    "opponent": "Pereira",
+                    "date": "Apr. 26, 2025",
+                    "result": "win",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                }
+            ]
+        },
+        "cam-rowston": {
+            "slug": "cam-rowston",
+            "url": "https://www.ufc.com/athlete/cam-rowston",
+            "name": "Cam Rowston",
+            "nickname": "",
+            "division": "Middleweight Division",
+            "record": {
+                "w": 15,
+                "l": 3,
+                "d": 0
+            },
+            "tags": [
+                "Middleweight Division",
+                "Active"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/ROWSTON_CAM_L_05-02.png?itok=uqDWq0O0",
+            "hero": {
+                "Wins by Knockout": 6,
+                "Wins by Submission": 7,
+                "First Round Finishes": 7
+            },
+            "totals": {
+                "Sig. Strikes Landed": 206,
+                "Sig. Strikes Attempted": 422,
+                "Takedowns Landed": null,
+                "Takedowns Attempted": 9
+            },
+            "accuracy": {
+                "striking": 49,
+                "takedown": 0
+            },
+            "rates": {
+                "Sig. Str. Landed": "4.60",
+                "Sig. Str. Absorbed": "2.12",
+                "Takedown avg": "1.34",
+                "Submission avg": "0.33",
+                "Sig. Str. Defense": "52%",
+                "Takedown Defense": "33%",
+                "Knockdown Avg": "1.00",
+                "Average fight time": "08:57"
+            },
+            "bars": {
+                "Standing": {
+                    "n": 115,
+                    "pct": 56
+                },
+                "Clinch": {
+                    "n": 22,
+                    "pct": 11
+                },
+                "Ground": {
+                    "n": 69,
+                    "pct": 33
+                },
+                "KO/TKO": {
+                    "n": 6,
+                    "pct": 40
+                },
+                "DEC": {
+                    "n": 2,
+                    "pct": 13
+                },
+                "SUB": {
+                    "n": 7,
+                    "pct": 47
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 160,
+                    "pct": 78
+                },
+                "body": {
+                    "n": 25,
+                    "pct": 12
+                },
+                "leg": {
+                    "n": 21,
+                    "pct": 10
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "Sydney, Australia",
+                "Trains at": "City Kickboxing",
+                "Fighting style": "Brazilian Jiu-Jitsu",
+                "Age": "31",
+                "Height": "75.00",
+                "Weight": "203.00",
+                "Octagon Debut": "Sep. 27, 2025",
+                "Reach": "78.00",
+                "Leg reach": "45.00"
+            },
+            "heightCm": 191,
+            "reachCm": 198,
+            "legReachCm": 114,
+            "weightKg": 92.1,
+            "age": 31,
+            "lastFights": [
+                {
+                    "opponent": "Bryczek",
+                    "date": "May. 2, 2026",
+                    "result": "win",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                },
+                {
+                    "opponent": "Brundage",
+                    "date": "Jan. 31, 2026",
+                    "result": "win",
+                    "round": "2",
+                    "time": "4:08",
+                    "method": "KO/TKO"
+                },
+                {
+                    "opponent": "Petroski",
+                    "date": "Sep. 27, 2025",
+                    "result": "win",
+                    "round": "1",
+                    "time": "2:41",
+                    "method": "KO/TKO"
+                }
+            ]
+        },
+        "grant-dawson": {
+            "slug": "grant-dawson",
+            "url": "https://www.ufc.com/athlete/grant-dawson",
+            "name": "Grant Dawson",
+            "nickname": "KGD",
+            "division": "Lightweight Division",
+            "record": {
+                "w": 24,
+                "l": 3,
+                "d": 1
+            },
+            "tags": [
+                "Lightweight Division",
+                "Active"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/DAWSON_GRANT_L_05-09.png?itok=JuVEhRo_",
+            "hero": {
+                "Wins by Knockout": 5,
+                "Wins by Submission": 14,
+                "First Round Finishes": 7
+            },
+            "totals": {
+                "Sig. Strikes Landed": 552,
+                "Sig. Strikes Attempted": 1081,
+                "Takedowns Landed": null,
+                "Takedowns Attempted": 106
+            },
+            "accuracy": {
+                "striking": 51,
+                "takedown": 0
+            },
+            "rates": {
+                "Sig. Str. Landed": "3.14",
+                "Sig. Str. Absorbed": "2.14",
+                "Takedown avg": "3.58",
+                "Submission avg": "1.36",
+                "Sig. Str. Defense": "45%",
+                "Takedown Defense": "67%",
+                "Knockdown Avg": "0.09",
+                "Average fight time": "11:00"
+            },
+            "bars": {
+                "Standing": {
+                    "n": 268,
+                    "pct": 49
+                },
+                "Clinch": {
+                    "n": 52,
+                    "pct": 9
+                },
+                "Ground": {
+                    "n": 232,
+                    "pct": 42
+                },
+                "KO/TKO": {
+                    "n": 5,
+                    "pct": 21
+                },
+                "DEC": {
+                    "n": 5,
+                    "pct": 21
+                },
+                "SUB": {
+                    "n": 14,
+                    "pct": 58
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 382,
+                    "pct": 69
+                },
+                "body": {
+                    "n": 104,
+                    "pct": 19
+                },
+                "leg": {
+                    "n": 66,
+                    "pct": 12
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "Cambria, United States",
+                "Trains at": "American Top Team",
+                "Age": "32",
+                "Height": "70.00",
+                "Weight": "156.00",
+                "Octagon Debut": "Aug. 15, 2017",
+                "Reach": "72.00",
+                "Leg reach": "40.00"
+            },
+            "heightCm": 178,
+            "reachCm": 183,
+            "legReachCm": 102,
+            "weightKg": 70.8,
+            "age": 32,
+            "lastFights": [
+                {
+                    "opponent": "Rebecki",
+                    "date": "May. 9, 2026",
+                    "result": "win",
+                    "round": "3",
+                    "time": "4:42",
+                    "method": "Submission"
+                },
+                {
+                    "opponent": "Torres",
+                    "date": "Dec. 6, 2025",
+                    "result": "loss",
+                    "round": "1",
+                    "time": "2:25",
+                    "method": "KO/TKO"
+                },
+                {
+                    "opponent": "Ferreira",
+                    "date": "Jan. 18, 2025",
+                    "result": "win",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                }
+            ]
+        },
+        "nurullo-aliev": {
+            "slug": "nurullo-aliev",
+            "url": "https://www.ufc.com/athlete/nurullo-aliev",
+            "name": "Nurullo Aliev",
+            "nickname": "Tajik Eagle",
+            "division": "Lightweight Division",
+            "record": {
+                "w": 12,
+                "l": 0,
+                "d": 0
+            },
+            "tags": [
+                "Lightweight Division",
+                "Active"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-07/ALIEV_NURULLO_L_07-25.png?itok=2JPUXADG",
+            "hero": {
+                "Wins by Knockout": 2,
+                "First Round Finishes": 1
+            },
+            "totals": {
+                "Sig. Strikes Landed": 148,
+                "Sig. Strikes Attempted": 335,
+                "Takedowns Landed": 3,
+                "Takedowns Attempted": 29
+            },
+            "accuracy": {
+                "striking": 44,
+                "takedown": 10
+            },
+            "rates": {
+                "Sig. Str. Landed": "2.29",
+                "Sig. Str. Absorbed": "1.59",
+                "Takedown avg": "3.48",
+                "Submission avg": "0.46",
+                "Sig. Str. Defense": "55%",
+                "Takedown Defense": "80%",
+                "Knockdown Avg": "0.00",
+                "Average fight time": "12:55"
+            },
+            "bars": {
+                "Standing": {
+                    "n": 75,
+                    "pct": 51
+                },
+                "Clinch": {
+                    "n": 9,
+                    "pct": 6
+                },
+                "Ground": {
+                    "n": 64,
+                    "pct": 43
+                },
+                "KO/TKO": {
+                    "n": 2,
+                    "pct": 17
+                },
+                "DEC": {
+                    "n": 10,
+                    "pct": 83
+                },
+                "SUB": {
+                    "n": 0,
+                    "pct": 0
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 122,
+                    "pct": 82
+                },
+                "body": {
+                    "n": 20,
+                    "pct": 14
+                },
+                "leg": {
+                    "n": 6,
+                    "pct": 4
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "Dushanbe, Tajikistan",
+                "Fighting style": "Wrestling",
+                "Age": "25",
+                "Height": "70.00",
+                "Weight": "155.00",
+                "Octagon Debut": "Feb. 25, 2023",
+                "Reach": "72.00",
+                "Leg reach": "38.00"
+            },
+            "heightCm": 178,
+            "reachCm": 183,
+            "legReachCm": 97,
+            "weightKg": 70.3,
+            "age": 25,
+            "lastFights": [
+                {
+                    "opponent": "Davis",
+                    "date": "Jul. 25, 2026",
+                    "result": "win",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                },
+                {
+                    "opponent": "Rock",
+                    "date": "Nov. 22, 2025",
+                    "result": "win",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                },
+                {
+                    "opponent": "Solecki",
+                    "date": "Jan. 12, 2025",
+                    "result": "win",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                }
+            ]
+        },
+        "colby-thicknesse": {
+            "slug": "colby-thicknesse",
+            "url": "https://www.ufc.com/athlete/colby-thicknesse",
+            "name": "Colby Thicknesse",
+            "nickname": "Slickness",
+            "division": "Bantamweight Division",
+            "record": {
+                "w": 9,
+                "l": 1,
+                "d": 0
+            },
+            "tags": [
+                "Bantamweight Division",
+                "Active"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/THICKNESSE_COLBY_L_05-02.png?itok=N5HTzqNl",
+            "hero": {
+                "Wins by Knockout": 2,
+                "Wins by Submission": 2,
+                "First Round Finishes": 4
+            },
+            "totals": {
+                "Sig. Strikes Landed": 146,
+                "Sig. Strikes Attempted": 355,
+                "Takedowns Landed": null,
+                "Takedowns Attempted": 28
+            },
+            "accuracy": {
+                "striking": 41,
+                "takedown": 0
+            },
+            "rates": {
+                "Sig. Str. Landed": "3.24",
+                "Sig. Str. Absorbed": "2.93",
+                "Takedown avg": "0.67",
+                "Submission avg": "1.67",
+                "Sig. Str. Defense": "54%",
+                "Takedown Defense": "33%",
+                "Knockdown Avg": "0.00",
+                "Average fight time": "15:00"
+            },
+            "bars": {
+                "Standing": {
+                    "n": 93,
+                    "pct": 64
+                },
+                "Clinch": {
+                    "n": 10,
+                    "pct": 7
+                },
+                "Ground": {
+                    "n": 43,
+                    "pct": 29
+                },
+                "KO/TKO": {
+                    "n": 2,
+                    "pct": 22
+                },
+                "DEC": {
+                    "n": 5,
+                    "pct": 56
+                },
+                "SUB": {
+                    "n": 2,
+                    "pct": 22
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 81,
+                    "pct": 55
+                },
+                "body": {
+                    "n": 41,
+                    "pct": 28
+                },
+                "leg": {
+                    "n": 24,
+                    "pct": 16
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "Australia",
+                "Trains at": "Freestyle MMA",
+                "Fighting style": "Freestyle",
+                "Age": "27",
+                "Height": "67.00",
+                "Weight": "135.50",
+                "Octagon Debut": "Feb. 8, 2025",
+                "Reach": "69.00",
+                "Leg reach": "39.00"
+            },
+            "heightCm": 170,
+            "reachCm": 175,
+            "legReachCm": 99,
+            "weightKg": 61.5,
+            "age": 27,
+            "lastFights": [
+                {
+                    "opponent": "Morales",
+                    "date": "May. 2, 2026",
+                    "result": "win",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                },
+                {
+                    "opponent": "Musasa",
+                    "date": "Sep. 27, 2025",
+                    "result": "win",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                },
+                {
+                    "opponent": "Topuria",
+                    "date": "Feb. 8, 2025",
+                    "result": "loss",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                }
+            ]
+        },
+        "asaf-chopurov": {
+            "slug": "asaf-chopurov",
+            "url": "https://www.ufc.com/athlete/asaf-chopurov",
+            "name": "Asaf Chopurov",
+            "nickname": "The Honey Badger",
+            "division": "Bantamweight Division",
+            "record": {
+                "w": 11,
+                "l": 0,
+                "d": 0
+            },
+            "tags": [
+                "Bantamweight Division",
+                "Active"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&itok=DfVddCfn",
+            "hero": {
+                "Wins by Knockout": 5,
+                "Wins by Submission": 5,
+                "First Round Finishes": 7
+            },
+            "totals": [],
+            "accuracy": {
+                "striking": null,
+                "takedown": null
+            },
+            "rates": {
+                "Sig. Str. Landed": "",
+                "Sig. Str. Absorbed": "",
+                "Takedown avg": "",
+                "Submission avg": "",
+                "Sig. Str. Defense": "",
+                "Takedown Defense": "",
+                "Knockdown Avg": "",
+                "Average fight time": "00:00"
+            },
+            "bars": {
+                "KO/TKO": {
+                    "n": 5,
+                    "pct": 45
+                },
+                "DEC": {
+                    "n": 1,
+                    "pct": 9
+                },
+                "SUB": {
+                    "n": 5,
+                    "pct": 45
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 0,
+                    "pct": 0
+                },
+                "body": {
+                    "n": 0,
+                    "pct": 0
+                },
+                "leg": {
+                    "n": 0,
+                    "pct": 0
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "Georgia",
+                "Trains at": "Team Chingiz Allazov",
+                "Fighting style": "MMA",
+                "Age": "24",
+                "Weight": "135.00",
+                "Octagon Debut": "Oct. 24, 2026"
+            },
+            "heightCm": null,
+            "reachCm": null,
+            "legReachCm": null,
+            "weightKg": 61.2,
+            "age": 24,
+            "lastFights": []
+        },
+        "abubakar-vagaev": {
+            "slug": "abubakar-vagaev",
+            "url": "https://www.ufc.com/athlete/abubakar-vagaev",
+            "name": "Abubakar Vagaev",
+            "nickname": "",
+            "division": "Middleweight Division",
+            "record": {
+                "w": 25,
+                "l": 4,
+                "d": 0
+            },
+            "tags": [
+                "Middleweight Division",
+                "Active"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-07/VAGAEV_ABUBAKAR_L_07-25.png?itok=RfC7eTGH",
+            "hero": {
+                "Wins by Knockout": 4,
+                "Wins by Submission": 1,
+                "First Round Finishes": 4
+            },
+            "totals": {
+                "Sig. Strikes Landed": 27,
+                "Sig. Strikes Attempted": 70,
+                "Takedowns Landed": null,
+                "Takedowns Attempted": 10
+            },
+            "accuracy": {
+                "striking": 39,
+                "takedown": 0
+            },
+            "rates": {
+                "Sig. Str. Landed": "1.80",
+                "Sig. Str. Absorbed": "2.20",
+                "Takedown avg": "4.00",
+                "Submission avg": "0.00",
+                "Sig. Str. Defense": "60%",
+                "Takedown Defense": "71%",
+                "Knockdown Avg": "0.00",
+                "Average fight time": "15:00"
+            },
+            "bars": {
+                "Standing": {
+                    "n": 18,
+                    "pct": 67
+                },
+                "Clinch": {
+                    "n": 7,
+                    "pct": 26
+                },
+                "Ground": {
+                    "n": 2,
+                    "pct": 7
+                },
+                "KO/TKO": {
+                    "n": 4,
+                    "pct": 16
+                },
+                "DEC": {
+                    "n": 20,
+                    "pct": 80
+                },
+                "SUB": {
+                    "n": 1,
+                    "pct": 4
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 16,
+                    "pct": 59
+                },
+                "body": {
+                    "n": 7,
+                    "pct": 26
+                },
+                "leg": {
+                    "n": 4,
+                    "pct": 15
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "Russia",
+                "Trains at": "Akhmat Fight Club",
+                "Age": "33",
+                "Height": "72.00",
+                "Weight": "170.00",
+                "Octagon Debut": "Jul. 25, 2026"
+            },
+            "heightCm": 183,
+            "reachCm": null,
+            "legReachCm": null,
+            "weightKg": 77.1,
+            "age": 33,
+            "lastFights": [
+                {
+                    "opponent": "Izagakhmaev",
+                    "date": "Jul. 25, 2026",
+                    "result": "win",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                }
+            ]
+        },
+        "jacob-malkoun": {
+            "slug": "jacob-malkoun",
+            "url": "https://www.ufc.com/athlete/jacob-malkoun",
+            "name": "Jacob Malkoun",
+            "nickname": "Mamba",
+            "division": "Middleweight Division",
+            "record": {
+                "w": 10,
+                "l": 3,
+                "d": 0
+            },
+            "tags": [
+                "Middleweight Division",
+                "Active"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/MALKOUN_JACOB_L_05-02.png?itok=8P_D4zmL",
+            "hero": {
+                "Wins by Knockout": 3,
+                "First Round Finishes": 1
+            },
+            "totals": {
+                "Sig. Strikes Landed": 424,
+                "Sig. Strikes Attempted": 746,
+                "Takedowns Landed": 14,
+                "Takedowns Attempted": 84
+            },
+            "accuracy": {
+                "striking": 57,
+                "takedown": 17
+            },
+            "rates": {
+                "Sig. Str. Landed": "4.23",
+                "Sig. Str. Absorbed": "2.33",
+                "Takedown avg": "5.39",
+                "Submission avg": "0.75",
+                "Sig. Str. Defense": "55%",
+                "Takedown Defense": "56%",
+                "Knockdown Avg": "0.15",
+                "Average fight time": "11:08"
+            },
+            "bars": {
+                "Standing": {
+                    "n": 292,
+                    "pct": 69
+                },
+                "Clinch": {
+                    "n": 16,
+                    "pct": 4
+                },
+                "Ground": {
+                    "n": 116,
+                    "pct": 27
+                },
+                "KO/TKO": {
+                    "n": 3,
+                    "pct": 30
+                },
+                "DEC": {
+                    "n": 7,
+                    "pct": 70
+                },
+                "SUB": {
+                    "n": 0,
+                    "pct": 0
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 390,
+                    "pct": 92
+                },
+                "body": {
+                    "n": 30,
+                    "pct": 7
+                },
+                "leg": {
+                    "n": 4,
+                    "pct": 1
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "Bankstown, Australia",
+                "Trains at": "Gracie Jiu Jitsu Smeaton Grange",
+                "Fighting style": "MMA",
+                "Age": "31",
+                "Height": "69.00",
+                "Weight": "197.70",
+                "Octagon Debut": "Oct. 24, 2020",
+                "Reach": "73.00",
+                "Leg reach": "38.00"
+            },
+            "heightCm": 175,
+            "reachCm": 185,
+            "legReachCm": 97,
+            "weightKg": 89.7,
+            "age": 31,
+            "lastFights": [
+                {
+                    "opponent": "Meerschaert",
+                    "date": "May. 2, 2026",
+                    "result": "win",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                },
+                {
+                    "opponent": "Finney",
+                    "date": "Jan. 31, 2026",
+                    "result": "win",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                },
+                {
+                    "opponent": "Petroski",
+                    "date": "Mar. 30, 2024",
+                    "result": "win",
+                    "round": "2",
+                    "time": "0:39",
+                    "method": "KO/TKO"
+                }
+            ]
+        },
+        "bolaji-oki": {
+            "slug": "bolaji-oki",
+            "url": "https://www.ufc.com/athlete/bolaji-oki",
+            "name": "Bolaji Oki",
+            "nickname": "Zulu Warrior",
+            "division": "Featherweight Division",
+            "record": {
+                "w": 10,
+                "l": 4,
+                "d": 0
+            },
+            "tags": [
+                "Featherweight Division",
+                "Active"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/OKI_BOLAJI_L_03-14.png?itok=Hs5udMlS",
+            "hero": {
+                "Wins by Knockout": 5,
+                "Wins by Submission": 1,
+                "First Round Finishes": 4
+            },
+            "totals": {
+                "Sig. Strikes Landed": 378,
+                "Sig. Strikes Attempted": 834,
+                "Takedowns Landed": 1,
+                "Takedowns Attempted": 7
+            },
+            "accuracy": {
+                "striking": 45,
+                "takedown": 14
+            },
+            "rates": {
+                "Sig. Str. Landed": "6.42",
+                "Sig. Str. Absorbed": "5.12",
+                "Takedown avg": "1.02",
+                "Submission avg": "0.00",
+                "Sig. Str. Defense": "61%",
+                "Takedown Defense": "75%",
+                "Knockdown Avg": "0.51",
+                "Average fight time": "09:48"
+            },
+            "bars": {
+                "Standing": {
+                    "n": 339,
+                    "pct": 90
+                },
+                "Clinch": {
+                    "n": 25,
+                    "pct": 7
+                },
+                "Ground": {
+                    "n": 14,
+                    "pct": 4
+                },
+                "KO/TKO": {
+                    "n": 5,
+                    "pct": 50
+                },
+                "DEC": {
+                    "n": 4,
+                    "pct": 40
+                },
+                "SUB": {
+                    "n": 1,
+                    "pct": 10
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 257,
+                    "pct": 68
+                },
+                "body": {
+                    "n": 87,
+                    "pct": 23
+                },
+                "leg": {
+                    "n": 34,
+                    "pct": 9
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "Jette, Brussels, Belgium",
+                "Trains at": "Valon Team",
+                "Fighting style": "MMA",
+                "Age": "30",
+                "Height": "70.00",
+                "Weight": "156.00",
+                "Octagon Debut": "Feb. 10, 2024",
+                "Reach": "73.00",
+                "Leg reach": "41.00"
+            },
+            "heightCm": 178,
+            "reachCm": 185,
+            "legReachCm": 104,
+            "weightKg": 70.8,
+            "age": 30,
+            "lastFights": [
+                {
+                    "opponent": "Sousa",
+                    "date": "Mar. 14, 2026",
+                    "result": "loss",
+                    "round": "3",
+                    "time": "4:12",
+                    "method": "KO/TKO"
+                },
+                {
+                    "opponent": "Jones",
+                    "date": "Sep. 6, 2025",
+                    "result": "loss",
+                    "round": "2",
+                    "time": "3:18",
+                    "method": "KO/TKO"
+                },
+                {
+                    "opponent": "Aswell Jr.",
+                    "date": "May. 31, 2025",
+                    "result": "win",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                }
+            ]
+        },
+        "daniel-santos": {
+            "slug": "daniel-santos",
+            "url": "https://www.ufc.com/athlete/daniel-santos",
+            "name": "Daniel Santos",
+            "nickname": "Willycat",
+            "division": "Featherweight Division",
+            "record": {
+                "w": 14,
+                "l": 3,
+                "d": 0
+            },
+            "tags": [
+                "Featherweight Division",
+                "Active"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/SANTOS_DANIEL_L_10-04.png?itok=v0mSMNti",
+            "hero": {
+                "Wins by Knockout": 7,
+                "Wins by Submission": 2,
+                "First Round Finishes": 3
+            },
+            "totals": {
+                "Sig. Strikes Landed": 357,
+                "Sig. Strikes Attempted": 882,
+                "Takedowns Landed": null,
+                "Takedowns Attempted": 36
+            },
+            "accuracy": {
+                "striking": 40,
+                "takedown": 0
+            },
+            "rates": {
+                "Sig. Str. Landed": "5.15",
+                "Sig. Str. Absorbed": "5.38",
+                "Takedown avg": "2.60",
+                "Submission avg": "0.00",
+                "Sig. Str. Defense": "50%",
+                "Takedown Defense": "73%",
+                "Knockdown Avg": "0.43",
+                "Average fight time": "11:33"
+            },
+            "bars": {
+                "Standing": {
+                    "n": 273,
+                    "pct": 76
+                },
+                "Clinch": {
+                    "n": 32,
+                    "pct": 9
+                },
+                "Ground": {
+                    "n": 52,
+                    "pct": 15
+                },
+                "KO/TKO": {
+                    "n": 7,
+                    "pct": 50
+                },
+                "DEC": {
+                    "n": 5,
+                    "pct": 36
+                },
+                "SUB": {
+                    "n": 2,
+                    "pct": 14
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 238,
+                    "pct": 67
+                },
+                "body": {
+                    "n": 79,
+                    "pct": 22
+                },
+                "leg": {
+                    "n": 40,
+                    "pct": 11
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "Uberaba, Brazil",
+                "Trains at": "Chute Boxe",
+                "Fighting style": "Muay Thai",
+                "Age": "31",
+                "Height": "67.00",
+                "Weight": "151.00",
+                "Octagon Debut": "Apr. 9, 2022",
+                "Reach": "67.00",
+                "Leg reach": "37.00"
+            },
+            "heightCm": 170,
+            "reachCm": 170,
+            "legReachCm": 94,
+            "weightKg": 68.5,
+            "age": 31,
+            "lastFights": [
+                {
+                    "opponent": "Choi",
+                    "date": "May. 16, 2026",
+                    "result": "loss",
+                    "round": "2",
+                    "time": "4:29",
+                    "method": "KO/TKO"
+                },
+                {
+                    "opponent": "Yoo",
+                    "date": "Oct. 4, 2025",
+                    "result": "win",
+                    "round": "2",
+                    "time": "0:21",
+                    "method": "KO/TKO"
+                },
+                {
+                    "opponent": "Lee",
+                    "date": "May. 10, 2025",
+                    "result": "win",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                }
+            ]
+        },
+        "kody-steele": {
+            "slug": "kody-steele",
+            "url": "https://www.ufc.com/athlete/kody-steele",
+            "name": "Kody Steele",
+            "nickname": "",
+            "division": "Lightweight Division",
+            "record": {
+                "w": 8,
+                "l": 1,
+                "d": 0
+            },
+            "tags": [
+                "Lightweight Division",
+                "Active"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-02/STEELE_KODY_R_02-08.png?itok=1eXV9YAp",
+            "hero": {
+                "Wins by Knockout": 4,
+                "Wins by Submission": 2,
+                "First Round Finishes": 2
+            },
+            "totals": {
+                "Sig. Strikes Landed": 108,
+                "Sig. Strikes Attempted": 328,
+                "Takedowns Landed": 1,
+                "Takedowns Attempted": 8
+            },
+            "accuracy": {
+                "striking": 33,
+                "takedown": 13
+            },
+            "rates": {
+                "Sig. Str. Landed": "3.85",
+                "Sig. Str. Absorbed": "6.20",
+                "Takedown avg": "1.07",
+                "Submission avg": "0.53",
+                "Sig. Str. Defense": "52%",
+                "Takedown Defense": "100%",
+                "Knockdown Avg": "0.53",
+                "Average fight time": "09:21"
+            },
+            "bars": {
+                "Standing": {
+                    "n": 105,
+                    "pct": 97
+                },
+                "Clinch": {
+                    "n": 2,
+                    "pct": 2
+                },
+                "Ground": {
+                    "n": 1,
+                    "pct": 1
+                },
+                "KO/TKO": {
+                    "n": 4,
+                    "pct": 50
+                },
+                "DEC": {
+                    "n": 2,
+                    "pct": 25
+                },
+                "SUB": {
+                    "n": 2,
+                    "pct": 25
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 80,
+                    "pct": 74
+                },
+                "body": {
+                    "n": 24,
+                    "pct": 22
+                },
+                "leg": {
+                    "n": 4,
+                    "pct": 4
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "Port Angeles, United States",
+                "Trains at": "Syndicate MMA - Las Vegas, NV",
+                "Fighting style": "Jiu-Jitsu",
+                "Age": "31",
+                "Height": "69.00",
+                "Weight": "155.00",
+                "Octagon Debut": "Feb. 8, 2025",
+                "Reach": "71.00",
+                "Leg reach": "39.00"
+            },
+            "heightCm": 175,
+            "reachCm": 180,
+            "legReachCm": 99,
+            "weightKg": 70.3,
+            "age": 31,
+            "lastFights": [
+                {
+                    "opponent": "Mar Fan",
+                    "date": "May. 2, 2026",
+                    "result": "win",
+                    "round": "1",
+                    "time": "3:56",
+                    "method": "Submission"
+                },
+                {
+                    "opponent": "Zhu",
+                    "date": "Feb. 8, 2025",
+                    "result": "loss",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                }
+            ]
+        },
+        "noah-gugnon": {
+            "slug": "noah-gugnon",
+            "url": "https://www.ufc.com/athlete/noah-gugnon",
+            "name": "Noah Gugnon",
+            "nickname": "",
+            "division": "Lightweight Division",
+            "record": {
+                "w": 10,
+                "l": 2,
+                "d": 0
+            },
+            "tags": [
+                "Lightweight Division",
+                "Active"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-07/GUGNON_NOAH_R_08-01.png?itok=llkgIODo",
+            "hero": {
+                "Wins by Knockout": 6,
+                "Wins by Submission": 4,
+                "First Round Finishes": 7
+            },
+            "totals": {
+                "Sig. Strikes Landed": 5,
+                "Sig. Strikes Attempted": 11
+            },
+            "accuracy": {
+                "striking": 45,
+                "takedown": null
+            },
+            "rates": {
+                "Sig. Str. Landed": "3.70",
+                "Sig. Str. Absorbed": "4.44",
+                "Takedown avg": "0.00",
+                "Submission avg": "11.11",
+                "Sig. Str. Defense": "68%",
+                "Takedown Defense": "",
+                "Knockdown Avg": "0.00",
+                "Average fight time": "01:21"
+            },
+            "bars": {
+                "Standing": {
+                    "n": 5,
+                    "pct": 100
+                },
+                "Clinch": {
+                    "n": 0,
+                    "pct": 0
+                },
+                "Ground": {
+                    "n": 0,
+                    "pct": 0
+                },
+                "KO/TKO": {
+                    "n": 6,
+                    "pct": 60
+                },
+                "DEC": {
+                    "n": 0,
+                    "pct": 0
+                },
+                "SUB": {
+                    "n": 4,
+                    "pct": 40
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 1,
+                    "pct": 20
+                },
+                "body": {
+                    "n": 0,
+                    "pct": 0
+                },
+                "leg": {
+                    "n": 4,
+                    "pct": 80
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "Spicheren, France",
+                "Trains at": "Bulgarian Top Team",
+                "Age": "25",
+                "Height": "70.00",
+                "Weight": "155.00",
+                "Octagon Debut": "Aug. 1, 2026"
+            },
+            "heightCm": 178,
+            "reachCm": null,
+            "legReachCm": null,
+            "weightKg": 70.3,
+            "age": 25,
+            "lastFights": [
+                {
+                    "opponent": "Janicic",
+                    "date": "Aug. 1, 2026",
+                    "result": "win",
+                    "round": "1",
+                    "time": "1:21",
+                    "method": "Submission"
+                }
+            ]
+        },
+        "iasmin-lucindo": {
+            "slug": "iasmin-lucindo",
+            "url": "https://www.ufc.com/athlete/iasmin-lucindo",
+            "name": "Iasmin Lucindo",
+            "nickname": "",
+            "division": "Women's Strawweight Division",
+            "record": {
+                "w": 18,
+                "l": 6,
+                "d": 0
+            },
+            "tags": [
+                "Women's Strawweight Division",
+                "Active"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/LUCINDO_IASMIN_L_08-09.png?itok=itSnZTmA",
+            "hero": {
+                "Wins by Knockout": 8,
+                "Wins by Submission": 3,
+                "First Round Finishes": 3
+            },
+            "totals": {
+                "Sig. Strikes Landed": 318,
+                "Sig. Strikes Attempted": 699,
+                "Takedowns Landed": null,
+                "Takedowns Attempted": 27
+            },
+            "accuracy": {
+                "striking": 45,
+                "takedown": 0
+            },
+            "rates": {
+                "Sig. Str. Landed": "3.22",
+                "Sig. Str. Absorbed": "2.80",
+                "Takedown avg": "2.28",
+                "Submission avg": "0.15",
+                "Sig. Str. Defense": "62%",
+                "Takedown Defense": "69%",
+                "Knockdown Avg": "0.00",
+                "Average fight time": "14:06"
+            },
+            "bars": {
+                "Standing": {
+                    "n": 266,
+                    "pct": 84
+                },
+                "Clinch": {
+                    "n": 31,
+                    "pct": 10
+                },
+                "Ground": {
+                    "n": 21,
+                    "pct": 7
+                },
+                "KO/TKO": {
+                    "n": 8,
+                    "pct": 44
+                },
+                "DEC": {
+                    "n": 7,
+                    "pct": 39
+                },
+                "SUB": {
+                    "n": 3,
+                    "pct": 17
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 210,
+                    "pct": 66
+                },
+                "body": {
+                    "n": 84,
+                    "pct": 26
+                },
+                "leg": {
+                    "n": 24,
+                    "pct": 8
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "Fortaleza, Brazil",
+                "Fighting style": "Striker",
+                "Age": "24",
+                "Height": "63.00",
+                "Weight": "115.00",
+                "Octagon Debut": "Aug. 13, 2022",
+                "Reach": "66.00",
+                "Leg reach": "36.00"
+            },
+            "heightCm": 160,
+            "reachCm": 168,
+            "legReachCm": 91,
+            "weightKg": 52.2,
+            "age": 24,
+            "lastFights": [
+                {
+                    "opponent": "Hill",
+                    "date": "Aug. 9, 2025",
+                    "result": "win",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                },
+                {
+                    "opponent": "Lemos",
+                    "date": "Mar. 8, 2025",
+                    "result": "loss",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Unanimous"
+                },
+                {
+                    "opponent": "Rodriguez",
+                    "date": "Oct. 5, 2024",
+                    "result": "win",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Split"
+                }
+            ]
+        },
+        "nicolle-caliari": {
+            "slug": "nicolle-caliari",
+            "url": "https://www.ufc.com/athlete/nicolle-caliari",
+            "name": "Nicolle Caliari",
+            "nickname": "",
+            "division": "Women's Strawweight Division",
+            "record": {
+                "w": 9,
+                "l": 4,
+                "d": 0
+            },
+            "tags": [
+                "Women's Strawweight Division",
+                "Active"
+            ],
+            "image": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/2/CALIARI_NICOLLE_L_01-11.png?itok=F6kDO8bo",
+            "hero": {
+                "Wins by Knockout": 5,
+                "Wins by Submission": 4,
+                "First Round Finishes": 4
+            },
+            "totals": {
+                "Sig. Strikes Landed": 128,
+                "Sig. Strikes Attempted": 322,
+                "Takedowns Landed": 3,
+                "Takedowns Attempted": 34
+            },
+            "accuracy": {
+                "striking": 40,
+                "takedown": 9
+            },
+            "rates": {
+                "Sig. Str. Landed": "2.88",
+                "Sig. Str. Absorbed": "5.59",
+                "Takedown avg": "3.38",
+                "Submission avg": "1.01",
+                "Sig. Str. Defense": "52%",
+                "Takedown Defense": "50%",
+                "Knockdown Avg": "0.00",
+                "Average fight time": "11:06"
+            },
+            "bars": {
+                "Standing": {
+                    "n": 107,
+                    "pct": 84
+                },
+                "Clinch": {
+                    "n": 9,
+                    "pct": 7
+                },
+                "Ground": {
+                    "n": 12,
+                    "pct": 9
+                },
+                "KO/TKO": {
+                    "n": 5,
+                    "pct": 56
+                },
+                "DEC": {
+                    "n": 0,
+                    "pct": 0
+                },
+                "SUB": {
+                    "n": 4,
+                    "pct": 44
+                }
+            },
+            "target": {
+                "head": {
+                    "n": 86,
+                    "pct": 67
+                },
+                "body": {
+                    "n": 29,
+                    "pct": 23
+                },
+                "leg": {
+                    "n": 13,
+                    "pct": 10
+                }
+            },
+            "bio": {
+                "Status": "Active",
+                "Place of Birth": "Curitiba, Brazil",
+                "Trains at": "Thai Brasil Floripa",
+                "Fighting style": "MMA",
+                "Age": "29",
+                "Height": "63.00",
+                "Weight": "126.00",
+                "Octagon Debut": "Jan. 11, 2025",
+                "Reach": "62.00",
+                "Leg reach": "34.00"
+            },
+            "heightCm": 160,
+            "reachCm": 157,
+            "legReachCm": 86,
+            "weightKg": 57.2,
+            "age": 29,
+            "lastFights": [
+                {
+                    "opponent": "Bannon",
+                    "date": "May. 16, 2026",
+                    "result": "win",
+                    "round": "3",
+                    "time": "3:08",
+                    "method": "Submission"
+                },
+                {
+                    "opponent": "Judice",
+                    "date": "Jul. 19, 2025",
+                    "result": "loss",
+                    "round": "3",
+                    "time": "1:30",
+                    "method": "KO/TKO"
+                },
+                {
+                    "opponent": "Kareckaite",
+                    "date": "Jan. 11, 2025",
+                    "result": "loss",
+                    "round": "3",
+                    "time": "5:00",
+                    "method": "Decision - Split"
+                }
+            ]
+        }
+    }
+}
