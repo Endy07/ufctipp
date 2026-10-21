@@ -4,10 +4,14 @@
 **Javasolt folytatás:** az első éles gála (UFC 333, 2026-10-24, szombat; korai előmeccsek 16:00, fő kártya 20:00) után
 nézzük meg együtt a tapasztalatokat: zárt-e és rögzített-e magától az automata (`tools/logs/`, Supabase `fights`:
 `lock_source` / `result_source`), volt-e eltérés vagy kézi beavatkozás. Utána a halasztott apróságok.
+**Új (2026-10-21, helyben commitolva, még NEM pusholva):** Történet, Statisztika, Szezon, megosztás képként, naptár-emlékeztető
+(README „Történet, statisztika, szezon"; terv: `docs/2026-10-21-tortenet-statisztika-terv.md`). A `get_history()` az éles adatbázison már
+megvan (test-004 OK), de a felület csak push után kerül az éles oldalra.
 **Félretéve (a felhasználó választ):**
-- Múltbeli gálák visszanézése a felületen (ma mindig csak az aktuális gála látszik).
 - A végső ellenőrzés halasztott apróságai (lent, „Ismert apróságok”).
-**Döntésre vár:** nincs nyitott döntés.
+- Valódi push-értesítés (szerver-oldali VAPID / edge function; iPhone-on telepített PWA kellene) — most csak az .ics.
+**Döntésre vár:** az új oldalak pusholása (GitHub Pages) a felhasználó igenje után; mire szombat este az első gála lemegy, az éles
+adat tölti meg a Történetet / Statisztikát — érdemes utána ránézni, jól számol-e.
 **Először olvasd:** ez a fájl; `README.md` (működés); `docs/2026-10-21-automatizalas-terv.md` (a döntések).
 **Figyelj:** élesben tesztelni csak `?demo`-val vagy `teszt-` slugú gálán szabad; a felhasználó valódi becenevével („Endy”)
 ne próbálj belépni (2026-10-21-én egy gyorsítótárazott régi `api.js` miatt egyszer megtörtént — 1 hibás PIN-próba lett belőle).
@@ -44,7 +48,8 @@ ne próbálj belépni (2026-10-21-én egy gyorsítótárazott régi `api.js` mia
 
 ## Ismert apróságok (a végső ellenőrzés halasztott pontjai, 2026-10-21)
 - `get_event`: `starts_at` nélküli gála a lista elejére kerülne (`nulls last` hiányzik; a szinkron mindig küld időt).
-- Az „aktuális gála” ablaka 1 nap (a terv 2 napot írt); múltbeli gálát a felület nem mutat.
+- Az „aktuális gála” ablaka 1 nap (a terv 2 napot írt); a múltbeli gálákat a Történet mutatja.
+- Statisztika: a kitalált demó-előzmények (`data/demo-history.json`) csak a `?demo` módban látszanak; élesen addig üres a Történet, amíg nincs eldőlt meccs.
 - `espn_tick` a még függő `pg_net`-választ eldobja (percenkénti ütemnél ártalmatlan).
 - Döntetlen / NC után a következő meccs nem zárul azonnal (az ESPN „zajlik” jelzésére vár, 1–2 perc).
 - A `sync.php auto` HIBA-t naplóz, ha az adatbázisban egyáltalán nincs gála.

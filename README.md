@@ -39,13 +39,25 @@ Windows Feladatütemező: „UfcTipp szinkron”, 5 percenként `wscript tools\s
 - **Az admin elsőbbsége:** amit az admin oldalon kézzel tesz (zárás, újranyitás, eredmény, eredmény törlése), azt az automata
   nem írja felül.
 
+## Történet, statisztika, szezon (2026-10-21)
+- **Történet** (`#tortenet`, `#tortenet/<gála>`): a lejátszott gálák listája (Mind / Számozott / Fight Night), gálánként győztes, saját eredmény;
+  részletnél gála-ranglista, meccsenként eredmény, saját tipp, társaság megoszlása, „ki kire tippelt", „a társaság tévedett" jelzések.
+- **Statisztika** (`#statisztika`): mindenki találati aránya, játékos-kártya (széria, favorit / esélytelen, címmeccs, súlycsoport, kedvenc
+  versenyző, tömeg ellen), díjak (legalább 5 eldőlt tipp után), bajnokok, fej-fej mellett.
+- **Ranglista → Szezon**: naptári évenként. **Megosztás képként**: Ranglista (Ez a gála) és a Történet részlete. **Emlékeztető**: a Meccsek
+  tetején visszaszámláló + naptár-fájl (.ics, 30 perccel a kezdések előtt). Valódi push-értesítés nincs.
+- Adat: egyetlen csak olvasó függvény, `get_history()` (`supabase/migrate-004-tortenet.sql`) — a tippek csak az eldőlt meccseknél szerepelnek.
+  A számítás a böngészőben (`js/stats.js`). Demóban három kitalált múltbeli gála (`data/demo-history.json`, kitalált nevek): Gergő, Réka, Dani, Márk, Bence.
+- Telepítés (egyszer, **2026-10-21-én az éles adatbázison megtörtént**): `migrate-004-tortenet.sql` az SQL-szerkesztőben; ellenőrzés: `test-004.sql`.
+
 ## Az est menete
 Semmit nem kell csinálni. Ha valami nem stimmel: `#admin` → admin-PIN → a meccsnél zárás / újranyitás / eredmény.
 Az admin oldal tetején: „Utolsó automatikus frissítés” (benne pl. `ESPN 14/14` — a nem párosult meccset az automata nem zárja).
 
 ## Tesztek
 - `php tests/test-sync.php` — UFC.com/ESPN feldolgozás és párosítás (fixture-ökből, hálózat nélkül).
-- `supabase/test-002.sql`, `supabase/test-003.sql` — az adatbázis-szabályok (az SQL-szerkesztőben; saját tesztadat, utána takarít).
+- `node tests/test-stats.js` — a statisztikai számítások (`js/stats.js`), kézzel kiszámolt példán.
+- `supabase/test-002.sql`, `test-003.sql`, `test-004.sql` — az adatbázis-szabályok (az SQL-szerkesztőben; saját tesztadat, utána takarít).
 
 ## Demó-adat frissítése
 `php tools/scrape-ufc.php ufc-333 --refresh` — újraírja a `data/ufc-333.json`-t (a `?demo` módhoz) és a `supabase/seed-ufc-333.sql`-t.

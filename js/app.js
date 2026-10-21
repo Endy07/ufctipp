@@ -14,7 +14,14 @@
     adminPin: null,
     sheetFight: null,
     busy: new Set(),
+    history: null,   // get_history: a lejátszott gálák meccsei a tippekkel (Történet, Statisztika, Szezon)
+    historyAt: 0,
+    historyTxt: '',
+    hKind: null,     // Történet szűrő: null | 'numbered' | 'fightnight'
+    statNick: null,  // Statisztika: a kiválasztott játékos
+    h2h: { a: null, b: null },
   };
+  const ST = window.UfcStats;
 
   // ------------------------------------------------------------ segédek
 
@@ -132,7 +139,11 @@
     document.addEventListener('click', onClick);
     document.addEventListener('submit', onSubmit);
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSheet(); });
-    window.addEventListener('hashchange', render);
+    window.addEventListener('hashchange', () => { render(); window.scrollTo(0, 0); });
+    document.addEventListener('change', (e) => {
+      const sel = e.target.closest('[data-h2h]');
+      if (sel) { state.h2h[sel.dataset.h2h] = sel.value; render(); }
+    });
     document.addEventListener('visibilitychange', () => { if (!document.hidden) refresh(); });
 
     if (state.me) {
@@ -169,16 +180,51 @@
       try { state.picks = await state.api.myPicks(state.me.nick, state.me.pin); } catch (e) { /* a következő körben újra */ }
     }
     if (currentRoute() === 'ranglista' && state.lbTab === 'ossz') loadOverall(state.lbKind || null);
-    // Űrlapos nézetet (belépés, admin) nem rajzolunk újra, mert elveszne a félig beírt adat
+    // Űrlapos nézetet (belépés, admin) nem rajzolunk újra, mert elveszne a félig beírt adat;
+    // a Történetet / Statisztikát sem (nyitott részletek, kiválasztott játékos): azok maguktól frissülnek, ha változott az adat
     const shown = $('#view').dataset.route;
+    const needsHistory = HISTORY_ROUTES.includes(shown) || (shown === 'ranglista' && state.lbTab === 'szezon');
+    if (needsHistory && Date.now() - state.historyAt > 60000) loadHistory();
     if (shown === 'admin') renderAdminStatusOnly();
+    else if (HISTORY_ROUTES.includes(shown)) { /* a loadHistory rajzol újra, ha kell */ }
     else if (shown !== 'join') render();
     if (state.sheetFight) renderSheet(state.sheetFight, true);
   }
 
-  function currentRoute() {
-    const h = location.hash.replace('#', '');
-    return ['kartya', 'ranglista', 'admin'].includes(h) ? h : 'kartya';
+  const HISTORY_ROUTES = ['tortenet', 'statisztika'];
+
+  // #tortenet/<gála-slug>: a második rész a részletes nézet argumentuma
+  function routeParts() {
+    const [name, arg] = location.hash.replace('#', '').split('/');
+    return {
+      name: ['kartya', 'ranglista', 'tortenet', 'statisztika', 'admin'].includes(name) ? name : 'kartya',
+      arg: arg ? decodeURIComponent(arg) : null,
+    };
+  }
+  const currentRoute = () => routeParts().name;
+
+  // Az előzmények (lejátszott gálák) betöltése; újrarajzol, ha ilyen nézeten vagyunk és változott az adat
+  async function loadHistory() {
+    if (loadHistory.busy) return;
+    loadHistory.busy = true;
+    try {
+      const h = await state.api.history();
+      state.historyAt = Date.now();
+      const txt = JSON.stringify(h.events);
+      const changed = txt !== state.historyTxt;
+      state.history = h;
+      state.historyTxt = txt;
+      const shown = $('#view').dataset.route;
+      const wants = HISTORY_ROUTES.includes(shown) || (shown === 'ranglista' && state.lbTab === 'szezon');
+      if (wants && (changed || !loadHistory.drawn)) render();
+      loadHistory.drawn = true;
+    } catch (e) {
+      state.historyAt = Date.now();
+      if (!state.history) { state.history = { events: [], failed: e.message }; if ($('#view').dataset.route !== 'join') render(); }
+      toast(e.message, 'err');
+    } finally {
+      loadHistory.busy = false;
+    }
   }
 
   // ------------------------------------------------------------ nézetek
@@ -201,7 +247,10 @@
     } else {
       $('#tabs').hidden = false;
       view.dataset.route = route;
-      view.innerHTML = route === 'ranglista' ? leaderboardView() : cardView();
+      view.innerHTML = route === 'ranglista' ? leaderboardView()
+        : route === 'tortenet' ? historyView()
+        : route === 'statisztika' ? statsView()
+        : cardView();
     }
     document.querySelectorAll('#tabs a').forEach((a) => a.classList.toggle('is-active', a.dataset.tab === route));
   }
@@ -271,6 +320,7 @@
         <div><b>${row ? row.points : 0}</b><span>pontod</span></div>
         <div><b>${place > 0 ? place + '.' : '–'}</b><span>helyezés (${total} játékos)</span></div>
       </div>
+      ${countdownHtml()}
       ${redo ? `<p class="nudge nudge--changed">${redo} meccs megváltozott (beugró), tippelj rá újra!</p>` : ''}
       ${missing && openCount ? `<p class="nudge">Még ${missing} nyitott meccsre nem tippeltél.</p>` : ''}`;
     ['main', 'prelims', 'early'].forEach((key) => {
@@ -374,8 +424,10 @@
     const tabs = `
       <div class="seg" role="tablist">
         <button type="button" role="tab" data-lb-tab="gala" aria-selected="${tab === 'gala'}">Ez a gála</button>
+        <button type="button" role="tab" data-lb-tab="szezon" aria-selected="${tab === 'szezon'}">Szezon</button>
         <button type="button" role="tab" data-lb-tab="ossz" aria-selected="${tab === 'ossz'}">Összesített</button>
       </div>`;
+    if (tab === 'szezon') return `${tabs}${seasonBody()}`;
     if (tab === 'ossz') {
       const kind = state.lbKind || null;
       const chips = `<div class="chips">${LB_KINDS.map(([k, label]) =>
@@ -394,8 +446,27 @@
     return `${tabs}
       <h2 class="section-h"><span>${esc(state.data.event.title.split(':')[0])}</span><time>${done}/${state.data.fights.length} meccs lement</time></h2>
       <ol class="lb">${lbRows(lb, (r) => `${r.correct}/${r.decided} talált, ${r.picks} tipp`, done)}</ol>
+      ${done ? `<button class="btn btn--share" type="button" data-share="current">Ranglista megosztása képként</button>` : ''}
       <p class="hint">Holtversenyben a több talált tipp dönt; a sorrend minden eredmény után frissül.</p>`;
   }
+
+  // Szezon: naptári évenként a gálák pontjai (az előzményekből számolva)
+  function seasonBody() {
+    if (!state.history) { loadHistory(); return '<div class="empty">Betöltés…</div>'; }
+    const seasons = ST.season(state.history);
+    const years = Object.keys(seasons);
+    if (!years.length) return '<div class="empty">Még nincs lejátszott gála. Az első után itt jelenik meg az évi összesítés.</div>';
+    const year = years.includes(String(state.seasonYear)) ? String(state.seasonYear) : years[0];
+    const chips = years.length > 1 ? `<div class="chips">${years.map((y) =>
+      `<button type="button" class="chip-btn ${y === year ? 'is-on' : ''}" data-season-year="${y}">${y}</button>`).join('')}</div>` : '';
+    const rows = seasons[year];
+    const gala = new Set(state.history.events.filter((e) => String(ST_year(e)) === year).map((e) => e.slug)).size;
+    return `${chips}
+      <h2 class="section-h"><span>${year}-es szezon</span><time>${gala} gála</time></h2>
+      <ol class="lb">${lbRows(rows, (r) => `${r.correct}/${r.decided} talált, ${r.events} gála`, true)}</ol>
+      <p class="hint">A naptári év gáláinak pontjai együtt. Holtversenyben a több talált tipp dönt.</p>`;
+  }
+  const ST_year = (e) => (e.starts_at ? +new Intl.DateTimeFormat('en', { timeZone: TZ, year: 'numeric' }).format(new Date(e.starts_at)) : null);
 
   async function loadOverall(kind) {
     if (loadOverall.busy === kind) return;
@@ -409,6 +480,337 @@
     } finally {
       loadOverall.busy = undefined;
     }
+  }
+
+  // ------------------------------------------------------------ történet
+
+  const KIND_NAME = { numbered: 'Számozott', fightnight: 'Fight Night' };
+  const fmtDate = (iso) => (iso ? new Intl.DateTimeFormat('hu-HU', { timeZone: TZ, year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(iso)) : '');
+  const isMe = (nick) => !!state.me && String(nick).toLowerCase() === state.me.nick.toLowerCase();
+  const nickList = (nicks) => nicks.map(esc).join(', ');
+  const rate = (g) => (g.picks ? `${Math.round((g.hits / g.picks) * 100)}% <small>(${g.hits}/${g.picks})</small>` : '–');
+
+  function historyGate(render) {
+    if (!state.history) { loadHistory(); return '<div class="empty">Betöltés…</div>'; }
+    if (state.history.failed) return `<div class="empty">Nem sikerült betölteni az előzményeket: ${esc(state.history.failed)} Újra próbáljuk.</div>`;
+    return render(state.history);
+  }
+
+  function historyView() {
+    return historyGate((h) => {
+      const { arg } = routeParts();
+      if (arg) return historyEventView(arg);
+      if (!h.events.length) return '<div class="empty">Még nincs lejátszott meccs. Az első gála után itt találod az összes korábbi estét: eredményeket, tippeket, győzteseket.</div>';
+      const chips = `<div class="chips">${LB_KINDS.map(([k, label]) =>
+        `<button type="button" class="chip-btn ${state.hKind === k ? 'is-on' : ''}" data-hist-kind="${k || ''}">${label}</button>`).join('')}</div>`;
+      const list = h.events.filter((e) => !state.hKind || e.kind === state.hKind);
+      return `<h2 class="section-h"><span>Korábbi gálák</span><time>${list.length} gála</time></h2>${chips}
+        ${list.length ? list.map(histCard).join('') : '<div class="empty">Ebből a fajtából még nincs lejátszott gála.</div>'}`;
+    });
+  }
+
+  function histCard(e) {
+    const done = e.fights.filter((f) => f.status === 'done').length;
+    const w = ST.eventWinners(e);
+    const mine = ST.eventTable(e).find((r) => isMe(r.nick));
+    const [num, ...rest] = e.title.split(':');
+    return `
+      <a class="hist" href="#tortenet/${encodeURIComponent(e.slug)}">
+        <div class="hist__top"><b>${esc(num)}</b><time>${esc(fmtDate(e.starts_at))}</time></div>
+        <div class="hist__sub">${esc(rest.join(':').trim())}</div>
+        <div class="hist__meta">${esc(KIND_NAME[e.kind] || '')} · ${done}/${e.fights.length} meccs lement${w.complete ? '' : ' · folyamatban'}</div>
+        ${w.nicks.length ? `<div class="hist__win"><span class="crown">${w.complete ? 'Győztes' : 'Éllovas'}</span><b>${nickList(w.nicks)}</b><span>${w.points} pont</span></div>` : ''}
+        <div class="hist__me ${mine ? '' : 'is-none'}">${mine ? `Te: ${mine.place}. hely, ${mine.points} pont, ${mine.correct}/${mine.decided} talált` : 'Ezen a gálán nem tippeltél'}</div>
+      </a>`;
+  }
+
+  function historyEventView(slug) {
+    const e = state.history.events.find((x) => x.slug === slug);
+    const back = '<a class="back" href="#tortenet">← Összes gála</a>';
+    if (!e) return `${back}<div class="empty">Ez a gála nem található az előzmények között.</div>`;
+    const table = ST.eventTable(e);
+    const w = ST.eventWinners(e);
+    const done = e.fights.filter((f) => f.status === 'done').length;
+    const wrong = e.fights.filter((f) => ST.crowd(f).crowdWrong);
+    const lone = e.fights.filter((f) => {
+      const c = ST.crowd(f);
+      return ST.decided(f) && c.total >= 3 && c.majority && c.majority !== f.winner && (f.winner === 'A' ? c.a : c.b) === 1;
+    });
+    const vs = (f) => `${lastName(f.a.name)} – ${lastName(f.b.name)}`;
+    const insights = [
+      ...wrong.slice(0, 4).map((f) => { const c = ST.crowd(f); return `A társaság tévedett: <b>${esc(vs(f))}</b> (${c.a}–${c.b}, ${f.winner === 'A' ? esc(lastName(f.a.name)) : esc(lastName(f.b.name))} nyert)`; }),
+      ...lone.slice(0, 4).map((f) => `Egyedül eltalálta: <b>${esc(f.picks.find((p) => p.side === f.winner).nick)}</b> — ${esc(vs(f))}`),
+    ];
+    let html = `${back}
+      <h2 class="section-h"><span>${esc(e.title.split(':')[0])}</span><time>${esc(fmtDate(e.starts_at))}</time></h2>
+      <p class="hint">${esc(e.title.split(':').slice(1).join(':').trim())} · ${esc(KIND_NAME[e.kind] || '')} · ${done}/${e.fights.length} meccs lement${w.complete ? '' : ' (folyamatban)'}</p>`;
+    if (table.length) {
+      html += `<ol class="lb">${lbRows(table, (r) => `${r.correct}/${r.decided} talált`, done > 0)}</ol>
+        ${done ? `<button class="btn btn--share" type="button" data-share="event:${esc(e.slug)}">Ranglista megosztása képként</button>` : ''}`;
+    } else {
+      html += '<div class="empty">Ezen a gálán senki nem tippelt.</div>';
+    }
+    if (insights.length) html += `<h3 class="tape__group">Érdekességek</h3><ul class="insights">${insights.map((x) => `<li>${x}</li>`).join('')}</ul>`;
+    ['main', 'prelims', 'early'].forEach((key) => {
+      const list = e.fights.filter((f) => f.card === key).sort((x, y) => x.ord - y.ord);
+      if (!list.length) return;
+      html += `<h2 class="section-h"><span>${CARD_NAME[key]}</span></h2>` + list.map(histFight).join('');
+    });
+    return html;
+  }
+
+  function histFight(f) {
+    const done = f.status === 'done';
+    const none = f.winner === 'draw' || f.winner === 'nc';
+    const mine = (f.picks || []).find((p) => isMe(p.nick));
+    const c = ST.crowd(f);
+    let res;
+    if (!done) res = '<span class="res res--none">Nem dőlt el</span>';
+    else if (none) res = `<span class="res res--none">${f.winner === 'draw' ? 'Döntetlen' : 'Nem értékelt'}, nincs pont</span>`;
+    else if (!mine) res = '<span class="res res--none">Nem tippeltél</span>';
+    else res = mine.side === f.winner ? `<span class="res res--hit">Talált, +${f.points} pont</span>` : '<span class="res res--miss">Nem talált</span>';
+    const how = done && f.method ? `<span class="how">${esc(methodHu(f.method))}${f.round ? `, ${f.round}. menet` : ''}${f.time ? ` ${esc(f.time)}` : ''}</span>` : '';
+    const side = (s) => {
+      const x = s === 'A' ? f.a : f.b;
+      const won = done && f.winner === s;
+      const lost = done && !none && f.winner !== s;
+      const pickedByMe = mine && mine.side === s;
+      return `<div class="hf__side hf__side--${s.toLowerCase()} ${won ? 'is-winner' : ''} ${lost ? 'is-loser' : ''}">
+          ${won ? '<span class="corner__win">Győztes</span>' : ''}${pickedByMe ? '<span class="corner__tick">Tipped</span>' : ''}
+          <span class="hf__name">${esc(x.name || '?')}</span>
+          ${x.rank ? `<span class="hf__rank">${x.rank === 'C' ? 'Bajnok' : esc('#' + x.rank)}</span>` : ''}
+        </div>`;
+    };
+    const split = done && c.total
+      ? `<div class="crowd" aria-label="A társaság tippjei: ${c.a} – ${c.b}">${c.a ? `<span class="crowd__a" style="flex-grow:${c.a}">${c.a}</span>` : ''}${c.b ? `<span class="crowd__b" style="flex-grow:${c.b}">${c.b}</span>` : ''}</div>` : '';
+    const who = done && f.picks && f.picks.length ? `
+      <details class="hf__who"><summary>Ki kire tippelt</summary>
+        <div class="who">
+          <ul class="who__a">${f.picks.filter((p) => p.side === 'A').map((p) => `<li class="${f.winner === 'A' ? 'is-hit' : ''}">${esc(p.nick)}</li>`).join('') || '<li class="muted">senki</li>'}</ul>
+          <ul class="who__b">${f.picks.filter((p) => p.side === 'B').map((p) => `<li class="${f.winner === 'B' ? 'is-hit' : ''}">${esc(p.nick)}</li>`).join('') || '<li class="muted">senki</li>'}</ul>
+        </div></details>` : '';
+    return `
+      <article class="hf ${f.title_bout ? 'hf--title' : ''}">
+        <div class="fight__meta"><span class="fight__class">${esc(weightName(f.weight || ''))}${f.title_bout ? ', <b class="belt">címmeccs</b>' : ''}</span><span class="fight__pts">${f.points} pont</span></div>
+        <div class="hf__split">${side('A')}${side('B')}</div>
+        <div class="fight__foot">${res}${how}${split}</div>
+        ${who}
+      </article>`;
+  }
+
+  // ------------------------------------------------------------ statisztika
+
+  const bar = (hit, miss) => {
+    const n = hit + miss;
+    return `<span class="bar" aria-hidden="true"><i class="bar__hit" style="width:${n ? (hit / n) * 100 : 0}%"></i></span>`;
+  };
+  const kv = (label, value) => `<div class="kv"><span>${label}</span><b>${value}</b></div>`;
+
+  function statsView() {
+    return historyGate((h) => {
+      const ov = ST.overview(h);
+      if (!ov.some((s) => s.picks)) return '<div class="empty">Még nincs eldőlt meccs. Az első gála után itt látod, ki hány százalékban talál, ki miben jó, és kinek mekkora a szériája.</div>';
+      const selNick = state.statNick || (state.me && ov.find((s) => isMe(s.nick)) ? state.me.nick : ov[0].nick);
+      const sel = ov.find((s) => s.nick.toLowerCase() === selNick.toLowerCase()) || ov[0];
+      let html = `<h2 class="section-h"><span>Ki hány százalékot talál?</span></h2>
+        <div class="srows">${ov.map((s) => `
+          <button class="srow ${s.nick === sel.nick ? 'is-sel' : ''} ${isMe(s.nick) ? 'is-me' : ''}" type="button" data-stat-player="${esc(s.nick)}" aria-pressed="${s.nick === sel.nick}">
+            <span class="srow__nick">${esc(s.nick)}</span>
+            <span class="srow__pct">${s.pct == null ? '–' : s.pct + '%'}</span>
+            ${bar(s.hits, s.misses)}
+            <span class="srow__sub">${s.hits} talált · ${s.misses} nem talált · ${s.points} pont</span>
+          </button>`).join('')}</div>
+        <p class="hint">Koppints egy névre a részletekért. Csak az eldőlt meccsek számítanak (döntetlen és „nem értékelt" nem).</p>`;
+      html += playerCard(sel);
+      const aw = ST.awards(h);
+      if (aw.length) {
+        html += `<h2 class="section-h"><span>Díjak</span></h2><div class="awards">${aw.map((a) => `
+          <div class="award ${isMe(a.nick) ? 'is-me' : ''}"><span class="award__t">${esc(a.title)}</span><b class="award__n">${esc(a.nick)}</b><span class="award__v">${esc(a.value)}</span><span class="award__d">${esc(a.desc)}</span></div>`).join('')}</div>
+          <p class="hint">Díj csak legalább ${ST.MIN_PICKS} eldőlt tipp után jár.</p>`;
+      }
+      html += trophyBlock(h) + h2hBlock(h, ov);
+      return html;
+    });
+  }
+
+  function playerCard(s) {
+    const cur = s.streak.current;
+    const dots = s.recent.length ? `<span class="dots" aria-label="Utolsó ${s.recent.length} tipp">${s.recent.map((r) => `<i class="dot dot--${r}"></i>`).join('')}</span>` : '–';
+    const favLine = s.fav.picks + s.dog.picks
+      ? kv('Favoritra tippel', `${s.favShare}% <small>(${s.fav.picks}/${s.fav.picks + s.dog.picks} meccs)</small>`)
+        + kv('Talál a favoriton', rate(s.fav)) + kv('Talál az esélytelenen', rate(s.dog))
+      : '';
+    const w = (x) => (x ? `${esc(weightName(x.name))} · ${x.pct}% <small>(${x.hits}/${x.picks})</small>` : '–');
+    return `
+      <section class="pcard" aria-label="${esc(s.nick)} részletei">
+        <div class="pcard__head">
+          <div class="pcard__pct">${s.pct == null ? '–' : s.pct}<small>${s.pct == null ? '' : '%'}</small></div>
+          <div class="pcard__who"><b>${esc(s.nick)}</b><span>${s.hits} talált, ${s.misses} nem talált</span><span>${s.points} pont · ${s.events} gála</span></div>
+        </div>
+        ${kv('Utolsó tippek', dots)}
+        ${kv('Jelenlegi széria', cur.n ? `${cur.n} ${cur.type === 'win' ? 'talált egymás után' : 'tévedés egymás után'}` : '–')}
+        ${kv('Leghosszabb nyerő széria', s.streak.bestWin || '–')}
+        ${kv('Leghosszabb rossz széria', s.streak.worstLoss || '–')}
+        ${favLine}
+        ${kv('Címmeccsek', rate(s.title))}
+        ${kv('A többséggel tippel', rate(s.withCrowd))}
+        ${kv('A tömeg ellen tippel', rate(s.againstCrowd))}
+        ${kv('Legjobb súlycsoport', w(s.bestWeight))}
+        ${kv('Leggyengébb súlycsoport', w(s.worstWeight))}
+        ${kv('Rá szokott jól tippelni', s.favFighter ? `${esc(s.favFighter.name)} <small>(${s.favFighter.hits}×)</small>` : '–')}
+        ${kv('Rá szokott tévedni', s.nemesis ? `${esc(s.nemesis.name)} <small>(${s.nemesis.picks - s.nemesis.hits}×)</small>` : '–')}
+        ${s.byEvent.length ? `<h3 class="tape__group">Gálánként</h3>${s.byEvent.map((ev) => `
+          <a class="kv kv--link" href="#tortenet/${encodeURIComponent(ev.slug)}"><span>${esc(ev.title.split(':')[0])}</span><b>${ev.points} pont <small>(${ev.correct}/${ev.decided})</small></b></a>`).join('')}` : ''}
+      </section>`;
+  }
+
+  function trophyBlock(h) {
+    const t = ST.trophies(h);
+    if (!t.table.length) return '';
+    const wins = t.events.filter((e) => e.complete && e.nicks.length);
+    return `<h2 class="section-h"><span>Bajnokok</span></h2>
+      <div class="trophies">${t.table.map((r) => `<div class="trophy ${isMe(r.nick) ? 'is-me' : ''}"><b>${esc(r.nick)}</b><span>${r.n} gála</span></div>`).join('')}</div>
+      <ul class="champs">${wins.map((e) => `<li><a href="#tortenet/${encodeURIComponent(e.slug)}"><span>${esc(e.title.split(':')[0])}</span><b>${nickList(e.nicks)}</b><small>${e.points} pont</small></a></li>`).join('')}</ul>`;
+  }
+
+  function h2hBlock(h, ov) {
+    if (ov.length < 2) return '';
+    const nicks = ov.map((s) => s.nick).sort((a, b) => a.localeCompare(b, 'hu'));
+    const me = state.me && nicks.find((n) => isMe(n));
+    const a = nicks.includes(state.h2h.a) ? state.h2h.a : (me || nicks[0]);
+    const b = nicks.includes(state.h2h.b) && state.h2h.b !== a ? state.h2h.b : nicks.find((n) => n !== a);
+    const opts = (cur) => nicks.map((n) => `<option ${n === cur ? 'selected' : ''}>${esc(n)}</option>`).join('');
+    const r = ST.headToHead(h, a, b);
+    let body = '<p class="hint">Nincs olyan meccs, amire mindketten tippeltek.</p>';
+    if (r.common) {
+      body = `
+        <div class="h2h__score"><span class="h2h__a">${r.pointsA}</span><small>pont a közös meccseken</small><span class="h2h__b">${r.pointsB}</span></div>
+        ${kv('Közös meccs', r.common)}
+        ${kv('Egyetértés', `${r.agreePct}% <small>(${r.agree}/${r.common} meccsen ugyanarra tippeltek)</small>`)}
+        ${kv('Mindketten eltalálták', r.bothHit)}
+        ${kv(`Csak ${esc(a)} találta el`, r.onlyA)}
+        ${kv(`Csak ${esc(b)} találta el`, r.onlyB)}
+        ${kv('Egyikük sem', r.bothMiss)}
+        ${kv('Gálák', `${esc(a)} ${r.eventsA} · ${esc(b)} ${r.eventsB} · döntetlen ${r.eventsTie}`)}`;
+    }
+    return `<h2 class="section-h"><span>Fej-fej mellett</span></h2>
+      <div class="h2h">
+        <div class="h2h__pick"><select data-h2h="a" aria-label="Első játékos">${opts(a)}</select><span>vs</span><select data-h2h="b" aria-label="Második játékos">${opts(b)}</select></div>
+        ${body}
+      </div>`;
+  }
+
+  // ------------------------------------------------------------ megosztás képként, emlékeztető
+
+  // A ranglista képe (1080 px széles): Web Share, ha a telefon tudja, különben letöltés
+  async function shareImage(title, sub, rows) {
+    try { await Promise.all([document.fonts.load('900 80px "Big Shoulders Display"'), document.fonts.load('600 32px Barlow')]); } catch (e) { /* alapbetű */ }
+    const show = rows.slice(0, 10);
+    const W = 1080, rowH = 112, top = 330;
+    const H = top + show.length * rowH + 150;
+    const cv = document.createElement('canvas');
+    cv.width = W; cv.height = H;
+    const g = cv.getContext('2d');
+    g.fillStyle = '#151a22'; g.fillRect(0, 0, W, H);
+    // plakát-sáv: piros és kék oldal, mint a belépő képernyőn
+    g.fillStyle = '#7c1f22'; g.beginPath(); g.moveTo(0, 0); g.lineTo(W / 2 + 40, 0); g.lineTo(W / 2 - 40, 270); g.lineTo(0, 270); g.fill();
+    g.fillStyle = '#1a3c78'; g.beginPath(); g.moveTo(W / 2 + 46, 0); g.lineTo(W, 0); g.lineTo(W, 270); g.lineTo(W / 2 - 34, 270); g.fill();
+    g.fillStyle = '#eef1f5'; g.textBaseline = 'alphabetic';
+    g.font = '900 104px "Big Shoulders Display", "Arial Narrow", sans-serif';
+    g.fillText(title.toUpperCase(), 54, 140, W - 108);
+    g.font = '600 34px Barlow, system-ui, sans-serif'; g.fillStyle = 'rgba(255,255,255,.85)';
+    g.fillText(sub, 54, 200, W - 108);
+    g.font = '700 30px Barlow, system-ui, sans-serif'; g.fillStyle = '#e0b04a';
+    g.fillText('RANGLISTA', 54, 250);
+    show.forEach((r, i) => {
+      const y = top + i * rowH;
+      g.fillStyle = i === 0 ? '#2a2616' : '#1d2430'; g.beginPath(); g.roundRect(40, y, W - 80, rowH - 14, 16); g.fill();
+      g.fillStyle = i === 0 ? '#e0b04a' : '#98a4b6'; g.font = '800 54px "Big Shoulders Display", sans-serif';
+      g.fillText(r.place + '.', 70, y + 68);
+      g.fillStyle = '#eef1f5'; g.font = '700 40px Barlow, system-ui, sans-serif';
+      g.fillText(r.nick, 170, y + 56, 520);
+      g.fillStyle = '#98a4b6'; g.font = '500 26px Barlow, system-ui, sans-serif';
+      g.fillText(r.sub, 170, y + 88, 520);
+      g.textAlign = 'right'; g.fillStyle = i === 0 ? '#e0b04a' : '#eef1f5'; g.font = '900 64px "Big Shoulders Display", sans-serif';
+      g.fillText(r.points + ' p', W - 70, y + 70);
+      g.textAlign = 'left';
+    });
+    g.fillStyle = '#98a4b6'; g.font = '500 26px Barlow, system-ui, sans-serif';
+    g.fillText('UFC Tipp · ' + location.host + location.pathname.replace(/index\.html$/, ''), 54, H - 56);
+    const blob = await new Promise((ok) => cv.toBlob(ok, 'image/png'));
+    if (!blob) throw new Error('A kép elkészítése nem sikerült.');
+    const name = 'ufc-tipp-ranglista.png';
+    const file = new File([blob], name, { type: 'image/png' });
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      try { await navigator.share({ files: [file], title: `${title} ranglista` }); return 'shared'; } catch (e) { if (e.name === 'AbortError') return 'cancelled'; }
+    }
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+    return 'saved';
+  }
+
+  async function onShare(which) {
+    let title, sub, rows;
+    if (which === 'current') {
+      const lb = state.board ? state.board.leaderboard.filter((r) => r.picks) : [];
+      let place = 0, prev = null;
+      title = state.data.event.title.split(':')[0];
+      sub = state.data.event.title.split(':').slice(1).join(':').trim();
+      rows = lb.map((r, i) => { if (r.points !== prev) { place = i + 1; prev = r.points; } return { place, nick: r.nick, points: r.points, sub: `${r.correct}/${r.decided} talált` }; });
+    } else {
+      const e = state.history && state.history.events.find((x) => x.slug === which.replace('event:', ''));
+      if (!e) return;
+      title = e.title.split(':')[0];
+      sub = `${e.title.split(':').slice(1).join(':').trim()} · ${fmtDate(e.starts_at)}`;
+      rows = ST.eventTable(e).map((r) => ({ place: r.place, nick: r.nick, points: r.points, sub: `${r.correct}/${r.decided} talált` }));
+    }
+    if (!rows.length) { toast('Még nincs mit megosztani.', 'err'); return; }
+    const r = await shareImage(title, sub, rows);
+    if (r === 'saved') toast('A kép letöltődött — küldd el a csoportba', 'ok');
+  }
+
+  // Naptár-emlékeztető (.ics): a kártya három kezdési ideje, mindegyik előtt 30 perccel jelzéssel
+  function downloadIcs() {
+    const ev = state.data.event;
+    const stamp = (ts) => new Date(ts).toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '');
+    const fold = (s) => s.replace(/[,;\\]/g, (c) => '\\' + c);
+    const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//UfcTipp//HU', 'CALSCALE:GREGORIAN'];
+    ev.sections.filter((s) => s.start).forEach((s) => {
+      lines.push('BEGIN:VEVENT', `UID:${ev.slug}-${s.key}@ufctipp`, `DTSTAMP:${stamp(Date.now())}`,
+        `DTSTART:${stamp(s.start * 1000)}`, `DTEND:${stamp((s.start + (s.key === 'main' ? 3.5 : 2) * 3600) * 1000)}`,
+        `SUMMARY:${fold(`${ev.title.split(':')[0]} — ${CARD_NAME[s.key]}`)}`,
+        `DESCRIPTION:${fold('Tippelj, mielőtt a meccs elindul: ' + location.href.split('#')[0])}`,
+        'BEGIN:VALARM', 'TRIGGER:-PT30M', 'ACTION:DISPLAY', `DESCRIPTION:${fold('Mindjárt kezdődik, tippeltél már?')}`, 'END:VALARM', 'END:VEVENT');
+    });
+    lines.push('END:VCALENDAR');
+    const blob = new Blob([lines.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = `ufc-tipp-${ev.slug}.ics`;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+    toast('Naptár-fájl letöltve — nyisd meg, és mentsd a naptáradba', 'ok');
+  }
+
+  // „Még N nap M óra" a gála kezdetéig (csak a kezdés előtt látszik)
+  function countdownHtml() {
+    const starts = state.data.event.sections.map((s) => s.start).filter(Boolean).map((s) => s * 1000);
+    if (!starts.length) return '';
+    const first = Math.min(...starts);
+    const left = first - Date.now();
+    if (left <= 0) return '';
+    const min = Math.floor(left / 60000);
+    const d = Math.floor(min / 1440), hr = Math.floor((min % 1440) / 60), m = min % 60;
+    const txt = d ? `${d} nap ${hr} óra` : hr ? `${hr} óra ${m} perc` : `${m} perc`;
+    return `
+      <div class="remind">
+        <div><b>Még ${txt}</b> a gála kezdetéig <small>(${esc(fmtDay(first))}, ${esc(fmtTime(first))})</small></div>
+        <p>A tippelés meccsenként zár, amikor az adott meccs elindul.</p>
+        <button class="btn" type="button" data-ics>Emlékeztető a naptárba</button>
+      </div>`;
   }
 
   // ------------------------------------------------------------ összevetés (alsó panel)
@@ -771,6 +1173,19 @@
     if (lbTab) { state.lbTab = lbTab.dataset.lbTab; render(); return; }
     const lbKind = t.closest('[data-lb-kind]');
     if (lbKind) { state.lbKind = lbKind.dataset.lbKind || null; render(); return; }
+    const hKind = t.closest('[data-hist-kind]');
+    if (hKind) { state.hKind = hKind.dataset.histKind || null; render(); return; }
+    const statPlayer = t.closest('[data-stat-player]');
+    if (statPlayer) { state.statNick = statPlayer.dataset.statPlayer; render(); return; }
+    const seasonYear = t.closest('[data-season-year]');
+    if (seasonYear) { state.seasonYear = seasonYear.dataset.seasonYear; render(); return; }
+    const share = t.closest('[data-share]');
+    if (share) {
+      share.disabled = true;
+      onShare(share.dataset.share).catch((er) => toast(er.message || 'A megosztás nem sikerült.', 'err')).finally(() => { share.disabled = false; });
+      return;
+    }
+    if (t.closest('[data-ics]')) { downloadIcs(); return; }
     const detail = t.closest('[data-detail]');
     if (detail) { openSheet(+detail.dataset.detail); return; }
     if (t.closest('[data-close]')) { closeSheet(); return; }

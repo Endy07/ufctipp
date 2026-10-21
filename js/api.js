@@ -35,6 +35,7 @@ function supabaseApi(cfg) {
     event: () => rpc('get_event', {}),
     board: (slug) => rpc('get_board', { p_event: slug }),
     overall: (kind) => rpc('get_overall', { p_kind: kind || null }),
+    history: () => rpc('get_history', {}),
     adminCheck: (pin) => rpc('admin_check', { p_pin: pin }),
     adminSetFight: (pin, fight, status, r = {}) => rpc('admin_set_fight', {
       p_pin: pin, p_fight: fight, p_status: status, p_winner: r.winner || null,
@@ -52,6 +53,7 @@ function demoApi(cfg) {
   const KEY = 'ufctipp-demo-' + cfg.event;
   const DEMO_ADMIN_PIN = '0000';
   let data = null;
+  let past = null;
 
   function load() {
     let s = null;
@@ -127,6 +129,32 @@ function demoApi(cfg) {
       const b = await demo.board();
       if (kind === 'fightnight') return b.leaderboard.map((r) => ({ ...r, points: 0, correct: 0, decided: 0, events: 0 }));
       return b.leaderboard.map((r) => ({ nick: r.nick, points: r.points, correct: r.correct, decided: r.decided, events: r.picks ? 1 : 0 }));
+    },
+    // Előzmények: a data/demo-history.json kitalált múltbeli gálái + a mostani demó-gála eldőlt meccsei (get_history formátum)
+    history: async () => {
+      if (!past) {
+        const res = await fetch('data/demo-history.json', { cache: 'no-cache' });
+        past = res.ok ? await res.json() : { events: [] };
+      }
+      const s = load();
+      const events = past.events.slice();
+      if (data && data.fights.some((df) => s.fights[df.id].status === 'done')) {
+        const starts = data.event.sections.map((x) => x.start).filter(Boolean);
+        events.unshift({
+          slug: cfg.event, title: data.event.title, kind: /^ufc-\d+$/.test(cfg.event) ? 'numbered' : 'fightnight',
+          starts_at: new Date(Math.min(...starts) * 1000).toISOString(),
+          fights: data.fights.map((df, i) => {
+            const f = s.fights[df.id];
+            const picks = f.status !== 'done' ? null : s.players
+              .map((p) => ({ nick: p.nick, side: (s.picks[p.nick.toLowerCase()] || {})[df.id] })).filter((x) => x.side)
+              .sort((a, b) => a.nick.localeCompare(b.nick, 'hu'));
+            const c = (x) => ({ name: x.name, slug: x.slug, odds: x.odds, rank: x.rank || null });
+            return { id: df.id, ord: i + 1, card: df.card, title_bout: !!df.titleBout, points: f.points, status: f.status, winner: f.winner,
+                     method: f.method, round: f.round, time: f.time, weight: df.weightClass, a: c(df.a), b: c(df.b), picks };
+          }),
+        });
+      }
+      return later({ now: new Date().toISOString(), events });
     },
     board: wrap(() => {
       const s = load();

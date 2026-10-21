@@ -24,9 +24,10 @@ GitHub Pages · Supabase · PostgreSQL · RPC · Row Level Security · pg_cron �
 - Tipp, ranglista (gála + összesített, számozott / Fight Night szűrő), demó mód
 - Teljes automatika: gála felvétele és kártyaváltozás (beugró) a gépről, zárás + eredmény a Supabase-ben az ESPN-ből
 
+- Történet (múltbeli gálák), statisztika (találati arány, széria, díjak, fej-fej), szezonranglista, megosztás képként, naptár-emlékeztető (helyben kész, push-ra vár)
+
 ## Ami hátra van / most ezen dolgozunk
-- Az első éles est (2026-10-24) megfigyelése, utána tapasztalatok
-- Múltbeli gálák böngészése a felületen
+- Az új oldalak felkerülése az éles oldalra (push), az első éles est (2026-10-24) megfigyelése, utána tapasztalatok
 
 ## Jövőbeni tervek
 - Szezonális ranglista, múltbeli gálák böngészése

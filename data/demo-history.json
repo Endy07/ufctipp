@@ -1,0 +1,2725 @@
+{
+ "events": [
+  {
+   "slug": "ufc-332",
+   "title": "UFC 332: Lindqvist vs Duarte",
+   "kind": "numbered",
+   "starts_at": "2026-10-10T22:00:00Z",
+   "fights": [
+    {
+     "id": 900046,
+     "ord": 1,
+     "card": "main",
+     "title_bout": true,
+     "points": 2,
+     "status": "done",
+     "winner": "B",
+     "method": "KO/TKO",
+     "round": 2,
+     "time": "2:30",
+     "weight": "Middleweight Title Bout",
+     "a": {
+      "name": "Sven Duarte",
+      "slug": null,
+      "odds": "+127",
+      "rank": "3"
+     },
+     "b": {
+      "name": "Hugo Rossi",
+      "slug": null,
+      "odds": "-127",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "A"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "B"
+      },
+      {
+       "nick": "Márk",
+       "side": "B"
+      },
+      {
+       "nick": "Réka",
+       "side": "B"
+      }
+     ]
+    },
+    {
+     "id": 900047,
+     "ord": 2,
+     "card": "main",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "KO/TKO",
+     "round": 1,
+     "time": "2:29",
+     "weight": "Bantamweight Bout",
+     "a": {
+      "name": "Kenji Reyes",
+      "slug": null,
+      "odds": "+317",
+      "rank": "6"
+     },
+     "b": {
+      "name": "Rafael Novak",
+      "slug": null,
+      "odds": "-317",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "B"
+      },
+      {
+       "nick": "Márk",
+       "side": "B"
+      },
+      {
+       "nick": "Réka",
+       "side": "B"
+      }
+     ]
+    },
+    {
+     "id": 900048,
+     "ord": 3,
+     "card": "main",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "Decision - Unanimous",
+     "round": 1,
+     "time": "2:41",
+     "weight": "Flyweight Bout",
+     "a": {
+      "name": "Felix Rossi",
+      "slug": null,
+      "odds": "+285",
+      "rank": null
+     },
+     "b": {
+      "name": "Rafael Sato",
+      "slug": null,
+      "odds": "-285",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "A"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "B"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "B"
+      }
+     ]
+    },
+    {
+     "id": 900049,
+     "ord": 4,
+     "card": "main",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "Decision - Unanimous",
+     "round": 2,
+     "time": "2:10",
+     "weight": "Women's Strawweight Bout",
+     "a": {
+      "name": "Luka Moreau",
+      "slug": null,
+      "odds": "+113",
+      "rank": null
+     },
+     "b": {
+      "name": "Tiago Tanaka",
+      "slug": null,
+      "odds": "-113",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "A"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "B"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    },
+    {
+     "id": 900050,
+     "ord": 5,
+     "card": "main",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "KO/TKO",
+     "round": 3,
+     "time": "2:51",
+     "weight": "Lightweight Bout",
+     "a": {
+      "name": "Marco Okoye",
+      "slug": null,
+      "odds": "+245",
+      "rank": null
+     },
+     "b": {
+      "name": "Tiago Reyes",
+      "slug": null,
+      "odds": "-245",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "B"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "B"
+      }
+     ]
+    },
+    {
+     "id": 900051,
+     "ord": 6,
+     "card": "prelims",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "Submission",
+     "round": 3,
+     "time": "2:26",
+     "weight": "Flyweight Bout",
+     "a": {
+      "name": "Jonas Silva",
+      "slug": null,
+      "odds": "+194",
+      "rank": null
+     },
+     "b": {
+      "name": "Hugo Duarte",
+      "slug": null,
+      "odds": "-194",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "B"
+      },
+      {
+       "nick": "Márk",
+       "side": "B"
+      },
+      {
+       "nick": "Réka",
+       "side": "B"
+      }
+     ]
+    },
+    {
+     "id": 900052,
+     "ord": 7,
+     "card": "prelims",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "A",
+     "method": "KO/TKO",
+     "round": 3,
+     "time": "2:27",
+     "weight": "Women's Strawweight Bout",
+     "a": {
+      "name": "Anton Kovač",
+      "slug": null,
+      "odds": "-335",
+      "rank": null
+     },
+     "b": {
+      "name": "Jonas Moreau",
+      "slug": null,
+      "odds": "+335",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "A"
+      },
+      {
+       "nick": "Dani",
+       "side": "A"
+      },
+      {
+       "nick": "Gergő",
+       "side": "A"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "B"
+      }
+     ]
+    },
+    {
+     "id": 900053,
+     "ord": 8,
+     "card": "prelims",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "Decision - Unanimous",
+     "round": 3,
+     "time": "2:27",
+     "weight": "Featherweight Bout",
+     "a": {
+      "name": "Ilya Reyes",
+      "slug": null,
+      "odds": "+270",
+      "rank": null
+     },
+     "b": {
+      "name": "Rafael Rossi",
+      "slug": null,
+      "odds": "-270",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "B"
+      },
+      {
+       "nick": "Márk",
+       "side": "B"
+      },
+      {
+       "nick": "Réka",
+       "side": "B"
+      }
+     ]
+    },
+    {
+     "id": 900054,
+     "ord": 9,
+     "card": "prelims",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "Decision - Unanimous",
+     "round": 2,
+     "time": "2:30",
+     "weight": "Featherweight Bout",
+     "a": {
+      "name": "Kenji Novak",
+      "slug": null,
+      "odds": "+113",
+      "rank": null
+     },
+     "b": {
+      "name": "Felix Banda",
+      "slug": null,
+      "odds": "-113",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "A"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      }
+     ]
+    },
+    {
+     "id": 900055,
+     "ord": 10,
+     "card": "early",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "A",
+     "method": "Decision - Split",
+     "round": 1,
+     "time": "2:58",
+     "weight": "Welterweight Bout",
+     "a": {
+      "name": "Idris Ivanov",
+      "slug": null,
+      "odds": "-122",
+      "rank": null
+     },
+     "b": {
+      "name": "Zane Lindqvist",
+      "slug": null,
+      "odds": "+122",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "A"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "A"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    },
+    {
+     "id": 900056,
+     "ord": 11,
+     "card": "early",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "A",
+     "method": "Decision - Unanimous",
+     "round": 3,
+     "time": "2:31",
+     "weight": "Welterweight Bout",
+     "a": {
+      "name": "Jonas Banda",
+      "slug": null,
+      "odds": "-300",
+      "rank": null
+     },
+     "b": {
+      "name": "Nikolai Keller",
+      "slug": null,
+      "odds": "+300",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "A"
+      },
+      {
+       "nick": "Márk",
+       "side": "B"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    },
+    {
+     "id": 900057,
+     "ord": 12,
+     "card": "early",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "A",
+     "method": "Decision - Split",
+     "round": 1,
+     "time": "2:52",
+     "weight": "Bantamweight Bout",
+     "a": {
+      "name": "Ilya Kovač",
+      "slug": null,
+      "odds": "-163",
+      "rank": null
+     },
+     "b": {
+      "name": "Hugo Silva",
+      "slug": null,
+      "odds": "+163",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "A"
+      },
+      {
+       "nick": "Gergő",
+       "side": "A"
+      },
+      {
+       "nick": "Márk",
+       "side": "B"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    },
+    {
+     "id": 900058,
+     "ord": 13,
+     "card": "early",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "A",
+     "method": "Decision - Split",
+     "round": 2,
+     "time": "2:15",
+     "weight": "Welterweight Bout",
+     "a": {
+      "name": "Tomasz Varga",
+      "slug": null,
+      "odds": "+138",
+      "rank": null
+     },
+     "b": {
+      "name": "Jonas Reyes",
+      "slug": null,
+      "odds": "-138",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "A"
+      },
+      {
+       "nick": "Dani",
+       "side": "A"
+      },
+      {
+       "nick": "Gergő",
+       "side": "B"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "ufc-fight-night-0912",
+   "title": "UFC Fight Night: Kovač vs Haddad",
+   "kind": "fightnight",
+   "starts_at": "2026-09-12T19:00:00Z",
+   "fights": [
+    {
+     "id": 900036,
+     "ord": 1,
+     "card": "main",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "KO/TKO",
+     "round": 1,
+     "time": "2:17",
+     "weight": "Light Heavyweight Bout",
+     "a": {
+      "name": "Anton Okoye",
+      "slug": null,
+      "odds": "+170",
+      "rank": "3"
+     },
+     "b": {
+      "name": "Sven Petrov",
+      "slug": null,
+      "odds": "-170",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "B"
+      },
+      {
+       "nick": "Márk",
+       "side": "B"
+      },
+      {
+       "nick": "Réka",
+       "side": "B"
+      }
+     ]
+    },
+    {
+     "id": 900037,
+     "ord": 2,
+     "card": "main",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "A",
+     "method": "KO/TKO",
+     "round": 2,
+     "time": "2:53",
+     "weight": "Flyweight Bout",
+     "a": {
+      "name": "Zane Sato",
+      "slug": null,
+      "odds": "-233",
+      "rank": "6"
+     },
+     "b": {
+      "name": "Tomasz Mbeki",
+      "slug": null,
+      "odds": "+233",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "A"
+      },
+      {
+       "nick": "Márk",
+       "side": "B"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    },
+    {
+     "id": 900038,
+     "ord": 3,
+     "card": "main",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "A",
+     "method": "Submission",
+     "round": 3,
+     "time": "2:46",
+     "weight": "Lightweight Bout",
+     "a": {
+      "name": "Nikolai Tanaka",
+      "slug": null,
+      "odds": "-257",
+      "rank": null
+     },
+     "b": {
+      "name": "Nikolai Haddad",
+      "slug": null,
+      "odds": "+257",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "A"
+      },
+      {
+       "nick": "Gergő",
+       "side": "A"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    },
+    {
+     "id": 900039,
+     "ord": 4,
+     "card": "main",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "A",
+     "method": "Submission",
+     "round": 2,
+     "time": "2:45",
+     "weight": "Flyweight Bout",
+     "a": {
+      "name": "Luka Costa",
+      "slug": null,
+      "odds": "-186",
+      "rank": null
+     },
+     "b": {
+      "name": "Jonas Duarte",
+      "slug": null,
+      "odds": "+186",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Dani",
+       "side": "A"
+      },
+      {
+       "nick": "Gergő",
+       "side": "A"
+      },
+      {
+       "nick": "Márk",
+       "side": "B"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    },
+    {
+     "id": 900040,
+     "ord": 5,
+     "card": "main",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "Decision - Unanimous",
+     "round": 2,
+     "time": "2:22",
+     "weight": "Featherweight Bout",
+     "a": {
+      "name": "Sven Haddad",
+      "slug": null,
+      "odds": "-133",
+      "rank": null
+     },
+     "b": {
+      "name": "Felix Okoye",
+      "slug": null,
+      "odds": "+133",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "A"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "A"
+      },
+      {
+       "nick": "Márk",
+       "side": "B"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    },
+    {
+     "id": 900041,
+     "ord": 6,
+     "card": "prelims",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "A",
+     "method": "Decision - Split",
+     "round": 1,
+     "time": "2:36",
+     "weight": "Heavyweight Bout",
+     "a": {
+      "name": "Luka Ivanov",
+      "slug": null,
+      "odds": "-203",
+      "rank": null
+     },
+     "b": {
+      "name": "Kenji Sato",
+      "slug": null,
+      "odds": "+203",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "A"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    },
+    {
+     "id": 900042,
+     "ord": 7,
+     "card": "prelims",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "Submission",
+     "round": 2,
+     "time": "2:47",
+     "weight": "Lightweight Bout",
+     "a": {
+      "name": "Zane Costa",
+      "slug": null,
+      "odds": "+133",
+      "rank": null
+     },
+     "b": {
+      "name": "Tiago Rossi",
+      "slug": null,
+      "odds": "-133",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "B"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "B"
+      }
+     ]
+    },
+    {
+     "id": 900043,
+     "ord": 8,
+     "card": "prelims",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "Decision - Split",
+     "round": 2,
+     "time": "2:14",
+     "weight": "Women's Strawweight Bout",
+     "a": {
+      "name": "Ilya Petrov",
+      "slug": null,
+      "odds": "+317",
+      "rank": null
+     },
+     "b": {
+      "name": "Viktor Silva",
+      "slug": null,
+      "odds": "-317",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "A"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "B"
+      },
+      {
+       "nick": "Márk",
+       "side": "B"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    },
+    {
+     "id": 900044,
+     "ord": 9,
+     "card": "prelims",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "A",
+     "method": "Decision - Unanimous",
+     "round": 3,
+     "time": "2:35",
+     "weight": "Lightweight Bout",
+     "a": {
+      "name": "Idris Tanaka",
+      "slug": null,
+      "odds": "-133",
+      "rank": null
+     },
+     "b": {
+      "name": "Nikolai Reyes",
+      "slug": null,
+      "odds": "+133",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "A"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "A"
+      },
+      {
+       "nick": "Márk",
+       "side": "B"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    },
+    {
+     "id": 900045,
+     "ord": 10,
+     "card": "early",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "A",
+     "method": "Decision - Split",
+     "round": 2,
+     "time": "2:29",
+     "weight": "Lightweight Bout",
+     "a": {
+      "name": "Zane Silva",
+      "slug": null,
+      "odds": "-355",
+      "rank": null
+     },
+     "b": {
+      "name": "Caleb Silva",
+      "slug": null,
+      "odds": "+355",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "A"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "ufc-331",
+   "title": "UFC 331: Silva vs Moreau",
+   "kind": "numbered",
+   "starts_at": "2026-08-08T22:00:00Z",
+   "fights": [
+    {
+     "id": 900023,
+     "ord": 1,
+     "card": "main",
+     "title_bout": true,
+     "points": 2,
+     "status": "done",
+     "winner": "A",
+     "method": "Decision - Split",
+     "round": 3,
+     "time": "2:36",
+     "weight": "Bantamweight Title Bout",
+     "a": {
+      "name": "Felix Haddad",
+      "slug": null,
+      "odds": "-133",
+      "rank": "3"
+     },
+     "b": {
+      "name": "Jonas Brandt",
+      "slug": null,
+      "odds": "+133",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "A"
+      },
+      {
+       "nick": "Gergő",
+       "side": "A"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    },
+    {
+     "id": 900024,
+     "ord": 2,
+     "card": "main",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "A",
+     "method": "KO/TKO",
+     "round": 3,
+     "time": "2:13",
+     "weight": "Featherweight Bout",
+     "a": {
+      "name": "Nikolai Rossi",
+      "slug": null,
+      "odds": "-426",
+      "rank": "6"
+     },
+     "b": {
+      "name": "Mateo Costa",
+      "slug": null,
+      "odds": "+426",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "A"
+      },
+      {
+       "nick": "Dani",
+       "side": "A"
+      },
+      {
+       "nick": "Gergő",
+       "side": "A"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "B"
+      }
+     ]
+    },
+    {
+     "id": 900025,
+     "ord": 3,
+     "card": "main",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "Submission",
+     "round": 2,
+     "time": "2:53",
+     "weight": "Light Heavyweight Bout",
+     "a": {
+      "name": "Tiago Duarte",
+      "slug": null,
+      "odds": "+300",
+      "rank": null
+     },
+     "b": {
+      "name": "Ilya Silva",
+      "slug": null,
+      "odds": "-300",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "A"
+      },
+      {
+       "nick": "Dani",
+       "side": "A"
+      },
+      {
+       "nick": "Gergő",
+       "side": "B"
+      },
+      {
+       "nick": "Márk",
+       "side": "B"
+      },
+      {
+       "nick": "Réka",
+       "side": "B"
+      }
+     ]
+    },
+    {
+     "id": 900026,
+     "ord": 4,
+     "card": "main",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "Submission",
+     "round": 3,
+     "time": "2:39",
+     "weight": "Welterweight Bout",
+     "a": {
+      "name": "Omar Tanaka",
+      "slug": null,
+      "odds": "+376",
+      "rank": null
+     },
+     "b": {
+      "name": "Omar Brandt",
+      "slug": null,
+      "odds": "-376",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "B"
+      },
+      {
+       "nick": "Márk",
+       "side": "B"
+      },
+      {
+       "nick": "Réka",
+       "side": "B"
+      }
+     ]
+    },
+    {
+     "id": 900027,
+     "ord": 5,
+     "card": "main",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "A",
+     "method": "Decision - Split",
+     "round": 1,
+     "time": "2:19",
+     "weight": "Welterweight Bout",
+     "a": {
+      "name": "Felix Petrov",
+      "slug": null,
+      "odds": "+108",
+      "rank": null
+     },
+     "b": {
+      "name": "Sven Lindqvist",
+      "slug": null,
+      "odds": "-108",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "A"
+      },
+      {
+       "nick": "Gergő",
+       "side": "A"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    },
+    {
+     "id": 900028,
+     "ord": 6,
+     "card": "prelims",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "Decision - Split",
+     "round": 1,
+     "time": "2:36",
+     "weight": "Bantamweight Bout",
+     "a": {
+      "name": "Rafael Reyes",
+      "slug": null,
+      "odds": "-150",
+      "rank": null
+     },
+     "b": {
+      "name": "Caleb Keller",
+      "slug": null,
+      "odds": "+150",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "A"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    },
+    {
+     "id": 900029,
+     "ord": 7,
+     "card": "prelims",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "A",
+     "method": "Decision - Unanimous",
+     "round": 3,
+     "time": "2:34",
+     "weight": "Flyweight Bout",
+     "a": {
+      "name": "Zane Moreau",
+      "slug": null,
+      "odds": "-426",
+      "rank": null
+     },
+     "b": {
+      "name": "Hugo Brandt",
+      "slug": null,
+      "odds": "+426",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Dani",
+       "side": "A"
+      },
+      {
+       "nick": "Gergő",
+       "side": "A"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      }
+     ]
+    },
+    {
+     "id": 900030,
+     "ord": 8,
+     "card": "prelims",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "Decision - Split",
+     "round": 1,
+     "time": "2:46",
+     "weight": "Heavyweight Bout",
+     "a": {
+      "name": "Nikolai Sato",
+      "slug": null,
+      "odds": "+117",
+      "rank": null
+     },
+     "b": {
+      "name": "Mateo Lindqvist",
+      "slug": null,
+      "odds": "-117",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "A"
+      },
+      {
+       "nick": "Dani",
+       "side": "A"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "B"
+      }
+     ]
+    },
+    {
+     "id": 900031,
+     "ord": 9,
+     "card": "prelims",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "A",
+     "method": "Decision - Split",
+     "round": 1,
+     "time": "2:46",
+     "weight": "Lightweight Bout",
+     "a": {
+      "name": "Caleb Petrov",
+      "slug": null,
+      "odds": "-213",
+      "rank": null
+     },
+     "b": {
+      "name": "Sven Kovač",
+      "slug": null,
+      "odds": "+213",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    },
+    {
+     "id": 900032,
+     "ord": 10,
+     "card": "early",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "A",
+     "method": "KO/TKO",
+     "round": 3,
+     "time": "2:34",
+     "weight": "Welterweight Bout",
+     "a": {
+      "name": "Marco Mbeki",
+      "slug": null,
+      "odds": "-317",
+      "rank": null
+     },
+     "b": {
+      "name": "Anton Varga",
+      "slug": null,
+      "odds": "+317",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "A"
+      },
+      {
+       "nick": "Márk",
+       "side": "B"
+      }
+     ]
+    },
+    {
+     "id": 900033,
+     "ord": 11,
+     "card": "early",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "A",
+     "method": "Submission",
+     "round": 1,
+     "time": "2:50",
+     "weight": "Women's Strawweight Bout",
+     "a": {
+      "name": "Marco Costa",
+      "slug": null,
+      "odds": "-156",
+      "rank": null
+     },
+     "b": {
+      "name": "Caleb Brandt",
+      "slug": null,
+      "odds": "+156",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "A"
+      },
+      {
+       "nick": "Gergő",
+       "side": "A"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    },
+    {
+     "id": 900034,
+     "ord": 12,
+     "card": "early",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "Decision - Split",
+     "round": 1,
+     "time": "2:18",
+     "weight": "Women's Strawweight Bout",
+     "a": {
+      "name": "Sven Ivanov",
+      "slug": null,
+      "odds": "+122",
+      "rank": null
+     },
+     "b": {
+      "name": "Caleb Varga",
+      "slug": null,
+      "odds": "-122",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "A"
+      },
+      {
+       "nick": "Gergő",
+       "side": "B"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      }
+     ]
+    },
+    {
+     "id": 900035,
+     "ord": 13,
+     "card": "early",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "A",
+     "method": "Decision - Split",
+     "round": 3,
+     "time": "2:10",
+     "weight": "Light Heavyweight Bout",
+     "a": {
+      "name": "Zane Brandt",
+      "slug": null,
+      "odds": "+257",
+      "rank": null
+     },
+     "b": {
+      "name": "Ilya Okoye",
+      "slug": null,
+      "odds": "-257",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "A"
+      },
+      {
+       "nick": "Gergő",
+       "side": "B"
+      },
+      {
+       "nick": "Réka",
+       "side": "B"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "ufc-fight-night-0620",
+   "title": "UFC Fight Night: Petrov vs Tanaka",
+   "kind": "fightnight",
+   "starts_at": "2026-06-20T19:00:00Z",
+   "fights": [
+    {
+     "id": 900012,
+     "ord": 1,
+     "card": "main",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "A",
+     "method": "Submission",
+     "round": 2,
+     "time": "2:14",
+     "weight": "Welterweight Bout",
+     "a": {
+      "name": "Viktor Keller",
+      "slug": null,
+      "odds": "-203",
+      "rank": "3"
+     },
+     "b": {
+      "name": "Mateo Moreau",
+      "slug": null,
+      "odds": "+203",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "A"
+      },
+      {
+       "nick": "Gergő",
+       "side": "A"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    },
+    {
+     "id": 900013,
+     "ord": 2,
+     "card": "main",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "KO/TKO",
+     "round": 2,
+     "time": "2:35",
+     "weight": "Bantamweight Bout",
+     "a": {
+      "name": "Felix Novak",
+      "slug": null,
+      "odds": "+138",
+      "rank": "6"
+     },
+     "b": {
+      "name": "Kenji Keller",
+      "slug": null,
+      "odds": "-138",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "B"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "B"
+      }
+     ]
+    },
+    {
+     "id": 900014,
+     "ord": 3,
+     "card": "main",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "Decision - Split",
+     "round": 3,
+     "time": "2:11",
+     "weight": "Welterweight Bout",
+     "a": {
+      "name": "Felix Kovač",
+      "slug": null,
+      "odds": "+257",
+      "rank": null
+     },
+     "b": {
+      "name": "Ilya Ivanov",
+      "slug": null,
+      "odds": "-257",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "A"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "B"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "B"
+      }
+     ]
+    },
+    {
+     "id": 900015,
+     "ord": 4,
+     "card": "main",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "Decision - Split",
+     "round": 2,
+     "time": "2:49",
+     "weight": "Featherweight Bout",
+     "a": {
+      "name": "Tomasz Ivanov",
+      "slug": null,
+      "odds": "-376",
+      "rank": null
+     },
+     "b": {
+      "name": "Idris Duarte",
+      "slug": null,
+      "odds": "+376",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "A"
+      },
+      {
+       "nick": "Dani",
+       "side": "A"
+      },
+      {
+       "nick": "Gergő",
+       "side": "A"
+      },
+      {
+       "nick": "Márk",
+       "side": "B"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    },
+    {
+     "id": 900016,
+     "ord": 5,
+     "card": "main",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "A",
+     "method": "KO/TKO",
+     "round": 1,
+     "time": "2:34",
+     "weight": "Women's Strawweight Bout",
+     "a": {
+      "name": "Anton Tanaka",
+      "slug": null,
+      "odds": "-163",
+      "rank": null
+     },
+     "b": {
+      "name": "Tomasz Keller",
+      "slug": null,
+      "odds": "+163",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "A"
+      },
+      {
+       "nick": "Gergő",
+       "side": "A"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    },
+    {
+     "id": 900017,
+     "ord": 6,
+     "card": "prelims",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "Decision - Split",
+     "round": 3,
+     "time": "2:18",
+     "weight": "Middleweight Bout",
+     "a": {
+      "name": "Felix Costa",
+      "slug": null,
+      "odds": "-178",
+      "rank": null
+     },
+     "b": {
+      "name": "Idris Petrov",
+      "slug": null,
+      "odds": "+178",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "A"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "B"
+      }
+     ]
+    },
+    {
+     "id": 900018,
+     "ord": 7,
+     "card": "prelims",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "Submission",
+     "round": 2,
+     "time": "2:41",
+     "weight": "Heavyweight Bout",
+     "a": {
+      "name": "Kenji Mbeki",
+      "slug": null,
+      "odds": "+400",
+      "rank": null
+     },
+     "b": {
+      "name": "Felix Mbeki",
+      "slug": null,
+      "odds": "-400",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "A"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "B"
+      },
+      {
+       "nick": "Márk",
+       "side": "B"
+      }
+     ]
+    },
+    {
+     "id": 900019,
+     "ord": 8,
+     "card": "prelims",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "A",
+     "method": "KO/TKO",
+     "round": 1,
+     "time": "2:24",
+     "weight": "Light Heavyweight Bout",
+     "a": {
+      "name": "Caleb Ivanov",
+      "slug": null,
+      "odds": "-257",
+      "rank": null
+     },
+     "b": {
+      "name": "Sven Banda",
+      "slug": null,
+      "odds": "+257",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "A"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "A"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "B"
+      }
+     ]
+    },
+    {
+     "id": 900020,
+     "ord": 9,
+     "card": "prelims",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "Decision - Unanimous",
+     "round": 2,
+     "time": "2:24",
+     "weight": "Women's Strawweight Bout",
+     "a": {
+      "name": "Zane Okoye",
+      "slug": null,
+      "odds": "-127",
+      "rank": null
+     },
+     "b": {
+      "name": "Kenji Varga",
+      "slug": null,
+      "odds": "+127",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "A"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "A"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    },
+    {
+     "id": 900021,
+     "ord": 10,
+     "card": "early",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "Submission",
+     "round": 2,
+     "time": "2:42",
+     "weight": "Featherweight Bout",
+     "a": {
+      "name": "Viktor Sato",
+      "slug": null,
+      "odds": "-186",
+      "rank": null
+     },
+     "b": {
+      "name": "Mateo Ivanov",
+      "slug": null,
+      "odds": "+186",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "A"
+      },
+      {
+       "nick": "Gergő",
+       "side": "B"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "B"
+      }
+     ]
+    },
+    {
+     "id": 900022,
+     "ord": 11,
+     "card": "early",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "A",
+     "method": "Decision - Split",
+     "round": 2,
+     "time": "2:21",
+     "weight": "Bantamweight Bout",
+     "a": {
+      "name": "Nikolai Okoye",
+      "slug": null,
+      "odds": "-376",
+      "rank": null
+     },
+     "b": {
+      "name": "Idris Okoye",
+      "slug": null,
+      "odds": "+376",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "A"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "A"
+      },
+      {
+       "nick": "Márk",
+       "side": "B"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "ufc-329",
+   "title": "UFC 329: Varga vs Okoye",
+   "kind": "numbered",
+   "starts_at": "2026-05-16T22:00:00Z",
+   "fights": [
+    {
+     "id": 900000,
+     "ord": 1,
+     "card": "main",
+     "title_bout": true,
+     "points": 2,
+     "status": "done",
+     "winner": "A",
+     "method": "Decision - Unanimous",
+     "round": 2,
+     "time": "2:30",
+     "weight": "Welterweight Title Bout",
+     "a": {
+      "name": "Omar Reyes",
+      "slug": null,
+      "odds": "-186",
+      "rank": "3"
+     },
+     "b": {
+      "name": "Felix Lindqvist",
+      "slug": null,
+      "odds": "+186",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "A"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    },
+    {
+     "id": 900001,
+     "ord": 2,
+     "card": "main",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "Submission",
+     "round": 3,
+     "time": "2:31",
+     "weight": "Women's Strawweight Bout",
+     "a": {
+      "name": "Zane Varga",
+      "slug": null,
+      "odds": "-113",
+      "rank": "6"
+     },
+     "b": {
+      "name": "Jonas Haddad",
+      "slug": null,
+      "odds": "+113",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Dani",
+       "side": "A"
+      },
+      {
+       "nick": "Gergő",
+       "side": "A"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    },
+    {
+     "id": 900002,
+     "ord": 3,
+     "card": "main",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "Decision - Unanimous",
+     "round": 2,
+     "time": "2:25",
+     "weight": "Flyweight Bout",
+     "a": {
+      "name": "Luka Okoye",
+      "slug": null,
+      "odds": "+133",
+      "rank": null
+     },
+     "b": {
+      "name": "Rafael Tanaka",
+      "slug": null,
+      "odds": "-133",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "B"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "B"
+      }
+     ]
+    },
+    {
+     "id": 900003,
+     "ord": 4,
+     "card": "main",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "Decision - Unanimous",
+     "round": 1,
+     "time": "2:18",
+     "weight": "Women's Strawweight Bout",
+     "a": {
+      "name": "Tomasz Silva",
+      "slug": null,
+      "odds": "+257",
+      "rank": null
+     },
+     "b": {
+      "name": "Luka Keller",
+      "slug": null,
+      "odds": "-257",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "A"
+      },
+      {
+       "nick": "Gergő",
+       "side": "B"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "B"
+      }
+     ]
+    },
+    {
+     "id": 900004,
+     "ord": 5,
+     "card": "main",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "Submission",
+     "round": 2,
+     "time": "2:49",
+     "weight": "Flyweight Bout",
+     "a": {
+      "name": "Anton Rossi",
+      "slug": null,
+      "odds": "+376",
+      "rank": null
+     },
+     "b": {
+      "name": "Nikolai Varga",
+      "slug": null,
+      "odds": "-376",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "A"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "B"
+      },
+      {
+       "nick": "Márk",
+       "side": "B"
+      },
+      {
+       "nick": "Réka",
+       "side": "B"
+      }
+     ]
+    },
+    {
+     "id": 900005,
+     "ord": 6,
+     "card": "prelims",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "KO/TKO",
+     "round": 1,
+     "time": "2:15",
+     "weight": "Lightweight Bout",
+     "a": {
+      "name": "Nikolai Silva",
+      "slug": null,
+      "odds": "+300",
+      "rank": null
+     },
+     "b": {
+      "name": "Mateo Reyes",
+      "slug": null,
+      "odds": "-300",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "A"
+      },
+      {
+       "nick": "Dani",
+       "side": "A"
+      },
+      {
+       "nick": "Gergő",
+       "side": "B"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "B"
+      }
+     ]
+    },
+    {
+     "id": 900006,
+     "ord": 7,
+     "card": "prelims",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "KO/TKO",
+     "round": 1,
+     "time": "2:33",
+     "weight": "Bantamweight Bout",
+     "a": {
+      "name": "Ilya Brandt",
+      "slug": null,
+      "odds": "+285",
+      "rank": null
+     },
+     "b": {
+      "name": "Anton Costa",
+      "slug": null,
+      "odds": "-285",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "A"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "B"
+      },
+      {
+       "nick": "Márk",
+       "side": "B"
+      }
+     ]
+    },
+    {
+     "id": 900007,
+     "ord": 8,
+     "card": "prelims",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "A",
+     "method": "Decision - Split",
+     "round": 1,
+     "time": "2:49",
+     "weight": "Flyweight Bout",
+     "a": {
+      "name": "Jonas Kovač",
+      "slug": null,
+      "odds": "-426",
+      "rank": null
+     },
+     "b": {
+      "name": "Darius Moreau",
+      "slug": null,
+      "odds": "+426",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "A"
+      },
+      {
+       "nick": "Gergő",
+       "side": "A"
+      },
+      {
+       "nick": "Márk",
+       "side": "B"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    },
+    {
+     "id": 900008,
+     "ord": 9,
+     "card": "prelims",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "A",
+     "method": "KO/TKO",
+     "round": 1,
+     "time": "2:45",
+     "weight": "Welterweight Bout",
+     "a": {
+      "name": "Jonas Lindqvist",
+      "slug": null,
+      "odds": "+163",
+      "rank": null
+     },
+     "b": {
+      "name": "Viktor Tanaka",
+      "slug": null,
+      "odds": "-163",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "A"
+      },
+      {
+       "nick": "Gergő",
+       "side": "B"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "B"
+      }
+     ]
+    },
+    {
+     "id": 900009,
+     "ord": 10,
+     "card": "early",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "A",
+     "method": "Submission",
+     "round": 1,
+     "time": "2:56",
+     "weight": "Flyweight Bout",
+     "a": {
+      "name": "Tiago Petrov",
+      "slug": null,
+      "odds": "-203",
+      "rank": null
+     },
+     "b": {
+      "name": "Jonas Okoye",
+      "slug": null,
+      "odds": "+203",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Gergő",
+       "side": "A"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    },
+    {
+     "id": 900010,
+     "ord": 11,
+     "card": "early",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "B",
+     "method": "KO/TKO",
+     "round": 2,
+     "time": "2:21",
+     "weight": "Welterweight Bout",
+     "a": {
+      "name": "Anton Sato",
+      "slug": null,
+      "odds": "+163",
+      "rank": null
+     },
+     "b": {
+      "name": "Felix Varga",
+      "slug": null,
+      "odds": "-163",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "B"
+      },
+      {
+       "nick": "Gergő",
+       "side": "B"
+      },
+      {
+       "nick": "Márk",
+       "side": "B"
+      },
+      {
+       "nick": "Réka",
+       "side": "B"
+      }
+     ]
+    },
+    {
+     "id": 900011,
+     "ord": 12,
+     "card": "early",
+     "title_bout": false,
+     "points": 1,
+     "status": "done",
+     "winner": "A",
+     "method": "KO/TKO",
+     "round": 2,
+     "time": "2:12",
+     "weight": "Light Heavyweight Bout",
+     "a": {
+      "name": "Felix Tanaka",
+      "slug": null,
+      "odds": "-138",
+      "rank": null
+     },
+     "b": {
+      "name": "Rafael Varga",
+      "slug": null,
+      "odds": "+138",
+      "rank": null
+     },
+     "picks": [
+      {
+       "nick": "Bence",
+       "side": "B"
+      },
+      {
+       "nick": "Dani",
+       "side": "A"
+      },
+      {
+       "nick": "Gergő",
+       "side": "B"
+      },
+      {
+       "nick": "Márk",
+       "side": "A"
+      },
+      {
+       "nick": "Réka",
+       "side": "A"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

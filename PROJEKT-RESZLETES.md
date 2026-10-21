@@ -14,7 +14,9 @@
 6. **Kereszt-ellenőrzés:** a UFC.com eredménye pontosítja a módot, és ha a győztes eltér, az automata eredményt visszavonja —
    az admin dönt. A kézi admin-döntést az automata nem írja felül.
 7. **Felület:** mobil-első oldal; a meccsek A/B oldallal, a versenyzők valós magasság szerint egy talpvonalon; összevetés
-   („tale of the tape”); ranglista gálánként és összesítve (szűrhető). Mások tippje csak a meccs végén látszik.
+   („tale of the tape”); ranglista gálánként, szezononként és összesítve (szűrhető). Mások tippje csak a meccs végén látszik.
+8. **Történet és statisztika:** a `get_history()` az eldőlt meccseket adja a tippekkel; a böngésző (`js/stats.js`) számolja a találati
+   arányt, szériát, favorit / esélytelen mintát, díjakat, trófeákat, fej-fej mellett összevetést. Új gála felvétele ehhez nem kell semmit.
 
 ## Miért így (a mért döntések)
 - **Zárás az ESPN „zajlik” jelzésére** az admin gomb helyett: a felhasználó teljes automatát kért; a stream késése miatt a valódi
