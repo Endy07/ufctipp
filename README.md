@@ -44,6 +44,9 @@ Windows Feladatütemező: „UfcTipp szinkron”, 5 percenként `wscript tools\s
   részletnél gála-ranglista, meccsenként eredmény, saját tipp, társaság megoszlása, „ki kire tippelt", „a társaság tévedett" jelzések.
 - **Statisztika** (`#statisztika`): mindenki találati aránya, játékos-kártya (széria, favorit / esélytelen, címmeccs, súlycsoport, kedvenc
   versenyző, tömeg ellen), díjak (legalább 5 eldőlt tipp után), bajnokok, fej-fej mellett.
+- **Profil** (`#profil/<becenév>`, csak megnézhető, nincs szerkesztés és új adatbázis-elem): avatar (a becenévből színezett kezdőbetű), találati arány,
+  pont, gálák, szezonhelyezés, díjak és gálagyőzelmek, legutóbbi 8 tipp, részletes kártya, fej-fej gomb. Megnyitás: névre koppintás a ranglistán,
+  a Statisztika játékos-kártyáján, vagy a fejléc nevére koppintva a „Profilom megnézése”.
 - **Ranglista → Szezon**: naptári évenként. **Megosztás képként**: Ranglista (Ez a gála) és a Történet részlete. **Emlékeztető**: a Meccsek
   tetején visszaszámláló + naptár-fájl (.ics, 30 perccel a kezdések előtt). Valódi push-értesítés nincs.
 - Adat: egyetlen csak olvasó függvény, `get_history()` (`supabase/migrate-004-tortenet.sql`) — a tippek csak az eldőlt meccseknél szerepelnek.

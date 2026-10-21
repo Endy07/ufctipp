@@ -191,13 +191,13 @@
     if (state.sheetFight) renderSheet(state.sheetFight, true);
   }
 
-  const HISTORY_ROUTES = ['tortenet', 'statisztika'];
+  const HISTORY_ROUTES = ['tortenet', 'statisztika', 'profil'];
 
   // #tortenet/<gála-slug>: a második rész a részletes nézet argumentuma
   function routeParts() {
     const [name, arg] = location.hash.replace('#', '').split('/');
     return {
-      name: ['kartya', 'ranglista', 'tortenet', 'statisztika', 'admin'].includes(name) ? name : 'kartya',
+      name: ['kartya', 'ranglista', 'tortenet', 'statisztika', 'profil', 'admin'].includes(name) ? name : 'kartya',
       arg: arg ? decodeURIComponent(arg) : null,
     };
   }
@@ -250,9 +250,11 @@
       view.innerHTML = route === 'ranglista' ? leaderboardView()
         : route === 'tortenet' ? historyView()
         : route === 'statisztika' ? statsView()
+        : route === 'profil' ? profileView()
         : cardView();
     }
-    document.querySelectorAll('#tabs a').forEach((a) => a.classList.toggle('is-active', a.dataset.tab === route));
+    const tab = route === 'profil' ? 'statisztika' : route;
+    document.querySelectorAll('#tabs a').forEach((a) => a.classList.toggle('is-active', a.dataset.tab === tab));
   }
 
   function sectionStart(key) {
@@ -412,7 +414,7 @@
       return `
         <li class="lb__row ${me ? 'is-me' : ''} ${place === 1 && crown ? 'is-first' : ''}">
           <span class="lb__place">${place}.</span>
-          <span class="lb__nick">${esc(r.nick)}</span>
+          <a class="lb__nick" href="#profil/${encodeURIComponent(r.nick)}">${esc(r.nick)}</a>
           <span class="lb__sub">${esc(sub(r))}</span>
           <span class="lb__pts">${r.points}<small> p</small></span>
         </li>`;
@@ -633,7 +635,7 @@
     });
   }
 
-  function playerCard(s) {
+  function playerCard(s, asProfile) {
     const cur = s.streak.current;
     const dots = s.recent.length ? `<span class="dots" aria-label="Utolsó ${s.recent.length} tipp">${s.recent.map((r) => `<i class="dot dot--${r}"></i>`).join('')}</span>` : '–';
     const favLine = s.fav.picks + s.dog.picks
@@ -661,7 +663,87 @@
         ${kv('Rá szokott tévedni', s.nemesis ? `${esc(s.nemesis.name)} <small>(${s.nemesis.picks - s.nemesis.hits}×)</small>` : '–')}
         ${s.byEvent.length ? `<h3 class="tape__group">Gálánként</h3>${s.byEvent.map((ev) => `
           <a class="kv kv--link" href="#tortenet/${encodeURIComponent(ev.slug)}"><span>${esc(ev.title.split(':')[0])}</span><b>${ev.points} pont <small>(${ev.correct}/${ev.decided})</small></b></a>`).join('')}` : ''}
+        ${asProfile ? '' : `<a class="btn btn--share" href="#profil/${encodeURIComponent(s.nick)}">${esc(s.nick)} profilja</a>`}
       </section>`;
+  }
+
+  // ------------------------------------------------------------ profil (csak megnézhető)
+
+  // Becenévből stabil színes kör: mindenkinek mindig ugyanaz
+  function avatar(nick) {
+    let h = 0;
+    for (const ch of String(nick).toLowerCase()) h = (h * 31 + ch.codePointAt(0)) % 360;
+    const initial = [...String(nick).trim()][0] || '?';
+    return `<span class="avatar" style="--hue:${h}" aria-hidden="true">${esc(initial.toUpperCase())}</span>`;
+  }
+
+  // A játékos utolsó eldőlt tippjei, a legfrissebbtől
+  function recentPicks(h, nick, max) {
+    const key = nick.toLowerCase();
+    const out = [];
+    const events = h.events.slice().sort((x, y) => new Date(y.starts_at) - new Date(x.starts_at));
+    for (const e of events) {
+      for (const f of e.fights.slice().sort((x, y) => x.ord - y.ord)) {
+        if (f.status !== 'done' || !f.picks || f.winner === 'draw' || f.winner === 'nc') continue;
+        const p = f.picks.find((q) => q.nick.toLowerCase() === key);
+        if (!p) continue;
+        out.push({ e, f, side: p.side, hit: p.side === f.winner });
+        if (out.length >= max) return out;
+      }
+    }
+    return out;
+  }
+
+  function profileView() {
+    return historyGate((h) => {
+      const { arg } = routeParts();
+      const ov = ST.overview(h);
+      const found = arg && ov.find((s) => s.nick.toLowerCase() === arg.toLowerCase());
+      const nick = found ? found.nick : (arg || (state.me && state.me.nick) || '');
+      if (!nick) return '<div class="empty">Nincs kiválasztott játékos.</div>';
+      const me = isMe(nick);
+      const back = '<a class="back" href="#statisztika">‹ Statisztika</a>';
+      const head = `
+        <div class="prof__head">${avatar(nick)}
+          <div class="prof__who"><b>${esc(nick)}</b>${me ? '<span class="prof__tag">Ez te vagy</span>' : '<span>Játékos</span>'}</div>
+        </div>`;
+      if (!found || !found.picks) {
+        return `${back}<section class="prof">${head}<p class="hint">${esc(nick)} még nem tippelt eldőlt meccsre, ezért nincs mit mutatni. Az első lejátszott gála után itt jelenik meg a statisztikája.</p></section>`;
+      }
+      const s = found;
+      const trophy = ST.trophies(h).table.find((r) => r.nick.toLowerCase() === nick.toLowerCase());
+      const awards = ST.awards(h).filter((a) => a.nick.toLowerCase() === nick.toLowerCase());
+      const place = ov.findIndex((x) => x.nick === s.nick) + 1;
+      const seasons = Object.entries(ST.season(h)).sort((a, b) => b[0] - a[0]).map(([year, rows]) => {
+        const r = rows.find((x) => x.nick.toLowerCase() === nick.toLowerCase());
+        return r ? kv(`Szezon ${year}`, `${r.place}. hely <small>(${r.points} pont, ${r.events} gála)</small>`) : '';
+      }).join('');
+      const recent = recentPicks(h, nick, 8).map((r) => {
+        const picked = (r.side === 'A' ? r.f.a : r.f.b).name || '?';
+        const other = (r.side === 'A' ? r.f.b : r.f.a).name || '?';
+        return `<a class="rp rp--${r.hit ? 'hit' : 'miss'}" href="#tortenet/${encodeURIComponent(r.e.slug)}">
+          <span class="rp__mark">${r.hit ? 'Talált' : 'Nem talált'}</span>
+          <span class="rp__fight"><b>${esc(picked)}</b> <small>vs ${esc(other)}</small></span>
+          <span class="rp__ev">${esc(r.e.title.split(':')[0])}</span>
+        </a>`;
+      }).join('');
+      const medals = (trophy ? `<div class="award"><span class="award__t">Gálagyőzelem</span><b class="award__n">${trophy.n}×</b><span class="award__d">Megnyert gála</span></div>` : '')
+        + awards.map((a) => `<div class="award"><span class="award__t">${esc(a.title)}</span><b class="award__v">${esc(a.value)}</b><span class="award__d">${esc(a.desc)}</span></div>`).join('');
+      return `${back}<section class="prof">${head}
+          <div class="prof__nums">
+            <div><b>${s.pct == null ? '–' : s.pct + '%'}</b><span>találati arány</span></div>
+            <div><b>${s.points}</b><span>pont</span></div>
+            <div><b>${s.events}</b><span>gála</span></div>
+            <div><b>${place}.</b><span>a százalék-táblán</span></div>
+          </div>
+          ${seasons}
+          ${me ? '' : (state.me ? `<button class="btn btn--share" type="button" data-h2h-with="${esc(nick)}">Fej-fej mellett: te vs ${esc(nick)}</button>` : '')}
+        </section>
+        ${medals ? `<h2 class="section-h"><span>Díjak és címek</span></h2><div class="awards">${medals}</div>` : ''}
+        ${recent ? `<h2 class="section-h"><span>Legutóbbi tippek</span></h2><div class="rps">${recent}</div>` : ''}
+        <h2 class="section-h"><span>Részletes statisztika</span></h2>
+        ${playerCard(s, true)}`;
+    });
   }
 
   function trophyBlock(h) {
@@ -965,6 +1047,7 @@
     const link = location.href.split('#')[0];
     $('#sheetBody').innerHTML = `
       <h2 class="sheet__title" id="sheetTitle">${esc(state.me.nick)}</h2>
+      <a class="btn btn--primary" href="#profil/${encodeURIComponent(state.me.nick)}" data-close>Profilom megnézése</a>
       <p class="hint">Hívd meg a barátaidat ezzel a linkkel:</p>
       <div class="invite"><input readonly value="${esc(link)}" aria-label="Meghívó link"><button class="btn" type="button" data-copy="${esc(link)}">Másolás</button></div>
       <button class="btn btn--ghost" type="button" data-logout>Kijelentkezés ezen a telefonon</button>
@@ -1177,6 +1260,8 @@
     if (hKind) { state.hKind = hKind.dataset.histKind || null; render(); return; }
     const statPlayer = t.closest('[data-stat-player]');
     if (statPlayer) { state.statNick = statPlayer.dataset.statPlayer; render(); return; }
+    const h2hWith = t.closest('[data-h2h-with]');
+    if (h2hWith && state.me) { state.h2h = { a: state.me.nick, b: h2hWith.dataset.h2hWith }; location.hash = '#statisztika'; return; }
     const seasonYear = t.closest('[data-season-year]');
     if (seasonYear) { state.seasonYear = seasonYear.dataset.seasonYear; render(); return; }
     const share = t.closest('[data-share]');
