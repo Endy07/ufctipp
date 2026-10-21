@@ -117,8 +117,10 @@ function demoApi(cfg, data) {
         return {
           id: df.id, status: f.status, open: isOpen(f), lock_at: f.lock_at, winner: f.winner, method: f.method,
           round: f.round, time: f.time, points: f.points,
-          count_a: all.filter((x) => x.side === 'A').length, count_b: all.filter((x) => x.side === 'B').length,
-          picks: isOpen(f) ? null : all.sort((a, b) => a.nick.localeCompare(b.nick, 'hu')),
+          count_total: all.length,
+          count_a: f.status === 'done' ? all.filter((x) => x.side === 'A').length : null,
+          count_b: f.status === 'done' ? all.filter((x) => x.side === 'B').length : null,
+          picks: f.status === 'done' ? all.sort((a, b) => a.nick.localeCompare(b.nick, 'hu')) : null,
         };
       });
       const leaderboard = s.players.map((p) => {

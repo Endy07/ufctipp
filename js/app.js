@@ -217,7 +217,7 @@
             <li>Minden meccsnél koppints arra, akit győztesnek tippelsz. Amíg a meccset le nem zárják, átírhatod.</li>
             <li>A tippelést az admin zárja le közvetlenül a meccs előtt.</li>
             <li>Eltalált győztes: 1 pont, címmeccsen 2 pont.</li>
-            <li>A többiek tippjei a zárás után látszanak.</li>
+            <li>Hogy ki kire tippelt, az a meccs végén, az eredménnyel együtt derül ki.</li>
           </ul>
         </div>
       </section>`;
@@ -294,8 +294,8 @@
       else if (!mine) result = '<span class="res res--none">Nem tippeltél</span>';
       else result = mine === s.winner ? `<span class="res res--hit">Talált, +${pts} pont</span>` : '<span class="res res--miss">Nem talált</span>';
     }
-    const total = s ? s.count_a + s.count_b : 0;
-    const split = s && !s.open && total
+    const total = s ? s.count_total || 0 : 0;
+    const split = s && s.status === 'done' && total
       ? `<div class="crowd" aria-label="A társaság tippjei: ${s.count_a} – ${s.count_b}">${s.count_a ? `<span class="crowd__a" style="flex-grow:${s.count_a}">${s.count_a}</span>` : ''}${s.count_b ? `<span class="crowd__b" style="flex-grow:${s.count_b}">${s.count_b}</span>` : ''}</div>`
       : `<span class="count">${total ? `${total} tipp eddig` : ''}</span>`;
     const how = s && s.status === 'done' && s.method ? `<span class="how">${esc(s.method)}${s.round ? `, ${s.round}. menet` : ''}${s.time ? ` ${esc(s.time)}` : ''}</span>` : '';
@@ -433,13 +433,13 @@
         <div class="vs__country">${c.flag ? `<img src="${esc(c.flag)}" alt="">` : ''}${esc(countryHu(c.country))}</div>
       </div>`;
     let picksHtml = '';
-    if (s && !s.open && s.picks) {
+    if (s && s.status === 'done' && s.picks) {
       const col = (side) => s.picks.filter((p) => p.side === side).map((p) => `<li>${esc(p.nick)}</li>`).join('') || '<li class="muted">senki</li>';
       picksHtml = `
         <h3 class="tape__group">Ki kire tippelt</h3>
         <div class="who"><ul class="who__a">${col('A')}</ul><ul class="who__b">${col('B')}</ul></div>`;
     } else if (s) {
-      picksHtml = `<p class="hint">${s.count_a + s.count_b} tipp érkezett eddig. Hogy ki kire tippelt, az a zárás után derül ki.</p>`;
+      picksHtml = `<p class="hint">${s.count_total || 0} tipp érkezett eddig. Hogy ki kire tippelt, az a meccs végén derül ki.</p>`;
     }
     return `
       <h2 class="sheet__title" id="sheetTitle">${esc(weightName(f.weightClass))}${f.titleBout ? ', címmeccs' : ''}</h2>
@@ -525,7 +525,7 @@
         <div class="adm__head">
           <b>${esc(lastName(f.a.name))} – ${esc(lastName(f.b.name))}</b>
           <span class="fight__state fight__state--${st.cls}" data-adm-state>${esc(st.text)}</span>
-          <span class="count" data-adm-count>${s.count_a ?? 0} – ${s.count_b ?? 0} tipp</span>
+          <span class="count" data-adm-count>${s.count_total ?? 0} tipp</span>
         </div>
         <div class="adm__row">
           ${s.open !== false ? `<button class="btn btn--lock" type="button" data-adm="lock">Tippelés lezárása</button>`
@@ -585,7 +585,7 @@
       const el = box.querySelector('[data-adm-state]');
       el.textContent = st.text;
       el.className = 'fight__state fight__state--' + st.cls;
-      box.querySelector('[data-adm-count]').textContent = `${s.count_a} – ${s.count_b} tipp`;
+      box.querySelector('[data-adm-count]').textContent = `${s.count_total} tipp`;
     });
   }
 

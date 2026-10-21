@@ -182,7 +182,8 @@ begin
   return json_build_object('fight', p_fight, 'side', p_side);
 end $$;
 
--- Nyilvános állapot: meccsenként a tippek száma; lezárt meccsnél a tippek névvel is; ranglista
+-- Nyilvános állapot: meccsenként a tippek száma; ki kire tippelt (és a megoszlás) csak a meccs végén
+-- (eredmény rögzítve) derül ki — a felhasználó döntése, 2026-10-21; ranglista
 create or replace function get_board(p_event text) returns json
 language sql stable security definer set search_path = public as $$
   select json_build_object(
@@ -192,9 +193,10 @@ language sql stable security definer set search_path = public as $$
       select json_agg(json_build_object(
         'id', f.id, 'status', f.status, 'open', fight_is_open(f), 'lock_at', f.lock_at,
         'winner', f.winner, 'method', f.method, 'round', f.round, 'time', f.time, 'points', f.points,
-        'count_a', (select count(*) from picks p where p.fight_id = f.id and p.side = 'A'),
-        'count_b', (select count(*) from picks p where p.fight_id = f.id and p.side = 'B'),
-        'picks', case when fight_is_open(f) then null else (
+        'count_total', (select count(*) from picks p where p.fight_id = f.id),
+        'count_a', case when f.status = 'done' then (select count(*) from picks p where p.fight_id = f.id and p.side = 'A') end,
+        'count_b', case when f.status = 'done' then (select count(*) from picks p where p.fight_id = f.id and p.side = 'B') end,
+        'picks', case when f.status <> 'done' then null else (
           select coalesce(json_agg(json_build_object('nick', pl.nick, 'side', p.side) order by lower(pl.nick)), '[]'::json)
           from picks p join players pl on pl.id = p.player_id where p.fight_id = f.id) end
       ) order by f.ord)
