@@ -206,7 +206,18 @@ main { max-width: 640px; margin: 0 auto; padding: 12px 12px 24px; outline: none;
 .crowd__a { background: var(--red); }
 .crowd__b { background: var(--blue); justify-content: flex-end; }
 
+/* ---------- csere-jelzés, szinkron ---------- */
+.changed { margin: 0 2px 6px; padding: 6px 10px; border-radius: var(--r); background: #3a2f12; color: #f3d98f; font-weight: 700; font-size: 14px; }
+.nudge--changed { color: #f3d98f; }
+.sync { color: var(--muted); font-size: 13px; margin: 4px 0 8px; }
+
 /* ---------- ranglista ---------- */
+.seg { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; margin: 6px 0 4px; background: var(--surface); border-radius: var(--r); }
+.seg button { min-height: 40px; border: 0; border-radius: 8px; background: transparent; color: var(--muted); font-weight: 700; cursor: pointer; }
+.seg button[aria-selected="true"] { background: var(--surface-2); color: var(--ink); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+.chip-btn { min-height: 36px; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--ink); font-weight: 600; cursor: pointer; }
+.chip-btn.is-on { background: var(--ink); color: var(--mat); border-color: var(--ink); }
 .lb { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
 .lb__row {
   display: grid; grid-template-columns: 2.4em 1fr auto; grid-template-areas: "place nick pts" "place sub pts";

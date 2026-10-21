@@ -25,8 +25,9 @@
     set(k, v, session) { try { (session ? sessionStorage : localStorage).setItem(k, JSON.stringify(v)); } catch (e) { /* privát mód */ } },
     del(k, session) { try { (session ? sessionStorage : localStorage).removeItem(k); } catch (e) { /* privát mód */ } },
   };
-  const ME_KEY = 'ufctipp-me-' + cfg.event;
-  const ADMIN_KEY = 'ufctipp-admin-' + cfg.event;
+  // A játékos minden gálán ugyanaz (a régi, gálánkénti kulcsot is elfogadjuk: ufctipp-me-ufc-333)
+  const ME_KEY = 'ufctipp-me';
+  const ADMIN_KEY = 'ufctipp-admin';
 
   const fmtTime = (ts) => new Intl.DateTimeFormat('hu-HU', { timeZone: TZ, hour: '2-digit', minute: '2-digit' }).format(ts);
   const fmtDay = (ts) => new Intl.DateTimeFormat('hu-HU', { timeZone: TZ, weekday: 'long', month: 'long', day: 'numeric' }).format(ts);
@@ -100,20 +101,32 @@
 
   // ------------------------------------------------------------ indulás
 
+  // Az aktuális gála az adatbázisból (élesben a gépen futó szinkron tölti fel, lásd tools/sync.php)
+  async function loadEvent() {
+    const ev = await state.api.event();
+    if (!ev || !ev.data) { state.event = null; state.data = null; return; }
+    state.event = ev;
+    state.data = ev.data;
+    $('#eventName').textContent = ev.data.event.title.split(':')[0];
+    $('#eventSub').textContent = ev.data.event.title.split(':').slice(1).join(':').trim();
+  }
+  const loadBoard = () => state.api.board(state.event.slug);
+
   async function start() {
+    state.api = window.createApi(cfg);
+    $('#demoBanner').hidden = state.api.mode !== 'demo';
     try {
-      const res = await fetch(`data/${cfg.event}.json`, { cache: 'no-cache' });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      state.data = await res.json();
+      await loadEvent();
     } catch (e) {
-      $('#view').innerHTML = `<div class="empty">Nem töltődött be az est adata (data/${esc(cfg.event)}.json). Frissítsd az oldalt.</div>`;
+      $('#view').innerHTML = `<div class="empty">Nem töltődött be a gála adata: ${esc(e.message)} Frissítsd az oldalt.</div>`;
       return;
     }
-    state.api = window.createApi(cfg, state.data);
-    $('#demoBanner').hidden = state.api.mode !== 'demo';
-    $('#eventName').textContent = state.data.event.title.split(':')[0];
-    $('#eventSub').textContent = state.data.event.title.split(':').slice(1).join(':').trim();
-    state.me = store.get(ME_KEY);
+    if (!state.data) {
+      $('#view').innerHTML = '<div class="empty">A következő gála még nincs kiírva. Amint a UFC kiírja, itt megjelenik, és lehet tippelni.</div>';
+      return;
+    }
+    state.me = store.get(ME_KEY) || store.get(ME_KEY + '-ufc-333');
+    if (state.me) store.set(ME_KEY, state.me);
     state.adminPin = store.get(ADMIN_KEY, true);
 
     document.addEventListener('click', onClick);
@@ -127,7 +140,7 @@
         state.picks = await state.api.myPicks(state.me.nick, state.me.pin);
       } catch (e) {
         // törölt játékos vagy megváltozott PIN: újra be kell lépni
-        if (/becenév|PIN/i.test(e.message)) { state.me = null; store.del(ME_KEY); }
+        if (/becenév|PIN/i.test(e.message)) { state.me = null; store.del(ME_KEY); store.del(ME_KEY + '-ufc-333'); }
       }
     }
     await refresh();
@@ -135,11 +148,23 @@
   }
 
   async function refresh() {
+    // a kártya (beugró, sorrend) ritkábban változik: kb. másfél percenként nézzük, frissült-e
+    refresh.n = (refresh.n || 0) + 1;
+    if (refresh.n % 6 === 0) {
+      try {
+        const ev = await state.api.event();
+        if (ev && ev.data && (ev.slug !== state.event.slug || ev.last_sync_at !== state.event.last_sync_at)) {
+          state.event = ev;
+          state.data = ev.data;
+        }
+      } catch (e) { /* a következő körben újra */ }
+    }
     try {
-      state.board = await state.api.board();
+      state.board = await loadBoard();
     } catch (e) {
       if (!state.board) toast(e.message, 'err');
     }
+    if (currentRoute() === 'ranglista' && state.lbTab === 'ossz') loadOverall(state.lbKind || null);
     // Űrlapos nézetet (belépés, admin) nem rajzolunk újra, mert elveszne a félig beírt adat
     const shown = $('#view').dataset.route;
     if (shown === 'admin') renderAdminStatusOnly();
@@ -235,12 +260,14 @@
     const picked = fights.filter((f) => state.picks[f.id]).length;
     const { row, place, total } = myStats();
     const missing = fights.filter((f) => { const s = fightState(f.id); return (!s || s.open) && !state.picks[f.id]; }).length;
+    const redo = fights.filter((f) => { const s = fightState(f.id); return s && s.changed && s.open && !state.picks[f.id]; }).length;
     let html = `
       <div class="summary">
         <div><b>${picked}/${fights.length}</b><span>tipped</span></div>
         <div><b>${row ? row.points : 0}</b><span>pontod</span></div>
         <div><b>${place > 0 ? place + '.' : '–'}</b><span>helyezés (${total} játékos)</span></div>
       </div>
+      ${redo ? `<p class="nudge nudge--changed">${redo} meccs megváltozott (beugró), tippelj rá újra!</p>` : ''}
       ${missing && openCount ? `<p class="nudge">Még ${missing} nyitott meccsre nem tippeltél.</p>` : ''}`;
     ['main', 'prelims', 'early'].forEach((key) => {
       const list = fights.filter((f) => f.card === key);
@@ -306,6 +333,7 @@
           <span class="fight__pts">${pts} pont</span>
           <span class="fight__state fight__state--${st.cls}">${esc(st.text)}</span>
         </div>
+        ${s && s.changed && s.open ? `<p class="changed">Megváltozott a meccs${mine ? '' : ' — tippelj újra!'}</p>` : ''}
         <div class="fight__split">
           ${cornerHtml(f, 'A', s)}
           <span class="fight__vs" aria-hidden="true">vs</span>
@@ -319,26 +347,64 @@
       </article>`;
   }
 
-  function leaderboardView() {
-    const lb = state.board ? state.board.leaderboard : [];
-    const done = state.board ? state.board.fights.filter((f) => f.status === 'done').length : 0;
-    if (!lb.length) return '<div class="empty">Még senki nem csatlakozott.</div>';
+  // Ranglista: „Ez a gála” vagy „Összesített” (minden gála; szűrhető számozott / Fight Night gálákra)
+  const LB_KINDS = [[null, 'Mind'], ['numbered', 'Számozott'], ['fightnight', 'Fight Night']];
+
+  function lbRows(lb, sub, crown) {
     let place = 0, prev = null;
-    const rows = lb.map((r, i) => {
+    return lb.map((r, i) => {
       if (r.points !== prev) { place = i + 1; prev = r.points; }
       const me = state.me && r.nick.toLowerCase() === state.me.nick.toLowerCase();
       return `
-        <li class="lb__row ${me ? 'is-me' : ''} ${place === 1 && done ? 'is-first' : ''}">
+        <li class="lb__row ${me ? 'is-me' : ''} ${place === 1 && crown ? 'is-first' : ''}">
           <span class="lb__place">${place}.</span>
           <span class="lb__nick">${esc(r.nick)}</span>
-          <span class="lb__sub">${r.correct}/${r.decided} talált, ${r.picks} tipp</span>
+          <span class="lb__sub">${esc(sub(r))}</span>
           <span class="lb__pts">${r.points}<small> p</small></span>
         </li>`;
     }).join('');
-    return `
-      <h2 class="section-h"><span>Ranglista</span><time>${done}/${state.data.fights.length} meccs lement</time></h2>
-      <ol class="lb">${rows}</ol>
+  }
+
+  function leaderboardView() {
+    const tab = state.lbTab || 'gala';
+    const tabs = `
+      <div class="seg" role="tablist">
+        <button type="button" role="tab" data-lb-tab="gala" aria-selected="${tab === 'gala'}">Ez a gála</button>
+        <button type="button" role="tab" data-lb-tab="ossz" aria-selected="${tab === 'ossz'}">Összesített</button>
+      </div>`;
+    if (tab === 'ossz') {
+      const kind = state.lbKind || null;
+      const chips = `<div class="chips">${LB_KINDS.map(([k, label]) =>
+        `<button type="button" class="chip-btn ${kind === k ? 'is-on' : ''}" data-lb-kind="${k || ''}">${label}</button>`).join('')}</div>`;
+      const lb = state.overall && state.overall.kind === kind ? state.overall.rows : null;
+      if (!lb) loadOverall(kind);
+      const body = !lb ? '<div class="empty">Betöltés…</div>'
+        : lb.length ? `<ol class="lb">${lbRows(lb, (r) => `${r.correct}/${r.decided} talált, ${r.events} gála`, lb.some((r) => r.decided))}</ol>`
+        : '<div class="empty">Még senki nem csatlakozott.</div>';
+      return `${tabs}${chips}${body}
+        <p class="hint">Az összes eddigi gála pontjai együtt. Holtversenyben a több talált tipp dönt.</p>`;
+    }
+    const lb = state.board ? state.board.leaderboard : [];
+    const done = state.board ? state.board.fights.filter((f) => f.status === 'done').length : 0;
+    if (!lb.length) return `${tabs}<div class="empty">Még senki nem csatlakozott.</div>`;
+    return `${tabs}
+      <h2 class="section-h"><span>${esc(state.data.event.title.split(':')[0])}</span><time>${done}/${state.data.fights.length} meccs lement</time></h2>
+      <ol class="lb">${lbRows(lb, (r) => `${r.correct}/${r.decided} talált, ${r.picks} tipp`, done)}</ol>
       <p class="hint">Holtversenyben a több talált tipp dönt; a sorrend minden eredmény után frissül.</p>`;
+  }
+
+  async function loadOverall(kind) {
+    if (loadOverall.busy === kind) return;
+    loadOverall.busy = kind;
+    try {
+      const rows = await state.api.overall(kind);
+      state.overall = { kind, rows };
+      if (currentRoute() === 'ranglista') render();
+    } catch (e) {
+      toast(e.message, 'err');
+    } finally {
+      loadOverall.busy = undefined;
+    }
   }
 
   // ------------------------------------------------------------ összevetés (alsó panel)
@@ -566,7 +632,10 @@
     let html = `
       <h2 class="section-h"><span>Admin</span><button class="link" type="button" data-adm-logout>Kilépés</button></h2>
       <div class="invite"><input readonly value="${esc(link)}" aria-label="Meghívó link"><button class="btn" type="button" data-copy="${esc(link)}">Link másolása</button></div>
-      <p class="hint">A meccs kezdetekor nyomd meg a „Tippelés lezárása” gombot, a végén pedig rögzítsd a győztest. A pontok azonnal frissülnek.</p>`;
+      <p class="hint">Az automata magától zárja a meccseket a kezdéskor, és rögzíti a győztest. Itt csak akkor kell bármit tenned, ha valami nem stimmel: a kézi döntésedet az automata nem írja felül.</p>
+      <p class="sync">Utolsó automatikus frissítés: ${state.event && state.event.last_sync_at
+        ? esc(new Intl.DateTimeFormat('hu-HU', { timeZone: TZ, month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }).format(Date.parse(state.event.last_sync_at)))
+        : 'még nem volt'}${state.event && state.event.sync_note ? ` (${esc(state.event.sync_note)})` : ''}</p>`;
     ['main', 'prelims', 'early'].forEach((key) => {
       const list = state.data.fights.filter((f) => f.card === key);
       html += `<h2 class="section-h"><span>${CARD_NAME[key]}</span></h2>` + list.map(adminFight).join('');
@@ -616,7 +685,7 @@
       } else if (act === 'nolockat') await api.adminSetLockAt(pin, id, null);
       const done = { lock: 'Lezárva', open: 'Újranyitva', unresult: 'Eredmény törölve', result: 'Eredmény mentve', lockat: 'Időpont mentve', nolockat: 'Időzítés kikapcsolva' };
       toast(done[act], 'ok');
-      state.board = await api.board();
+      state.board = await loadBoard();
       const scroll = window.scrollY;
       box.outerHTML = adminFight(state.data.fights.find((f) => f.id === id));
       window.scrollTo(0, scroll);
@@ -658,11 +727,11 @@
       await state.api.pick(state.me.nick, state.me.pin, id, next);
       const f = state.data.fights.find((x) => x.id === id);
       toast(next ? `Tipped: ${(next === 'A' ? f.a : f.b).name}` : 'Tipp visszavonva', 'ok');
-      state.board = await state.api.board().catch(() => state.board);
+      state.board = await loadBoard().catch(() => state.board);
     } catch (e) {
       if (prev) state.picks[id] = prev; else delete state.picks[id];
       toast(e.message, 'err');
-      state.board = await state.api.board().catch(() => state.board);
+      state.board = await loadBoard().catch(() => state.board);
     } finally {
       state.busy.delete(id);
       rerenderFight(id);
@@ -694,6 +763,10 @@
       pick(+pickBtn.dataset.fight, pickBtn.dataset.pick);
       return;
     }
+    const lbTab = t.closest('[data-lb-tab]');
+    if (lbTab) { state.lbTab = lbTab.dataset.lbTab; render(); return; }
+    const lbKind = t.closest('[data-lb-kind]');
+    if (lbKind) { state.lbKind = lbKind.dataset.lbKind || null; render(); return; }
     const detail = t.closest('[data-detail]');
     if (detail) { openSheet(+detail.dataset.detail); return; }
     if (t.closest('[data-close]')) { closeSheet(); return; }
@@ -707,7 +780,7 @@
       return;
     }
     if (t.closest('[data-logout]')) {
-      store.del(ME_KEY); state.me = null; state.picks = {}; closeSheet(); render(); return;
+      store.del(ME_KEY); store.del(ME_KEY + '-ufc-333'); state.me = null; state.picks = {}; closeSheet(); render(); return;
     }
     const adm = t.closest('[data-adm]');
     if (adm) { adminAction(adm); return; }
@@ -743,7 +816,7 @@
         store.set(ME_KEY, state.me);
         state.picks = await state.api.myPicks(r.nick, pin);
         toast(r.created ? `Üdv a játékban, ${r.nick}!` : `Üdv újra, ${r.nick}!`, 'ok');
-        state.board = await state.api.board().catch(() => state.board);
+        state.board = await loadBoard().catch(() => state.board);
         location.hash = '#kartya';
         render();
       } else if (form.dataset.form === 'admin') {
@@ -751,7 +824,7 @@
         await state.api.adminCheck(pin);
         state.adminPin = pin;
         store.set(ADMIN_KEY, pin, true);
-        state.board = await state.api.board().catch(() => state.board);
+        state.board = await loadBoard().catch(() => state.board);
         render();
       }
     } catch (er) {

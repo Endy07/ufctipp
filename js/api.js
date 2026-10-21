@@ -1,11 +1,11 @@
 // Háttér-elérés: élesben a Supabase RPC-függvényei (supabase/schema.sql), helyben demó (localStorage).
 // Mindkét háttér ugyanazt a felületet adja; hiba esetén Error-t dob olvasható üzenettel.
 
-window.createApi = function createApi(cfg, data) {
+window.createApi = function createApi(cfg) {
   // ?demo a címben: kipróbálás az éles adatbázis érintése nélkül
   const forceDemo = new URLSearchParams(location.search).has('demo');
   if (cfg.supabaseUrl && cfg.supabaseKey && !forceDemo) return supabaseApi(cfg);
-  return demoApi(cfg, data);
+  return demoApi(cfg);
 };
 
 function supabaseApi(cfg) {
@@ -32,7 +32,9 @@ function supabaseApi(cfg) {
     join: (nick, pin) => rpc('join_game', { p_nick: nick, p_pin: pin }),
     myPicks: (nick, pin) => rpc('my_picks', { p_nick: nick, p_pin: pin }).then((r) => r.picks),
     pick: (nick, pin, fight, side) => rpc('place_pick', { p_nick: nick, p_pin: pin, p_fight: fight, p_side: side }),
-    board: () => rpc('get_board', { p_event: cfg.event }),
+    event: () => rpc('get_event', {}),
+    board: (slug) => rpc('get_board', { p_event: slug }),
+    overall: (kind) => rpc('get_overall', { p_kind: kind || null }),
     adminCheck: (pin) => rpc('admin_check', { p_pin: pin }),
     adminSetFight: (pin, fight, status, r = {}) => rpc('admin_set_fight', {
       p_pin: pin, p_fight: fight, p_status: status, p_winner: r.winner || null,
@@ -45,10 +47,11 @@ function supabaseApi(cfg) {
   };
 }
 
-// Demó: ugyanazok a szabályok, a böngésző localStorage-ában. Admin-PIN demóban: 0000.
-function demoApi(cfg, data) {
+// Demó: ugyanazok a szabályok, a böngésző localStorage-ában, a data/<event>.json gálával. Admin-PIN demóban: 0000.
+function demoApi(cfg) {
   const KEY = 'ufctipp-demo-' + cfg.event;
   const DEMO_ADMIN_PIN = '0000';
+  let data = null;
 
   function load() {
     let s = null;
@@ -79,7 +82,7 @@ function demoApi(cfg, data) {
   }
   const wrap = (fn) => (...args) => { try { return later(fn(...args)); } catch (e) { return fail(e.message); } };
 
-  return {
+  const demo = {
     mode: 'demo',
     join: wrap((nick, pin) => {
       const s = load();
@@ -109,6 +112,22 @@ function demoApi(cfg, data) {
       save(s);
       return { fight, side };
     }),
+    event: async () => {
+      if (!data) {
+        const res = await fetch(`data/${cfg.event}.json`, { cache: 'no-cache' });
+        if (!res.ok) throw new Error(`data/${cfg.event}.json nem töltődött be.`);
+        data = await res.json();
+      }
+      const starts = data.event.sections.map((x) => x.start).filter(Boolean);
+      return { slug: cfg.event, title: data.event.title, kind: /^ufc-\d+$/.test(cfg.event) ? 'numbered' : 'fightnight',
+               starts_at: new Date(Math.min(...starts) * 1000).toISOString(), data, last_sync_at: null, sync_note: 'demó' };
+    },
+    // demóban egyetlen (számozott) gála van: az összesített = ennek a gálának a ranglistája
+    overall: async (kind) => {
+      const b = await demo.board();
+      if (kind === 'fightnight') return b.leaderboard.map((r) => ({ ...r, points: 0, correct: 0, decided: 0, events: 0 }));
+      return b.leaderboard.map((r) => ({ nick: r.nick, points: r.points, correct: r.correct, decided: r.decided, events: r.picks ? 1 : 0 }));
+    },
     board: wrap(() => {
       const s = load();
       const fights = data.fights.map((df) => {
@@ -116,7 +135,7 @@ function demoApi(cfg, data) {
         const all = s.players.map((p) => ({ nick: p.nick, side: (s.picks[p.nick.toLowerCase()] || {})[df.id] })).filter((x) => x.side);
         return {
           id: df.id, status: f.status, open: isOpen(f), lock_at: f.lock_at, winner: f.winner, method: f.method,
-          round: f.round, time: f.time, points: f.points,
+          round: f.round, time: f.time, points: f.points, changed: !!f.changed,
           count_total: all.length,
           count_a: f.status === 'done' ? all.filter((x) => x.side === 'A').length : null,
           count_b: f.status === 'done' ? all.filter((x) => x.side === 'B').length : null,
@@ -184,4 +203,5 @@ function demoApi(cfg, data) {
       return { reset: nick };
     }),
   };
+  return demo;
 }
