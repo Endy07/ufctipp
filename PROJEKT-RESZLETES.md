@@ -16,7 +16,7 @@
 7. **Felület:** mobil-első oldal; a meccsek A/B oldallal, a versenyzők valós magasság szerint egy talpvonalon; összevetés
    („tale of the tape”); ranglista gálánként, szezononként és összesítve (szűrhető). Mások tippje csak a meccs végén látszik.
 8. **Történet és statisztika:** a `get_history()` az eldőlt meccseket adja a tippekkel; a böngésző (`js/stats.js`) számolja a találati
-   arányt, szériát, favorit / esélytelen mintát, díjakat, trófeákat, fej-fej mellett összevetést. Új gála felvétele ehhez nem kell semmit.
+   arányt, szériát, favorit / esélytelen mintát, díjakat, trófeákat, fej-fej mellett összevetést. Új gála felvétele ehhez nem kell semmit. A játékosprofil (`#profil/<becenév>`) ugyanebből számol, csak megnézhető.
 
 ## Miért így (a mért döntések)
 - **Zárás az ESPN „zajlik” jelzésére** az admin gomb helyett: a felhasználó teljes automatát kért; a stream késése miatt a valódi
@@ -31,7 +31,7 @@
   eltűnésnél a szinkron elutasít).
 - Az ESPN adatfolyama nem hivatalos; ha megszűnik vagy változik, az automata zárás és eredmény leáll (a kézi admin marad).
 - A kártyaszinkron a felhasználó gépén fut: ha a gép napokig ki van kapcsolva, a beugrók nem kerülnek be.
-- Múltbeli gálák visszanézése még nincs a felületen.
+- Az éles Történet / Statisztika / Profil az első eldőlt meccsig üres; a számok helyességét csak éles adaton lehet igazolni (a tesztek demó-adaton futnak).
 
 ## Kizárt utak (ne ajánld)
 - Valódi pénzes fogadás és fizetés — jogi és baráti okból is kizárt.
