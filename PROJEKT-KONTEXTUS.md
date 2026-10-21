@@ -16,14 +16,16 @@ Mobilra optimalizált webapp, amelyben a felhasználó és a barátai egy UFC-es
 - Első éles bevetés: UFC 333 (2026-10-24, Abu Dhabi)
 
 ## Amit használunk (kulcsszavak — ezekre kell találnia)
-PHP · SQLite · XAMPP · mobil-első webapp · vanilla JavaScript · PWA · UFC · MMA · tippjáték · ranglista · versenyzőstatisztika · ufcstats · admin-felület
+GitHub Pages · Supabase · PostgreSQL · RPC · Row Level Security · PHP (adatletöltő) · mobil-első webapp · vanilla JavaScript · UFC · MMA · tippjáték · ranglista · versenyzőstatisztika · ufcstats · admin-felület
 
 ## Ami kész
-- Projekt indítva, terv egyeztetés alatt (2026-10-21)
+- Élesben fut: GitHub Pages (endy07.github.io/ufctipp) + Supabase (2026-10-21)
+- UFC.com-letöltő: a UFC 333 14 meccse, 28 versenyző hivatalos statisztikái
+- Tipp, admin-zárás, eredmény, ranglista, demó mód helyi teszthez
 
 ## Ami hátra van / most ezen dolgozunk
-- Terv jóváhagyása, majd építés a hétvégi estre
-- Hosztolás: hol érik el a barátok interneten
+- Az est (2026-10-24) lebonyolítása, utána tapasztalatok
+- Beugró / kártyaváltozás esetén adatfrissítés
 
 ## Jövőbeni tervek
 - Több est kezelése, szezonális ranglista
