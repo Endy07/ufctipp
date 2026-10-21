@@ -21,7 +21,20 @@ Mobil-első statikus webapp (GitHub Pages) + Supabase (adatok, szabályok).
 ### 2. GitHub Pages
 Repó → Settings → Pages → Deploy from branch → `main`, `/ (root)`.
 
-## Adatfrissítés a UFC.com-ról
+## Automatika (2026-10-21 óta)
+- **A gála felvétele és a kártya változásai:** `tools/sync.php` a gépen (UFC.com + ESPN-párosítás → Supabase `sync_event`).
+  Az ütemező 5 percenként hívja (`auto`); naponta egyszer felveszi a következő gálát, a gála előtti napon óránként,
+  az utolsó 2 órában 10 percenként újraolvassa a kártyát. Kézi indítás: `tools\sync.cmd` (dupla katt).
+  Beállítás: `tools/sync.local.json` (minta: `sync.local.example.json`; az admin-PIN csak ide kerül, nincs verziókövetve).
+  Napló: `tools/logs/`.
+- **Zárás és eredmény:** a Supabase-ben, percenként (`pg_cron` → `espn_tick` → ESPN → `espn_apply`), a géptől függetlenül.
+  A meccs kezdetekor zár, a végén rögzíti a győztest (csak egyértelmű jelzésből; döntetlen / NC az adminé).
+  A kézi döntést nem írja felül.
+- **Versenyzőcsere:** a meccs tippjei törlődnek, a felület „tippelj újra” jelzést mutat; elmaradt meccs eltűnik.
+- Telepítés: `supabase/migrate-002-automatizalas.sql`, ellenőrzés: `supabase/test-002.sql` (egy „OK” sor).
+- Tesztek: `php tests/test-sync.php`.
+
+## Adatfrissítés a UFC.com-ról (demóhoz)
 ```
 php tools/scrape-ufc.php ufc-333 --refresh
 ```

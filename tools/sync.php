@@ -127,6 +127,10 @@ function cmd_card(string $slug, bool $dry): void
     ];
     if ($dry) {
         echo json_encode(['event' => $payload['event'], 'fights' => $fights], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "\n";
+        // a teljes küldemény SQL-ként is: a Supabase SQL-szerkesztőjében PIN nélkül lefuttatható (első feltöltés, hibakeresés)
+        $sql = 'select sync_event_apply($ufctipp$' . json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '$ufctipp$::jsonb);';
+        file_put_contents(CACHE . "/sync-$slug.sql", $sql);
+        logmsg('SQL-változat: tools/cache/sync-' . $slug . '.sql');
         return;
     }
     $r = rpc('sync_event', ['p_pin' => config()['adminPin'], 'p_payload' => $payload]);
