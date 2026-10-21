@@ -1,5 +1,5 @@
 -- UfcTipp — Supabase séma. A Supabase SQL Editorában egyszer kell lefuttatni (újrafuttatható).
--- Utána: seed-ufc-333.sql, migrate-002-automatizalas.sql, végül az admin-PIN beállítása (lásd a README-t; a PIN a repóba NEM kerül).
+-- Utána: seed-ufc-333.sql, migrate-002-automatizalas.sql, migrate-003-javitasok.sql, végül az admin-PIN beállítása (lásd a README-t; a PIN a repóba NEM kerül).
 -- Az ellenőrzés: test-002.sql (egy „OK” sort ad).
 --
 -- Elv: a böngésző (anon kulcs) a táblákat közvetlenül nem írhatja és — a meccseken kívül — nem is olvashatja.

@@ -31,7 +31,7 @@ Repó → Settings → Pages → Deploy from branch → `main`, `/ (root)`.
   A meccs kezdetekor zár, a végén rögzíti a győztest (csak egyértelmű jelzésből; döntetlen / NC az adminé).
   A kézi döntést nem írja felül.
 - **Versenyzőcsere:** a meccs tippjei törlődnek, a felület „tippelj újra” jelzést mutat; elmaradt meccs eltűnik.
-- Telepítés: `supabase/migrate-002-automatizalas.sql`, ellenőrzés: `supabase/test-002.sql` (egy „OK” sor).
+- Telepítés: `supabase/migrate-002-automatizalas.sql`, majd `migrate-003-javitasok.sql`; ellenőrzés: `test-002.sql`, `test-003.sql` (egy-egy „OK” sor).
 - Tesztek: `php tests/test-sync.php`.
 
 ## Adatfrissítés a UFC.com-ról (demóhoz)

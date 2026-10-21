@@ -164,6 +164,10 @@
     } catch (e) {
       if (!state.board) toast(e.message, 'err');
     }
+    // a saját tippeket is újraolvassuk: beugrónál a szerver törli, sarokcserénél átfordítja őket
+    if (state.me && !state.busy.size) {
+      try { state.picks = await state.api.myPicks(state.me.nick, state.me.pin); } catch (e) { /* a következő körben újra */ }
+    }
     if (currentRoute() === 'ranglista' && state.lbTab === 'ossz') loadOverall(state.lbKind || null);
     // Űrlapos nézetet (belépés, admin) nem rajzolunk újra, mert elveszne a félig beírt adat
     const shown = $('#view').dataset.route;

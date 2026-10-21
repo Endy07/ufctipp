@@ -74,5 +74,44 @@ test('test_espn_match_333', function () use ($fx) {
     check('test_espn_match_333: fő meccs ESPN-id', ($m[13063]['espn_id'] ?? '') === '401911632');
 });
 
+function fake_fight(int $id, string $a, string $b): array
+{
+    return ['id' => $id, 'a' => ['name' => $a], 'b' => ['name' => $b]];
+}
+
+function fake_comp(string $id, array $people): array
+{
+    return ['id' => $id, 'competitors' => array_map(fn($p) => ['id' => $p[0], 'athlete' => ['displayName' => $p[1]]], $people)];
+}
+
+test('test_espn_match_same_surname', function () {
+    // azonos vezetéknév mindkét oldalon, az ESPN fordított sorrendben: a teljes név dönt
+    $m = espn_match([fake_fight(1, 'Ana Silva', 'Bia Silva')],
+        ['competitions' => [fake_comp('c1', [['b', 'Bia Silva'], ['a', 'Ana Silva']])]]);
+    check('test_espn_match_same_surname: teljes névvel jó oldal', ($m[1]['espn_a'] ?? '') === 'a', json_encode($m));
+    // csak vezetéknév egyezik, és az is azonos a két oldalon → nem egyértelmű, nincs párosítás
+    $m = espn_match([fake_fight(1, 'Ana Silva', 'Bia Silva')],
+        ['competitions' => [fake_comp('c1', [['b', 'Beatriz Silva'], ['a', 'Anna Silva']])]]);
+    check('test_espn_match_same_surname: kétértelműnél nincs párosítás', !isset($m[1]), json_encode($m));
+});
+
+test('test_espn_match_two_bouts_same_surnames', function () {
+    $fights = [fake_fight(1, 'Joao Silva', 'Rui Santos'), fake_fight(2, 'Pedro Silva', 'Leo Santos')];
+    $ev = ['competitions' => [
+        fake_comp('c1', [['p', 'Pedro Silva'], ['l', 'Leo Santos']]),
+        fake_comp('c2', [['j', 'João Silva'], ['r', 'Rui Santos']]),
+    ]];
+    $m = espn_match($fights, $ev);
+    check('test_espn_match_two_bouts_same_surnames: 1 → c2', ($m[1]['espn_id'] ?? '') === 'c2', json_encode($m));
+    check('test_espn_match_two_bouts_same_surnames: 2 → c1', ($m[2]['espn_id'] ?? '') === 'c1', json_encode($m));
+});
+
+test('test_espn_match_no_double_use', function () {
+    // két UFC-meccs ugyanarra az ESPN-meccsre mutatna vezetéknév alapján → egyik sem kapja meg
+    $fights = [fake_fight(1, 'Joao Silva', 'Rui Santos'), fake_fight(2, 'Pedro Silva', 'Leo Santos')];
+    $m = espn_match($fights, ['competitions' => [fake_comp('c1', [['x', 'Marco Silva'], ['y', 'Tiago Santos']])]]);
+    check('test_espn_match_no_double_use: kétértelmű vezetéknév-párosítás elutasítva', count($m) === 0, json_encode($m));
+});
+
 echo "\n" . $pass . '/' . ($pass + $fail) . " teszt OK\n";
 exit($fail ? 1 : 0);

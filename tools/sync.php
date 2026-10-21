@@ -121,6 +121,9 @@ function cmd_card(string $slug, bool $dry): void
             'starts_at' => gmdate('c', $start),
             'espn_event_id' => $espn ? (string) $espn['event']['id'] : null,
             'espn_date' => $espn['date'] ?? null,
+            // a naplóba (admin oldal): hány meccs párosult az ESPN-nel — a nem párosultat az automata nem zárja
+            'espn_matched' => count($match),
+            'fight_count' => count($data['fights']),
         ],
         'data' => $data,
         'fights' => $fights,
@@ -143,7 +146,8 @@ function cmd_details(string $slug, bool $dry): void
     $rows = [];
     foreach ($res as $id => $r) {
         if ($r['winner'] === null || $r['method'] === '') continue;
-        $rows[] = ['id' => $id, 'method' => method_hu($r['method']), 'round' => $r['round'], 'time' => $r['time']];
+        // a győztes is megy: a Supabase ellenőrzi az automata (ESPN) eredménnyel, eltérésnél visszavonja
+        $rows[] = ['id' => $id, 'winner' => $r['winner'], 'method' => method_hu($r['method']), 'round' => $r['round'], 'time' => $r['time']];
     }
     logmsg("részletek: $slug, " . count($rows) . ' lement meccs a UFC.com-on');
     if ($dry || !$rows) return;

@@ -28,25 +28,54 @@ function last_name_key(string $n): string
 }
 
 // [fightId => ['espn_id' => ..., 'espn_a' => az A (piros) sarok ESPN-azonosítója]]
-// Csak egyértelmű párosítást ad vissza: mindkét versenyző egyezzen (teljes névvel vagy vezetéknévvel).
+// Csak egyértelmű párosítást ad vissza (egy rossz párosítás rossz oldalra írná a győztest):
+//  1. teljes névvel mindkét oldal;
+//  2. a maradék vezetéknévvel — csak ha a két vezetéknév különbözik, és a meccsnek egyetlen jelöltje van,
+//     amelyre más meccs nem pályázik. Egy ESPN-meccs legfeljebb egy UFC-meccshez tartozhat.
 function espn_match(array $fights, array $espnEvent): array
 {
+    $comps = [];
+    foreach ($espnEvent['competitions'] ?? [] as $c) {
+        $p = [];
+        foreach ($c['competitors'] ?? [] as $x) $p[] = ['id' => (string) $x['id'], 'name' => $x['athlete']['displayName'] ?? ''];
+        if (count($p) === 2) $comps[(string) $c['id']] = $p;
+    }
     $out = [];
+    $used = [];
+
     foreach ($fights as $f) {
-        $a = $f['a']['name'];
-        $b = $f['b']['name'];
-        foreach ($espnEvent['competitions'] ?? [] as $c) {
-            $comp = [];
-            foreach ($c['competitors'] ?? [] as $x) $comp[] = ['id' => (string) $x['id'], 'name' => $x['athlete']['displayName'] ?? ''];
-            if (count($comp) !== 2) continue;
+        foreach ($comps as $cid => $p) {
+            if (isset($used[$cid])) continue;
             foreach ([[0, 1], [1, 0]] as [$i, $j]) {
-                $full = norm_name($comp[$i]['name']) === norm_name($a) && norm_name($comp[$j]['name']) === norm_name($b);
-                $last = last_name_key($comp[$i]['name']) === last_name_key($a) && last_name_key($comp[$j]['name']) === last_name_key($b);
-                if ($full || $last) {
-                    $out[$f['id']] = ['espn_id' => (string) $c['id'], 'espn_a' => $comp[$i]['id']];
-                    break 2;
+                if (norm_name($p[$i]['name']) === norm_name($f['a']['name']) && norm_name($p[$j]['name']) === norm_name($f['b']['name'])) {
+                    $out[$f['id']] = ['espn_id' => (string) $cid, 'espn_a' => $p[$i]['id']];
+                    $used[$cid] = true;
+                    continue 3;
                 }
             }
+        }
+    }
+
+    $cand = [];   // fightId => [[cid, espn_a]]
+    $claims = []; // cid => hány meccs pályázik rá
+    foreach ($fights as $f) {
+        if (isset($out[$f['id']])) continue;
+        $la = last_name_key($f['a']['name']);
+        $lb = last_name_key($f['b']['name']);
+        if ($la === $lb) continue;
+        foreach ($comps as $cid => $p) {
+            if (isset($used[$cid])) continue;
+            foreach ([[0, 1], [1, 0]] as [$i, $j]) {
+                if (last_name_key($p[$i]['name']) === $la && last_name_key($p[$j]['name']) === $lb) {
+                    $cand[$f['id']][] = [(string) $cid, $p[$i]['id']];
+                    $claims[$cid] = ($claims[$cid] ?? 0) + 1;
+                }
+            }
+        }
+    }
+    foreach ($cand as $fid => $list) {
+        if (count($list) === 1 && $claims[$list[0][0]] === 1) {
+            $out[$fid] = ['espn_id' => $list[0][0], 'espn_a' => $list[0][1]];
         }
     }
     return $out;
