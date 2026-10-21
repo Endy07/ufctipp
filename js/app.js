@@ -79,6 +79,15 @@
   const firstNames = (n) => { const p = String(n).trim().split(/\s+/); return p.slice(0, -1).join(' '); };
   const rec = (a) => (a && a.record ? `${a.record.w}–${a.record.l}–${a.record.d}` : '');
   const athlete = (slug) => state.data.athletes[slug] || {};
+  // A kártya képei fejtetőtől talpig vágottak, így a kép magassága = a versenyző magassága.
+  // A magasabbik tölti ki a helyet (1), a másik a valós magassága arányában kisebb, közös talpvonalon.
+  const heightOf = (c) => athlete(c.slug).heightCm || null;
+  function figureHeights(f) {
+    const ha = heightOf(f.a) || heightOf(f.b) || 175;
+    const hb = heightOf(f.b) || heightOf(f.a) || 175;
+    const max = Math.max(ha, hb);
+    return { a: (ha / max).toFixed(3), b: (hb / max).toFixed(3) };
+  }
   const fightState = (id) => (state.board ? state.board.fights.find((f) => f.id === id) : null);
 
   function toast(msg, kind) {
@@ -263,7 +272,7 @@
     const label = `${c.name}${mine ? ', a tipped' : ''}${won ? ', győztes' : ''}`;
     return `
       <button class="${cls}" type="button" data-pick="${side}" data-fight="${f.id}" ${open ? '' : 'aria-disabled="true"'} aria-pressed="${mine}" aria-label="${esc(label)}">
-        ${c.image ? `<img class="corner__img" src="${esc(c.image)}" alt="" loading="lazy">` : ''}
+        ${c.image ? `<img class="corner__img" src="${esc(c.image)}" alt="" loading="lazy" style="--fh:${figureHeights(f)[side === 'A' ? 'a' : 'b']}">` : ''}
         <span class="corner__text">
           ${mine || won ? `<span class="corner__badges" aria-hidden="true">${won ? '<span class="corner__win">Győztes</span>' : ''}${mine ? '<span class="corner__tick">Tipped</span>' : ''}</span>` : ''}
           ${c.rank ? `<span class="corner__rank">${c.rank === 'C' ? 'Bajnok' : esc(c.rank)}</span>` : ''}
@@ -411,9 +420,14 @@
     const A = athlete(f.a.slug), B = athlete(f.b.slug);
     const open = !s || s.open;
     const mine = state.picks[f.id];
+    const fh = figureHeights(f);
+    const fig = (c, side) => `
+      <div class="vs__fig vs__fig--${side}">
+        ${c.image ? `<img src="${esc(c.image)}" alt="${esc(c.name)}" style="--fh:${fh[side]}">` : ''}
+        ${heightOf(c) ? `<span class="vs__cm">${heightOf(c)} cm</span>` : ''}
+      </div>`;
     const head = (c, a, side) => `
       <div class="vs__side vs__side--${side}">
-        ${c.image ? `<img src="${esc(c.image)}" alt="${esc(c.name)}">` : ''}
         <div class="vs__name">${esc(c.name)}</div>
         ${a.nickname ? `<div class="vs__nick">„${esc(a.nickname)}”</div>` : ''}
         <div class="vs__country">${c.flag ? `<img src="${esc(c.flag)}" alt="">` : ''}${esc(countryHu(c.country))}</div>
@@ -430,6 +444,7 @@
     return `
       <h2 class="sheet__title" id="sheetTitle">${esc(weightName(f.weightClass))}${f.titleBout ? ', címmeccs' : ''}</h2>
       <p class="sheet__state fight__state--${st.cls}">${esc(st.text)}</p>
+      <div class="vs__figs">${fig(f.a, 'a')}${fig(f.b, 'b')}</div>
       <div class="vs">${head(f.a, A, 'a')}<span class="vs__x">vs</span>${head(f.b, B, 'b')}</div>
       ${state.me && open ? `
         <div class="pickbar">

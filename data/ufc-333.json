@@ -17,7 +17,7 @@
                 "start": 1792850400
             }
         ],
-        "scrapedAt": "2026-10-20T23:15:14+00:00",
+        "scrapedAt": "2026-10-21T00:10:35+00:00",
         "source": "UFC.com (hivatalos esemény- és versenyzőoldalak)"
     },
     "fights": [
@@ -33,7 +33,13 @@
                 "country": "Australia",
                 "flag": "https://ufc.com/images/flags/AU.PNG",
                 "rank": "C",
-                "odds": "-110"
+                "odds": "-110",
+                "imageBox": {
+                    "w": 185,
+                    "h": 455,
+                    "top": 0,
+                    "bottom": 454
+                }
             },
             "b": {
                 "slug": "movsar-evloev",
@@ -42,7 +48,13 @@
                 "country": "Russia",
                 "flag": "https://ufc.com/images/flags/RU.PNG",
                 "rank": "#1",
-                "odds": "-110"
+                "odds": "-110",
+                "imageBox": {
+                    "w": 185,
+                    "h": 621,
+                    "top": 0,
+                    "bottom": 620
+                }
             },
             "order": 1
         },
@@ -58,7 +70,13 @@
                 "country": "Russia",
                 "flag": "https://ufc.com/images/flags/RU.PNG",
                 "rank": "C",
-                "odds": "-"
+                "odds": "-",
+                "imageBox": {
+                    "w": 185,
+                    "h": 589,
+                    "top": 0,
+                    "bottom": 588
+                }
             },
             "b": {
                 "slug": "merab-dvalishvili",
@@ -67,7 +85,13 @@
                 "country": "Georgia",
                 "flag": "https://ufc.com/images/flags/GE.PNG",
                 "rank": "#1",
-                "odds": "-"
+                "odds": "-",
+                "imageBox": {
+                    "w": 185,
+                    "h": 597,
+                    "top": 0,
+                    "bottom": 596
+                }
             },
             "order": 2
         },
@@ -83,7 +107,13 @@
                 "country": "England",
                 "flag": "https://ufc.com/images/flags/EN.PNG",
                 "rank": "#6",
-                "odds": "-105"
+                "odds": "-105",
+                "imageBox": {
+                    "w": 185,
+                    "h": 594,
+                    "top": 0,
+                    "bottom": 593
+                }
             },
             "b": {
                 "slug": "ramazan-temirov",
@@ -92,7 +122,13 @@
                 "country": "Uzbekistan",
                 "flag": "https://ufc.com/images/flags/UZ.PNG",
                 "rank": "#10",
-                "odds": "-115"
+                "odds": "-115",
+                "imageBox": {
+                    "w": 185,
+                    "h": 551,
+                    "top": 0,
+                    "bottom": 550
+                }
             },
             "order": 3
         },
@@ -108,7 +144,13 @@
                 "country": "Russia",
                 "flag": "https://ufc.com/images/flags/RU.PNG",
                 "rank": "#2",
-                "odds": "-120"
+                "odds": "-120",
+                "imageBox": {
+                    "w": 185,
+                    "h": 599,
+                    "top": 0,
+                    "bottom": 598
+                }
             },
             "b": {
                 "slug": "rizvan-kuniev",
@@ -117,7 +159,13 @@
                 "country": "Russia",
                 "flag": "https://ufc.com/images/flags/RU.PNG",
                 "rank": "#7",
-                "odds": "+100"
+                "odds": "+100",
+                "imageBox": {
+                    "w": 185,
+                    "h": 523,
+                    "top": 0,
+                    "bottom": 522
+                }
             },
             "order": 4
         },
@@ -133,7 +181,13 @@
                 "country": "United States",
                 "flag": "https://ufc.com/images/flags/US.PNG",
                 "rank": "#11",
-                "odds": "-105"
+                "odds": "-105",
+                "imageBox": {
+                    "w": 185,
+                    "h": 517,
+                    "top": 0,
+                    "bottom": 516
+                }
             },
             "b": {
                 "slug": "losene-keita",
@@ -142,7 +196,13 @@
                 "country": "Belgium",
                 "flag": "https://ufc.com/images/flags/BE.PNG",
                 "rank": "",
-                "odds": "-115"
+                "odds": "-115",
+                "imageBox": {
+                    "w": 185,
+                    "h": 639,
+                    "top": 0,
+                    "bottom": 638
+                }
             },
             "order": 5
         },
@@ -158,7 +218,13 @@
                 "country": "Russia",
                 "flag": "https://ufc.com/images/flags/RU.PNG",
                 "rank": "#7",
-                "odds": "-220"
+                "odds": "-220",
+                "imageBox": {
+                    "w": 185,
+                    "h": 518,
+                    "top": 0,
+                    "bottom": 517
+                }
             },
             "b": {
                 "slug": "dominick-reyes",
@@ -167,7 +233,13 @@
                 "country": "United States",
                 "flag": "https://ufc.com/images/flags/US.PNG",
                 "rank": "#8",
-                "odds": "+180"
+                "odds": "+180",
+                "imageBox": {
+                    "w": 185,
+                    "h": 684,
+                    "top": 0,
+                    "bottom": 683
+                }
             },
             "order": 6
         },
@@ -183,7 +255,13 @@
                 "country": "Russia",
                 "flag": "https://ufc.com/images/flags/RU.PNG",
                 "rank": "#15",
-                "odds": "+350"
+                "odds": "+350",
+                "imageBox": {
+                    "w": 185,
+                    "h": 609,
+                    "top": 0,
+                    "bottom": 608
+                }
             },
             "b": {
                 "slug": "abdulrakhman-yakhyaev",
@@ -192,7 +270,13 @@
                 "country": "Türkiye",
                 "flag": "https://ufc.com/images/flags/TR.PNG",
                 "rank": "",
-                "odds": "-450"
+                "odds": "-450",
+                "imageBox": {
+                    "w": 185,
+                    "h": 674,
+                    "top": 0,
+                    "bottom": 673
+                }
             },
             "order": 7
         },
@@ -208,7 +292,13 @@
                 "country": "Germany",
                 "flag": "https://ufc.com/images/flags/DE.PNG",
                 "rank": "#12",
-                "odds": "-120"
+                "odds": "-120",
+                "imageBox": {
+                    "w": 185,
+                    "h": 666,
+                    "top": 0,
+                    "bottom": 665
+                }
             },
             "b": {
                 "slug": "cam-rowston",
@@ -217,7 +307,13 @@
                 "country": "Australia",
                 "flag": "https://ufc.com/images/flags/AU.PNG",
                 "rank": "",
-                "odds": "+100"
+                "odds": "+100",
+                "imageBox": {
+                    "w": 185,
+                    "h": 627,
+                    "top": 0,
+                    "bottom": 626
+                }
             },
             "order": 8
         },
@@ -233,7 +329,13 @@
                 "country": "United States",
                 "flag": "https://ufc.com/images/flags/US.PNG",
                 "rank": "",
-                "odds": "-125"
+                "odds": "-125",
+                "imageBox": {
+                    "w": 185,
+                    "h": 666,
+                    "top": 0,
+                    "bottom": 665
+                }
             },
             "b": {
                 "slug": "nurullo-aliev",
@@ -242,7 +344,13 @@
                 "country": "Tajikistan",
                 "flag": "https://ufc.com/images/flags/TJ.PNG",
                 "rank": "",
-                "odds": "+105"
+                "odds": "+105",
+                "imageBox": {
+                    "w": 185,
+                    "h": 566,
+                    "top": 0,
+                    "bottom": 565
+                }
             },
             "order": 9
         },
@@ -258,7 +366,13 @@
                 "country": "Australia",
                 "flag": "https://ufc.com/images/flags/AU.PNG",
                 "rank": "",
-                "odds": "+400"
+                "odds": "+400",
+                "imageBox": {
+                    "w": 185,
+                    "h": 682,
+                    "top": 0,
+                    "bottom": 681
+                }
             },
             "b": {
                 "slug": "asaf-chopurov",
@@ -267,7 +381,13 @@
                 "country": "Russia",
                 "flag": "https://ufc.com/images/flags/RU.PNG",
                 "rank": "",
-                "odds": "-550"
+                "odds": "-550",
+                "imageBox": {
+                    "w": 185,
+                    "h": 624,
+                    "top": 0,
+                    "bottom": 623
+                }
             },
             "order": 10
         },
@@ -283,7 +403,13 @@
                 "country": "Russia",
                 "flag": "https://ufc.com/images/flags/RU.PNG",
                 "rank": "",
-                "odds": "-190"
+                "odds": "-190",
+                "imageBox": {
+                    "w": 185,
+                    "h": 629,
+                    "top": 0,
+                    "bottom": 628
+                }
             },
             "b": {
                 "slug": "jacob-malkoun",
@@ -292,7 +418,13 @@
                 "country": "Australia",
                 "flag": "https://ufc.com/images/flags/AU.PNG",
                 "rank": "",
-                "odds": "+160"
+                "odds": "+160",
+                "imageBox": {
+                    "w": 185,
+                    "h": 564,
+                    "top": 0,
+                    "bottom": 563
+                }
             },
             "order": 11
         },
@@ -308,7 +440,13 @@
                 "country": "Belgium",
                 "flag": "https://ufc.com/images/flags/BE.PNG",
                 "rank": "",
-                "odds": "+110"
+                "odds": "+110",
+                "imageBox": {
+                    "w": 185,
+                    "h": 523,
+                    "top": 0,
+                    "bottom": 522
+                }
             },
             "b": {
                 "slug": "daniel-santos",
@@ -317,7 +455,13 @@
                 "country": "Brazil",
                 "flag": "https://ufc.com/images/flags/BR.PNG",
                 "rank": "",
-                "odds": "-130"
+                "odds": "-130",
+                "imageBox": {
+                    "w": 185,
+                    "h": 637,
+                    "top": 0,
+                    "bottom": 636
+                }
             },
             "order": 12
         },
@@ -333,7 +477,13 @@
                 "country": "United States",
                 "flag": "https://ufc.com/images/flags/US.PNG",
                 "rank": "",
-                "odds": "-155"
+                "odds": "-155",
+                "imageBox": {
+                    "w": 185,
+                    "h": 574,
+                    "top": 0,
+                    "bottom": 573
+                }
             },
             "b": {
                 "slug": "noah-gugnon",
@@ -342,7 +492,13 @@
                 "country": "France",
                 "flag": "https://ufc.com/images/flags/FR.PNG",
                 "rank": "",
-                "odds": "+130"
+                "odds": "+130",
+                "imageBox": {
+                    "w": 185,
+                    "h": 582,
+                    "top": 0,
+                    "bottom": 581
+                }
             },
             "order": 13
         },
@@ -358,7 +514,13 @@
                 "country": "Brazil",
                 "flag": "https://ufc.com/images/flags/BR.PNG",
                 "rank": "",
-                "odds": "-350"
+                "odds": "-350",
+                "imageBox": {
+                    "w": 185,
+                    "h": 568,
+                    "top": 1,
+                    "bottom": 567
+                }
             },
             "b": {
                 "slug": "nicolle-caliari",
@@ -367,7 +529,13 @@
                 "country": "Brazil",
                 "flag": "https://ufc.com/images/flags/BR.PNG",
                 "rank": "",
-                "odds": "+275"
+                "odds": "+275",
+                "imageBox": {
+                    "w": 185,
+                    "h": 700,
+                    "top": 0,
+                    "bottom": 699
+                }
             },
             "order": 14
         }

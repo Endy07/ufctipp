@@ -2,7 +2,9 @@
 // Mindkét háttér ugyanazt a felületet adja; hiba esetén Error-t dob olvasható üzenettel.
 
 window.createApi = function createApi(cfg, data) {
-  if (cfg.supabaseUrl && cfg.supabaseKey) return supabaseApi(cfg);
+  // ?demo a címben: kipróbálás az éles adatbázis érintése nélkül
+  const forceDemo = new URLSearchParams(location.search).has('demo');
+  if (cfg.supabaseUrl && cfg.supabaseKey && !forceDemo) return supabaseApi(cfg);
   return demoApi(cfg, data);
 };
 

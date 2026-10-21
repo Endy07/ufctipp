@@ -65,6 +65,36 @@ function athlete_slug(string $href): string
     return preg_match('~/athlete/([^/?#]+)~', $href, $m) ? $m[1] : '';
 }
 
+// A teljes alakos (átlátszó hátterű) kép befoglaló doboza: hol kezdődik a fej és hol van a talp.
+// Ebből méretezi a felület a versenyzőket valós magasság szerint, közös talpvonalra.
+function body_box(string $url, string $cacheFile, bool $refresh): ?array
+{
+    if ($refresh || !is_file($cacheFile)) {
+        $bin = @file_get_contents($url, false, stream_context_create(['http' => ['header' => "User-Agent: Mozilla/5.0 (UfcTipp)\r\n", 'timeout' => 30]]));
+        if ($bin === false) return null;
+        file_put_contents($cacheFile, $bin);
+        usleep(300000);
+    }
+    $im = @imagecreatefromstring(file_get_contents($cacheFile));
+    if (!$im) return null;
+    $w = imagesx($im);
+    $h = imagesy($im);
+    $opaque = function (int $x, int $y) use ($im): bool {
+        return ((imagecolorat($im, $x, $y) >> 24) & 0x7F) < 100; // 0 = átlátszatlan, 127 = teljesen átlátszó
+    };
+    $rowHas = function (int $y) use ($w, $opaque): bool {
+        for ($x = 0; $x < $w; $x += 2) if ($opaque($x, $y)) return true;
+        return false;
+    };
+    $top = 0;
+    while ($top < $h && !$rowHas($top)) $top++;
+    $bottom = $h - 1;
+    while ($bottom > $top && !$rowHas($bottom)) $bottom--;
+    imagedestroy($im);
+    if ($top >= $bottom) return null;
+    return ['w' => $w, 'h' => $h, 'top' => $top, 'bottom' => $bottom];
+}
+
 // ---- Esemény ----
 $eventUrl = "https://www.ufc.com/event/$slug";
 $x = dom(fetch_page($eventUrl, "$cache/event-$slug.html", $refresh));
@@ -129,7 +159,15 @@ if (count($fights) === 0) {
 }
 
 // A UFC.com a szekción belül a legutolsó (legnagyobb) meccsel kezd; a sorrend: fő meccs = 1.
-foreach ($fights as $i => &$fi) $fi['order'] = $i + 1;
+// A kártya képei teljes alakosak (fejtől talpig) — a profiloldal „full body" képe csak derékig ér.
+foreach ($fights as $i => &$fi) {
+    $fi['order'] = $i + 1;
+    foreach (['a', 'b'] as $k) {
+        $c = &$fi[$k];
+        $c['imageBox'] = $c['image'] ? body_box($c['image'], "$cache/card-{$c['slug']}.png", $refresh) : null;
+        unset($c);
+    }
+}
 unset($fi);
 
 // ---- Versenyzők ----

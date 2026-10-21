@@ -154,7 +154,7 @@ main { max-width: 640px; margin: 0 auto; padding: 12px 12px 24px; outline: none;
 .corner {
   position: relative; overflow: hidden;
   display: flex; align-items: flex-end;
-  min-height: 132px; padding: 10px 12px; border: 0; border-radius: var(--r);
+  height: 170px; padding: 10px 12px; border: 0; border-radius: var(--r);
   text-align: left; cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   transition: background-color .18s ease;
@@ -164,13 +164,14 @@ main { max-width: 640px; margin: 0 auto; padding: 12px 12px 24px; outline: none;
 .fight--title .corner--a { border-radius: var(--r) 0 0 var(--r); }
 .fight--title .corner--b { border-radius: 0 var(--r) var(--r) 0; }
 
+/* Teljes alak, valós magasság szerint: a magasabbik tölti ki a sarkot, a talpak egy vonalon */
 .corner__img {
-  position: absolute; bottom: 0; height: 128%; width: auto; max-width: 62%;
-  object-fit: contain; object-position: bottom; opacity: .92; pointer-events: none;
-  filter: drop-shadow(0 0 12px rgba(0, 0, 0, .5));
+  position: absolute; bottom: 0; height: calc((100% - 8px) * var(--fh, 1)); width: auto; max-width: none;
+  opacity: .95; pointer-events: none;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, .5));
 }
-.corner--a .corner__img { right: -6px; }
-.corner--b .corner__img { left: -6px; }
+.corner--a .corner__img { right: 6px; }
+.corner--b .corner__img { left: 6px; }
 .corner__text { position: relative; z-index: 1; display: grid; gap: 1px; max-width: 70%; text-shadow: 0 1px 6px rgba(0, 0, 0, .7); }
 .corner__rank { font-size: 12px; font-weight: 700; color: var(--gold); }
 .corner__first { font-size: 13px; line-height: 1.1; color: rgba(255, 255, 255, .8); overflow-wrap: anywhere; }
@@ -239,16 +240,22 @@ main { max-width: 640px; margin: 0 auto; padding: 12px 12px 24px; outline: none;
 .sheet__title { font: 800 26px/1.05 var(--display); margin: 4px 48px 2px 0; }
 .sheet__state { margin: 0 0 12px; font-weight: 600; }
 
-.vs { display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 6px; }
-.vs__side { display: grid; justify-items: center; text-align: center; gap: 2px; border-bottom: 4px solid; padding-bottom: 8px; }
-.vs__side--a { border-color: var(--red); }
-.vs__side--b { border-color: var(--blue); }
-.vs__side > img { height: 190px; width: auto; max-width: 100%; object-fit: contain; object-position: bottom; }
+/* A két alak egy közös „padlón", valós magasság arányában */
+.vs__figs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 4px; }
+.vs__fig { position: relative; height: 260px; display: flex; justify-content: center; align-items: flex-end; border-bottom: 4px solid; }
+.vs__fig--a { border-color: var(--red); }
+.vs__fig--b { border-color: var(--blue); }
+.vs__fig img { height: calc((100% - 6px) * var(--fh, 1)); width: auto; }
+.vs__cm { position: absolute; bottom: 6px; font-size: 12px; font-weight: 700; color: var(--muted); }
+.vs__fig--a .vs__cm { left: 0; }
+.vs__fig--b .vs__cm { right: 0; }
+.vs { display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; gap: 6px; margin-top: 8px; }
+.vs__side { display: grid; justify-items: center; text-align: center; gap: 2px; }
 .vs__name { font: 800 22px/1 var(--display); text-transform: uppercase; overflow-wrap: anywhere; }
 .vs__nick { font-size: 14px; color: var(--muted); font-style: italic; }
 .vs__country { display: flex; align-items: center; gap: 5px; font-size: 13px; color: var(--muted); }
 .vs__country img { width: 18px; height: auto; border-radius: 2px; }
-.vs__x { font: 800 18px/1 var(--display); color: var(--muted); padding-bottom: 40px; }
+.vs__x { font: 800 18px/1 var(--display); color: var(--muted); padding-top: 4px; }
 
 .pickbar { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 14px 0 4px; }
 
@@ -321,7 +328,7 @@ main { max-width: 640px; margin: 0 auto; padding: 12px 12px 24px; outline: none;
 .toast--err { background: var(--err); color: #fff; }
 
 @media (min-width: 560px) {
-  .corner { min-height: 160px; }
+  .corner { height: 210px; }
   .corner__last { font-size: 32px; }
   .corner__last.is-mid { font-size: 28px; }
   .corner__last.is-long { font-size: 24px; }

@@ -1,4 +1,4 @@
--- Generálta: tools/scrape-ufc.php (ufc-333) 2026-10-20 23:15 UTC. Újrafuttatható: a meglévő meccsek állapotát nem bántja.
+-- Generálta: tools/scrape-ufc.php (ufc-333) 2026-10-21 00:10 UTC. Újrafuttatható: a meglévő meccsek állapotát nem bántja.
 insert into fights (id, event, ord, card, title_bout, points, lock_at) values
   (13063, 'ufc-333', 1, 'main', true, 2, null),
   (13064, 'ufc-333', 2, 'main', true, 2, null),
