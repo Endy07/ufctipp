@@ -16,16 +16,17 @@ Mobilra optimalizált webapp, amelyben a felhasználó és a barátai egy UFC-es
 - Első éles bevetés: UFC 333 (2026-10-24, Abu Dhabi)
 
 ## Amit használunk (kulcsszavak — ezekre kell találnia)
-GitHub Pages · Supabase · PostgreSQL · RPC · Row Level Security · PHP (adatletöltő) · mobil-első webapp · vanilla JavaScript · UFC · MMA · tippjáték · ranglista · versenyzőstatisztika · ufcstats · admin-felület
+GitHub Pages · Supabase · PostgreSQL · RPC · Row Level Security · pg_cron · pg_net · ESPN API · web scraping · Windows Feladatütemező · PHP (adatletöltő) · mobil-első webapp · vanilla JavaScript · UFC · MMA · tippjáték · ranglista · versenyzőstatisztika · ufcstats · admin-felület
 
 ## Ami kész
 - Élesben fut: GitHub Pages (endy07.github.io/ufctipp) + Supabase (2026-10-21)
 - UFC.com-letöltő: a UFC 333 14 meccse, 28 versenyző hivatalos statisztikái
-- Tipp, admin-zárás, eredmény, ranglista, demó mód helyi teszthez
+- Tipp, ranglista (gála + összesített, számozott / Fight Night szűrő), demó mód
+- Teljes automatika: gála felvétele és kártyaváltozás (beugró) a gépről, zárás + eredmény a Supabase-ben az ESPN-ből
 
 ## Ami hátra van / most ezen dolgozunk
-- Az est (2026-10-24) lebonyolítása, utána tapasztalatok
-- Beugró / kártyaváltozás esetén adatfrissítés
+- Az első éles est (2026-10-24) megfigyelése, utána tapasztalatok
+- Múltbeli gálák böngészése a felületen
 
 ## Jövőbeni tervek
 - Több est kezelése, szezonális ranglista
