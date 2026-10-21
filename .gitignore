@@ -1,2 +1,6 @@
 tools/cache/
 .playwright-mcp/
+.superpowers/
+tools/sync.local.json
+tools/logs/
+tools/state.json
