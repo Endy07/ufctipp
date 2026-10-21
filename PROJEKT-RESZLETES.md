@@ -1,26 +1,42 @@
 # UfcTipp — hogyan dolgozunk
 
 ## A lánc lépésről lépésre
-1. **Az est felvétele:** az admin felveszi az estet és a meccseket (sorrend, súlycsoport, címmeccs-e, tervezett kezdés). A kártya forrása a hivatalos eseményoldal és a Wikipédia.
-2. **Versenyzőadatok:** név, becenév, rekord (győzelem-vereség-döntetlen), magasság, karfesztáv, kor, állás, nemzetiség, kép és a szokásos ütés-/birkózás-statisztikák. A hivatalos UFC.com esemény- és versenyzőoldalairól, egy letöltő szkripttel.
-3. **Csatlakozás:** meghívó link → becenév + PIN; a böngésző megjegyzi.
-4. **Tippelés:** meccsenként A vagy B oldal, módosítható a zárásig.
-5. **Zárás:** az admin meccsenként zárja a tippelést (a stream késése miatt ez a megbízható), opcionálisan egy tervezett időpont után automatikusan zár.
-6. **Eredmény és pontozás:** az admin rögzíti a győztest; a pontok és a ranglista azonnal frissülnek.
+1. **Gála felvétele (naponta, a felhasználó gépéről):** a szinkronprogram a UFC.com eseménylistájából kiválasztja a következő
+   gálát (számozott és Fight Night is), letölti a kártyát és minden versenyző profilját, és admin-PIN-nel védett
+   adatbázis-függvényen át feltölti. Onnantól napokkal előre lehet tippelni.
+2. **ESPN-párosítás:** a UFC.com-meccseket név alapján párosítja az ESPN ingyenes UFC-adatfolyamának meccseivel
+   (teljes név, majd csak egyértelmű vezetéknév; az ESPN néha fordítva sorolja a sarkokat).
+3. **Kártyaváltozás:** a gála napján egyre sűrűbben újraolvassa a kártyát. Beugrónál a nyitott meccs tippjei törlődnek
+   („tippelj újra”), elmaradt nyitott meccs eltűnik, sarokcserénél a tippek is átfordulnak; lezárt meccshez nem nyúl.
+4. **Csatlakozás és tippelés:** meghívó link → becenév + 4 jegyű PIN; meccsenként A vagy B oldal, módosítható a zárásig.
+5. **Zárás és eredmény (a felhőben, percenként):** az adatbázis időzítője lekéri az ESPN-t; a meccs kezdetekor zárja a
+   tippelést, a végén rögzíti a győztest, a módot, a menetet. A következő meccs is zárul, amint az előző véget ért.
+6. **Kereszt-ellenőrzés:** a UFC.com eredménye pontosítja a módot, és ha a győztes eltér, az automata eredményt visszavonja —
+   az admin dönt. A kézi admin-döntést az automata nem írja felül.
+7. **Felület:** mobil-első oldal; a meccsek A/B oldallal, a versenyzők valós magasság szerint egy talpvonalon; összevetés
+   („tale of the tape”); ranglista gálánként és összesítve (szűrhető). Mások tippje csak a meccs végén látszik.
 
 ## Miért így (a mért döntések)
-- Admin-zárás az automatikus helyett: a baráti társaság streamje percekkel késhet, a hivatalos kezdési idők meccsenként csak becslések.
-- GitHub Pages + Supabase: ingyenes, a gépnek nem kell bekapcsolva lennie; minden szabályt az adatbázis-függvények ellenőriznek, a böngésző csak a nyilvános kulcsot látja.
+- **Zárás az ESPN „zajlik” jelzésére** az admin gomb helyett: a felhasználó teljes automatát kért; a stream késése miatt a valódi
+  kezdés a tisztességes pont. A kézi admin megmaradt felülbírálásnak.
+- **Az élő rész a felhőben, nem a gépen:** egy alvó gép mellett egy késő esti gálán utólag is lehetett volna tippelni.
+- **Eredmény csak egyértelmű jelzésből** (vége + pontosan egy győztes, és a párosítás biztos): rossz eredmény rosszabb, mint a késés.
+- GitHub Pages + Supabase: ingyenes; minden szabályt az adatbázis-függvények ellenőriznek, a böngésző csak a nyilvános kulcsot látja.
+- Mérés: a 2026-10-17-i Fight Night visszajátszása 13/13 helyes győztes; az élő HTTP-lekérés a felhőből működik.
 
 ## Ahol most fáj (ide keresünk jobb megoldást)
-- Versenyzőstatisztikák tiszta, megbízható forrása (nincs hivatalos nyilvános UFC API).
-- A versenyzőadatok frissítése a kártyaváltozáskor (beugró) jelenleg kézi újrafuttatás + SQL.
+- A UFC.com-nak nincs nyilvános API-ja: a kártya HTML-feldolgozásból jön, szerkezetváltásra érzékeny (védőkorlát: tömeges
+  eltűnésnél a szinkron elutasít).
+- Az ESPN adatfolyama nem hivatalos; ha megszűnik vagy változik, az automata zárás és eredmény leáll (a kézi admin marad).
+- A kártyaszinkron a felhasználó gépén fut: ha a gép napokig ki van kapcsolva, a beugrók nem kerülnek be.
+- Múltbeli gálák visszanézése még nincs a felületen.
 
 ## Kizárt utak (ne ajánld)
 - Valódi pénzes fogadás és fizetés — jogi és baráti okból is kizárt.
 - Teljes regisztráció e-maillel — túl nagy súrlódás egy esti játékhoz.
+- Fizetős sport-API (az ingyenes TheSportsDB-kulcsot megszüntették; az ESPN-folyam elég).
 
 ## Vaskorlátok
-- Rövid határidő: az első éles est 2026-10-24.
+- Ingyenes csomagok: GitHub Pages, Supabase Free (pg_cron, pg_net); nincs saját szerver.
 - Mobil-első felület; a barátok telefonon, böngészőből használják.
-- Futtatókörnyezet: statikus oldal (GitHub Pages) + Supabase (Postgres, RPC-függvények); a PHP csak az adatletöltőhöz kell. Keretrendszer és build-lépés nincs.
+- Statikus oldal, keretrendszer és build-lépés nélkül; a szinkron PHP 8 (XAMPP) a felhasználó Windows-gépén.

@@ -53,7 +53,7 @@ is lehessen tippelni, és reggelre kész legyen az eredmény.
   - `sync_event(pin, adat)`: felveszi / frissíti a gálát; új meccs be, kiesett meccs (ha még nincs eredménye) törlés,
     versenyzőcsere → tippek törlése + jelző, sorrend frissítése.
   - `sync_status(pin, meccsenkénti állapotok)`: zárás és eredmény a fenti szabályok szerint; kézi döntést nem ír felül.
-- Nyilvános: `get_event()` — az aktuális gála (a legközelebbi még nem lezárt, vagy a legutóbbi 2 napon belül),
+- Nyilvános: `get_event()` — az aktuális gála (a legközelebbi még nem lezárt, vagy a legutóbbi 2 napon belül — megvalósítva: 1 nap, lásd KOVETKEZO-SESSION.md „Ismert apróságok”),
   `get_board(event)` (mai), és összesített ranglista.
 
 ### A szinkronprogram (a felhasználó gépén)

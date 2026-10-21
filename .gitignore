@@ -4,3 +4,4 @@ tools/cache/
 tools/sync.local.json
 tools/logs/
 tools/state.json
+supabase/.temp/

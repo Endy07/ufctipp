@@ -6,11 +6,11 @@ aliasok: ufctipp, ufc tipp, ufc tippjáték, ufc fogadás, ufc meccs, ufc est, u
 ---
 
 ## Egy mondatban
-Mobilra optimalizált webapp, amelyben a felhasználó és a barátai egy UFC-est minden meccsére tippelnek (ki nyer), pontokért, ranglistával; az admin meccsenként zárja a tippelést és rögzíti az eredményt.
+Mobilra optimalizált webapp, amelyben a felhasználó és a barátai minden UFC-gála (számozott és Fight Night) minden meccsére tippelnek (ki nyer), pontokért, ranglistával; a gála felvétele, a beugrók, a zárás és az eredmény teljesen automatikus (UFC.com + ESPN), az admin csak felülbírál.
 
 ## Cél
 - Az est kártyája meccsenként: A oldal / B oldal, a versenyzők adatai és statisztikái
-- Tipp leadása a meccs kezdetéig, utána zárás (admin gomb, opcionálisan tervezett időpont)
+- Tipp leadása a meccs kezdetéig, utána automatikus zárás (ESPN „zajlik”), az admin felülbírálhat
 - Pontozás és ranglista a barátok között — tipp, nem pénzes fogadás
 - Csatlakozás linkkel, becenév + PIN, regisztráció nélkül
 - Első éles bevetés: UFC 333 (2026-10-24, Abu Dhabi)
@@ -29,7 +29,7 @@ GitHub Pages · Supabase · PostgreSQL · RPC · Row Level Security · pg_cron �
 - Múltbeli gálák böngészése a felületen
 
 ## Jövőbeni tervek
-- Több est kezelése, szezonális ranglista
+- Szezonális ranglista, múltbeli gálák böngészése
 - Bónusztippek (győzelem módja, menet)
 
 ## Ami NEM érdekel (negatív jelzés)
