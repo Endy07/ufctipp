@@ -146,4 +146,20 @@ t('demó-előzmények: értelmes arányok', () => {
   assert.ok(S.awards(d).length >= 4);
 });
 
+t('módtipp: +1 pont, ha a győztes és a mód is talál (címmeccsen is csak +1); a mód nélküli tipp nem változik', () => {
+  assert.strictEqual(S.methodCat('Pontozás (egyhangú)'), 'Pontozás');
+  assert.strictEqual(S.methodCat('Orvosi leállítás'), 'KO/TKO');
+  assert.strictEqual(S.methodCat('Kizárás'), null);
+  const f = (o) => ({ ...fight(90, 1, { title: true, winner: 'A', picks: o }), method: 'KO/TKO' });
+  const ev = (picks) => ({ slug: 'm', title: 'M', kind: 'numbered', starts_at: '2026-10-01T18:00:00Z', fights: [f(picks)] });
+  const row = (picks, nick) => S.eventTable(ev(picks)).find((r) => r.nick === nick);
+  const picks = [{ nick: 'Jo', side: 'A', method: 'KO/TKO' }, { nick: 'Rossz', side: 'A', method: 'Feladás' },
+                 { nick: 'Regi', side: 'A' }, { nick: 'Vesztes', side: 'B', method: 'KO/TKO' }];
+  assert.strictEqual(row(picks, 'Jo').points, 3);
+  assert.strictEqual(row(picks, 'Jo').bonus, 1);
+  assert.strictEqual(row(picks, 'Rossz').points, 2);
+  assert.strictEqual(row(picks, 'Regi').points, 2);
+  assert.strictEqual(row(picks, 'Vesztes').points, 0);
+});
+
 console.log(`\n${ok} teszt rendben.`);

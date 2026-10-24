@@ -194,6 +194,14 @@ main { max-width: 640px; margin: 0 auto; padding: 12px 12px 24px; outline: none;
 
 .fight__foot { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 6px 2px 0; font-size: 14px; color: var(--muted); }
 .fight__foot .link { margin-left: auto; font-size: 14px; }
+/* módtipp: „Hogyan nyer?” */
+.modes { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 8px 2px 0; }
+.modes__q { color: var(--muted); font-size: 14px; font-weight: 600; margin-right: 2px; }
+.modes__q small { color: var(--gold); font-weight: 700; }
+.modes__q b { color: var(--ink); }
+.chip-mode { min-height: 40px; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface-2); color: var(--ink); font: inherit; font-weight: 600; cursor: pointer; }
+.chip-mode.is-picked { background: var(--gold); color: var(--mat); border-color: var(--gold); }
+.modes--done { padding-top: 6px; }
 .count { color: var(--muted); font-size: 13px; }
 .res { font-weight: 700; }
 .res--hit { color: var(--ok); }

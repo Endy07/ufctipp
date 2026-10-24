@@ -30,8 +30,9 @@ function supabaseApi(cfg) {
   return {
     mode: 'live',
     join: (nick, pin) => rpc('join_game', { p_nick: nick, p_pin: pin }),
-    myPicks: (nick, pin) => rpc('my_picks', { p_nick: nick, p_pin: pin }).then((r) => r.picks),
-    pick: (nick, pin, fight, side) => rpc('place_pick', { p_nick: nick, p_pin: pin, p_fight: fight, p_side: side }),
+    myPicks: (nick, pin) => rpc('my_picks', { p_nick: nick, p_pin: pin }).then((r) => ({ picks: r.picks, methods: r.methods || {} })),
+    // a p_method csak módtipp esetén megy ki (a régi, 4 paraméteres szerverfüggvénnyel is működjön)
+    pick: (nick, pin, fight, side, method) => rpc('place_pick', { p_nick: nick, p_pin: pin, p_fight: fight, p_side: side, ...(method ? { p_method: method } : {}) }),
     event: () => rpc('get_event', {}),
     board: (slug) => rpc('get_board', { p_event: slug }),
     overall: (kind) => rpc('get_overall', { p_kind: kind || null }),
@@ -59,7 +60,7 @@ function demoApi(cfg) {
     let s = null;
     try { s = JSON.parse(localStorage.getItem(KEY)); } catch (e) { /* üres vagy tiltott tároló */ }
     if (!s) {
-      s = { players: [], picks: {}, fights: {} };
+      s = { players: [], picks: {}, methods: {}, fights: {} };
       data.fights.forEach((f) => {
         s.fights[f.id] = { status: 'open', lock_at: null, winner: null, method: null, round: null, time: null, points: f.titleBout ? 2 : 1 };
       });
@@ -100,9 +101,10 @@ function demoApi(cfg) {
     myPicks: wrap((nick, pin) => {
       const s = load();
       const p = auth(s, nick, pin);
-      return s.picks[p.nick.toLowerCase()] || {};
+      const k = p.nick.toLowerCase();
+      return { picks: s.picks[k] || {}, methods: (s.methods || {})[k] || {} };
     }),
-    pick: wrap((nick, pin, fight, side) => {
+    pick: wrap((nick, pin, fight, side, method) => {
       const s = load();
       const p = auth(s, nick, pin);
       const f = s.fights[fight];
@@ -110,9 +112,13 @@ function demoApi(cfg) {
       if (!isOpen(f)) throw new Error('Erre a meccsre már nem lehet tippelni — lezárták.');
       const k = p.nick.toLowerCase();
       s.picks[k] = s.picks[k] || {};
-      if (side) s.picks[k][fight] = side; else delete s.picks[k][fight];
+      if (method && !['KO/TKO', 'Feladás', 'Pontozás'].includes(method)) throw new Error('Érvénytelen mód.');
+      s.methods = s.methods || {};
+      s.methods[k] = s.methods[k] || {};
+      if (side) { s.picks[k][fight] = side; if (method) s.methods[k][fight] = method; else delete s.methods[k][fight]; }
+      else { delete s.picks[k][fight]; delete s.methods[k][fight]; }
       save(s);
-      return { fight, side };
+      return { fight, side, method: method || null };
     }),
     event: async () => {
       if (!data) {
@@ -146,7 +152,7 @@ function demoApi(cfg) {
           fights: data.fights.map((df, i) => {
             const f = s.fights[df.id];
             const picks = f.status !== 'done' ? null : s.players
-              .map((p) => ({ nick: p.nick, side: (s.picks[p.nick.toLowerCase()] || {})[df.id] })).filter((x) => x.side)
+              .map((p) => ({ nick: p.nick, side: (s.picks[p.nick.toLowerCase()] || {})[df.id], method: ((s.methods || {})[p.nick.toLowerCase()] || {})[df.id] || null })).filter((x) => x.side)
               .sort((a, b) => a.nick.localeCompare(b.nick, 'hu'));
             const c = (x) => ({ name: x.name, slug: x.slug, odds: x.odds, rank: x.rank || null });
             return { id: df.id, ord: i + 1, card: df.card, title_bout: !!df.titleBout, points: f.points, status: f.status, winner: f.winner,
@@ -160,7 +166,7 @@ function demoApi(cfg) {
       const s = load();
       const fights = data.fights.map((df) => {
         const f = s.fights[df.id];
-        const all = s.players.map((p) => ({ nick: p.nick, side: (s.picks[p.nick.toLowerCase()] || {})[df.id] })).filter((x) => x.side);
+        const all = s.players.map((p) => ({ nick: p.nick, side: (s.picks[p.nick.toLowerCase()] || {})[df.id], method: ((s.methods || {})[p.nick.toLowerCase()] || {})[df.id] || null })).filter((x) => x.side);
         return {
           id: df.id, status: f.status, open: isOpen(f), lock_at: f.lock_at, winner: f.winner, method: f.method,
           round: f.round, time: f.time, points: f.points, changed: !!f.changed,
@@ -172,15 +178,19 @@ function demoApi(cfg) {
       });
       const leaderboard = s.players.map((p) => {
         const my = s.picks[p.nick.toLowerCase()] || {};
-        let points = 0, correct = 0, decided = 0, picks = 0;
+        let points = 0, correct = 0, decided = 0, picks = 0, bonus = 0;
+        const mm = (s.methods || {})[p.nick.toLowerCase()] || {};
         Object.entries(my).forEach(([id, side]) => {
           const f = s.fights[id];
           if (!f) return;
           picks++;
           if (f.status === 'done' && (f.winner === 'A' || f.winner === 'B')) decided++;
-          if (f.status === 'done' && f.winner === side) { correct++; points += f.points; }
+          if (f.status === 'done' && f.winner === side) {
+            correct++; points += f.points;
+            if (mm[id] && mm[id] === UfcStats.methodCat(f.method)) { points++; bonus++; }
+          }
         });
-        return { nick: p.nick, points, correct, decided, picks };
+        return { nick: p.nick, points, correct, decided, picks, bonus };
       }).sort((a, b) => b.points - a.points || b.correct - a.correct || a.nick.localeCompare(b.nick, 'hu'));
       return { now: new Date().toISOString(), players: s.players.length, fights, leaderboard };
     }),

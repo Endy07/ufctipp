@@ -27,6 +27,18 @@
     return a > b ? 'A' : 'B';
   }
 
+  // A tényleges mód kategóriája (a SQL method_cat tükre): KO/TKO, Feladás, Pontozás; Kizárás / Egyéb → null
+  function methodCat(m) {
+    if (!m) return null;
+    const t = String(m).toLowerCase();
+    if (t.startsWith('ko') || t.includes('tko') || t.startsWith('orvosi')) return 'KO/TKO';
+    if (t.startsWith('felad') || t.includes('submission')) return 'Feladás';
+    if (t.startsWith('pontoz') || t.includes('decision')) return 'Pontozás';
+    return null;
+  }
+  // +1 pont: a győztes és a tippelt mód is talált (a SQL pick_bonus tükre)
+  const bonus = (f, p) => (p && p.method && f.status === 'done' && f.winner === p.side && p.method === methodCat(f.method) ? 1 : 0);
+
   const decided = (f) => f.status === 'done' && (f.winner === 'A' || f.winner === 'B');
   const timeOf = (e) => (e.starts_at ? Date.parse(e.starts_at) : Infinity);
 
@@ -67,12 +79,12 @@
     const rows = new Map();
     (event.fights || []).forEach((f) => (f.picks || []).forEach((p) => {
       const k = low(p.nick);
-      if (!rows.has(k)) rows.set(k, { nick: p.nick, points: 0, correct: 0, decided: 0, picks: 0 });
+      if (!rows.has(k)) rows.set(k, { nick: p.nick, points: 0, correct: 0, decided: 0, picks: 0, bonus: 0 });
       const r = rows.get(k);
       r.picks++;
       if (decided(f)) {
         r.decided++;
-        if (f.winner === p.side) { r.correct++; r.points += f.points || 1; }
+        if (f.winner === p.side) { r.correct++; r.points += (f.points || 1) + bonus(f, p); r.bonus += bonus(f, p); }
       }
     }));
     const list = [...rows.values()].sort((x, y) => y.points - x.points || y.correct - x.correct || byNick(x.nick, y.nick));
@@ -141,7 +153,7 @@
   function playerStats(history, nick) {
     const key = low(nick);
     const s = {
-      nick, picks: 0, hits: 0, misses: 0, pct: null, points: 0, events: 0,
+      nick, picks: 0, hits: 0, misses: 0, pct: null, points: 0, bonus: 0, events: 0,
       title: { picks: 0, hits: 0 }, fav: { picks: 0, hits: 0 }, dog: { picks: 0, hits: 0 },
       favShare: null,
       withCrowd: { picks: 0, hits: 0 }, againstCrowd: { picks: 0, hits: 0 },
@@ -158,7 +170,7 @@
       if (!mine) return;
       const hit = mine.side === f.winner;
       s.picks++;
-      if (hit) { s.hits++; s.points += f.points || 1; } else s.misses++;
+      if (hit) { s.hits++; s.points += (f.points || 1) + bonus(f, mine); s.bonus += bonus(f, mine); } else s.misses++;
       if (f.title_bout) { s.title.picks++; if (hit) s.title.hits++; }
 
       const fav = favoriteSide(f);
@@ -191,7 +203,7 @@
       s.recent.push(hit ? 'h' : 'm');
 
       const ev = events.get(e.slug) || { slug: e.slug, title: e.title, starts_at: e.starts_at, points: 0, correct: 0, decided: 0 };
-      ev.decided++; if (hit) { ev.correct++; ev.points += f.points || 1; }
+      ev.decided++; if (hit) { ev.correct++; ev.points += (f.points || 1) + bonus(f, mine); }
       events.set(e.slug, ev);
     });
 
@@ -269,8 +281,8 @@
       if (pa.side === pb.side) r.agree++;
       if (ha && hb) r.bothHit++; else if (ha) r.onlyA++; else if (hb) r.onlyB++; else r.bothMiss++;
       const ev = events.get(e.slug) || { slug: e.slug, title: e.title, starts_at: e.starts_at, a: 0, b: 0 };
-      if (ha) ev.a += f.points || 1;
-      if (hb) ev.b += f.points || 1;
+      if (ha) ev.a += (f.points || 1) + bonus(f, pa);
+      if (hb) ev.b += (f.points || 1) + bonus(f, pb);
       events.set(e.slug, ev);
     });
     events.forEach((ev) => {
@@ -282,7 +294,7 @@
     return r;
   }
 
-  const api = { impliedPct, favoriteSide, decided, crowd, nicks, eventTable, eventComplete, eventWinners, trophies, season,
+  const api = { methodCat, bonus, impliedPct, favoriteSide, decided, crowd, nicks, eventTable, eventComplete, eventWinners, trophies, season,
                 playerStats, overview, awards, headToHead, MIN_PICKS };
   root.UfcStats = api;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;

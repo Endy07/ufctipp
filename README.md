@@ -12,7 +12,7 @@ A CSS/JS hivatkozások `?v=N` verziót kapnak (`index.html`); módosítás után
 ## Telepítés (egyszer; 2026-10-21-én megtörtént)
 ### 1. Supabase
 1. Az **SQL Editor**-ban sorban: `supabase/schema.sql`, `supabase/seed-ufc-333.sql`, `supabase/migrate-002-automatizalas.sql`,
-   `supabase/migrate-003-javitasok.sql`. Ellenőrzés: `supabase/test-002.sql` és `test-003.sql` — egy-egy „OK” sor.
+   `supabase/migrate-003-javitasok.sql`, majd `migrate-005-pontos-zaras.sql`, `migrate-006-mod-tipp.sql`. Ellenőrzés: `supabase/test-002.sql` és `test-003.sql` — egy-egy „OK” sor (a 005-höz `test-005.sql`, a 006-hoz `test-006.sql`).
 2. Admin-PIN (ugyanott; a `…` helyére a saját PIN — ez **nem** kerül a repóba):
    ```sql
    insert into settings (key, value) values ('admin_pin_hash', extensions.crypt('…', extensions.gen_salt('bf')))
@@ -24,6 +24,13 @@ Repó → Settings → Pages → Deploy from branch → `main`, `/ (root)`.
 ### 3. A gép (szinkron)
 `tools/sync.local.json` (minta: `sync.local.example.json`) — az `adminPin` mezőbe az admin-PIN; a fájl nincs verziókövetve.
 Windows Feladatütemező: „UfcTipp szinkron”, 5 percenként `wscript tools\sync-hidden.vbs` (ablak nélkül; kimaradt futást pótol).
+
+## Módtipp (+1 pont)
+A győztes-tipp mellé opcionálisan megadható, hogyan nyer: KO/TKO, Feladás vagy Pontozás („Hogyan nyer?” gombok a meccsnél). Ha a győztes
+és a mód is talál: +1 pont a meccs pontján felül (címmeccsen is csak +1). Mód nélküli és régi tippek pontja nem változik. A tényleges mód
+a `fights.method`-ból jön (ESPN / UFC.com / admin); `method_cat()` sorolja: KO/TKO (orvosi leállítás is), Feladás, Pontozás (egyhangú /
+megosztott / többségi); Kizárás / Egyéb nem ad bónuszt. Mások módtippje is csak a meccs végén látszik. SQL: `migrate-006-mod-tipp.sql`
+(`picks.method`, `pick_bonus()`, `place_pick` 5. paraméter, `my_picks.methods`, a ranglisták `bonus` oszlopa).
 
 ## Automatika
 - **Gála és kártya** (a gépről): `tools/sync.php` — UFC.com (kártya, versenyzők, statisztikák, képek) + ESPN-párosítás →
