@@ -12,7 +12,7 @@ Mobilra optimalizált webapp, amelyben a felhasználó és a barátai minden UFC
 - Az est kártyája meccsenként: A oldal / B oldal, a versenyzők adatai és statisztikái
 - Tipp leadása a meccs kezdetéig, utána automatikus zárás (ESPN „zajlik”), az admin felülbírálhat
 - Pontozás és ranglista a barátok között — tipp, nem pénzes fogadás
-- Módtipp (2026-10-24): a győztes mellé opcionálisan a mód (KO/TKO, Feladás, Pontozás); ha győztes és mód is talál, +1 pont (`migrate-006`)
+- Módtipp (2026-10-24): a győztes mellé opcionálisan a mód (KO/TKO, Submission/feladás, Pontozás); mód nélkül a meccs pontja, pontos győztes+mód = dupla pont, rossz mód = 0 (`migrate-006`)
 - Pontos zárás (2026-10-24): az ESPN 1. menet indulásakor zár (`period >= 1`), nincs menetrendi tartalék `lock_at` (`migrate-005`)
 - Csatlakozás linkkel, becenév + PIN, regisztráció nélkül
 - Első éles bevetés: UFC 333 (2026-10-24, Abu Dhabi)

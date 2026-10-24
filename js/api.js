@@ -186,8 +186,9 @@ function demoApi(cfg) {
           picks++;
           if (f.status === 'done' && (f.winner === 'A' || f.winner === 'B')) decided++;
           if (f.status === 'done' && f.winner === side) {
-            correct++; points += f.points;
-            if (mm[id] && mm[id] === UfcStats.methodCat(f.method)) { points++; bonus++; }
+            correct++;
+            points += UfcStats.score(f, { side, method: mm[id] });
+            bonus += UfcStats.exact(f, { side, method: mm[id] });
           }
         });
         return { nick: p.nick, points, correct, decided, picks, bonus };

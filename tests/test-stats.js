@@ -146,7 +146,7 @@ t('demó-előzmények: értelmes arányok', () => {
   assert.ok(S.awards(d).length >= 4);
 });
 
-t('módtipp: +1 pont, ha a győztes és a mód is talál (címmeccsen is csak +1); a mód nélküli tipp nem változik', () => {
+t('módtipp: pontos mód = dupla pont, rossz mód = 0, mód nélkül a sima pont', () => {
   assert.strictEqual(S.methodCat('Pontozás (egyhangú)'), 'Pontozás');
   assert.strictEqual(S.methodCat('Orvosi leállítás'), 'KO/TKO');
   assert.strictEqual(S.methodCat('Kizárás'), null);
@@ -155,10 +155,10 @@ t('módtipp: +1 pont, ha a győztes és a mód is talál (címmeccsen is csak +1
   const row = (picks, nick) => S.eventTable(ev(picks)).find((r) => r.nick === nick);
   const picks = [{ nick: 'Jo', side: 'A', method: 'KO/TKO' }, { nick: 'Rossz', side: 'A', method: 'Feladás' },
                  { nick: 'Regi', side: 'A' }, { nick: 'Vesztes', side: 'B', method: 'KO/TKO' }];
-  assert.strictEqual(row(picks, 'Jo').points, 3);
+  assert.strictEqual(row(picks, 'Jo').points, 4);      // címmeccs: 2 × 2
   assert.strictEqual(row(picks, 'Jo').bonus, 1);
-  assert.strictEqual(row(picks, 'Rossz').points, 2);
-  assert.strictEqual(row(picks, 'Regi').points, 2);
+  assert.strictEqual(row(picks, 'Rossz').points, 0);   // győztes talált, a mód nem
+  assert.strictEqual(row(picks, 'Regi').points, 2);    // mód nélkül a meccs sima pontja
   assert.strictEqual(row(picks, 'Vesztes').points, 0);
 });
 

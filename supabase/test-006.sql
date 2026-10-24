@@ -50,18 +50,18 @@ begin
     raise exception '(3) a tippek a meccs vége előtt látszanak';
   end if;
 
-  -- (4) pontozás: címmeccs (2 pont) + mód találat; sima meccs; téves mód; téves győztes
-  update fights set status = 'done', winner = 'A', method = 'KO/TKO' where id = 990601;   -- a: 2+1, b: 2 (téves mód)
-  update fights set status = 'done', winner = 'A', method = 'Pontozás (egyhangú)' where id = 990602;  -- a: 1+1, b: 1 (nincs mód)
-  update fights set status = 'done', winner = 'A', method = 'Feladás' where id = 990603;  -- a: 0 (téves oldal), b: 1+1
+  -- (4) pontozás: címmeccs (2 pont) · sima meccs · módtipp találat = dupla · rossz mód = 0 · mód nélkül = sima pont · rossz győztes = 0
+  update fights set status = 'done', winner = 'A', method = 'KO/TKO' where id = 990601;   -- a: 4 (pontos mód), b: 0 (rossz mód)
+  update fights set status = 'done', winner = 'A', method = 'Pontozás (egyhangú)' where id = 990602;  -- a: 2 (pontos), b: 1 (nincs mód)
+  update fights set status = 'done', winner = 'A', method = 'Feladás' where id = 990603;  -- a: 0 (rossz oldal), b: 2 (pontos)
   lb := get_board('teszt-g6')->'leaderboard';
-  if (select (x->>'points')::int from json_array_elements(lb) x where x->>'nick' = 'teszt-g6a') <> 5
+  if (select (x->>'points')::int from json_array_elements(lb) x where x->>'nick' = 'teszt-g6a') <> 6
      or (select (x->>'bonus')::int from json_array_elements(lb) x where x->>'nick' = 'teszt-g6a') <> 2 then
-    raise exception '(4) teszt-g6a pontja / bónusza hibás: %', lb;
+    raise exception '(4) teszt-g6a pontja / pontos módjai hibásak: %', lb;
   end if;
-  if (select (x->>'points')::int from json_array_elements(lb) x where x->>'nick' = 'teszt-g6b') <> 5
+  if (select (x->>'points')::int from json_array_elements(lb) x where x->>'nick' = 'teszt-g6b') <> 3
      or (select (x->>'bonus')::int from json_array_elements(lb) x where x->>'nick' = 'teszt-g6b') <> 1 then
-    raise exception '(4) teszt-g6b pontja / bónusza hibás: %', lb;
+    raise exception '(4) teszt-g6b pontja / pontos módjai hibásak: %', lb;
   end if;
 
   -- (5) a módok a meccs végén látszanak a board-on és az előzményekben; az összesítő is bónuszos
@@ -73,11 +73,9 @@ begin
          json_array_elements(f->'picks') p where e->>'slug' = 'teszt-g6' and p->>'method' is not null) <> 5 then
     raise exception '(5) az előzmények nem mutatják a módokat';
   end if;
-  if (select (x->>'points')::int from json_array_elements(get_overall('fightnight')) x where x->>'nick' = 'teszt-g6a') < 5 then
-    raise exception '(5) az összesített nem számolja a bónuszt';
+  if (select (x->>'points')::int from json_array_elements(get_overall('fightnight')) x where x->>'nick' = 'teszt-g6a') < 6 then
+    raise exception '(5) az összesített nem számolja a módtippet';
   end if;
-
-  -- (6) mód nélküli (régi) tipp pontja nem változik: a teszt-g6b 990602-es tippje módtalan, de 1 pontot ért (lásd 4)
 
   delete from fights where event = 'teszt-g6';
   delete from events where slug = 'teszt-g6';

@@ -1,10 +1,12 @@
 -- UfcTipp — 006: a győzelem módjának tippelése (2026-10-24). Újrafuttatható.
--- Szabály: a győztes tippje mellé opcionálisan megadható a mód (KO/TKO, Feladás, Pontozás). Ha a győztes ÉS a mód is talál: +1 pont
--- (a meccs pontján felül, címmeccsen is csak +1). Mód nélküli / régi tippek pontja nem változik.
--- A tényleges mód a fights.method-ból jön (ESPN / UFC.com / admin), method_cat() sorolja a három kategóriába:
---   KO/TKO (KO, TKO, orvosi leállítás), Feladás, Pontozás (egyhangú / megosztott / többségi). Kizárás, Egyéb: nincs bónusz.
--- Mások módtippje is csak a meccs végén látszik (ugyanaz a szabály, mint a győztesnél).
--- Ellenőrzés: test-006.sql (egy „OK” sor).
+-- Szabály (a felhasználó szavai szerint):
+--   - csak a győztest tippeli (nincs mód): talál → a meccs pontja (1, címmeccsen 2), ahogy eddig;
+--   - győztes + mód: a győztes ÉS a mód is talál → a meccs pontjának duplája (1 → 2, címmeccsen 2 → 4);
+--     a győztes talál, de a mód nem → 0 pont; a győztes nem talál → 0 pont.
+-- Régi (mód nélküli) tippek pontja nem változik. A tényleges mód a fights.method-ból jön (ESPN / UFC.com / admin),
+-- method_cat() sorolja: KO/TKO (az adatforrások nem választják szét a KO-t és a TKO-t; orvosi leállítás is ide), Feladás,
+-- Pontozás (egyhangú / megosztott / többségi). Kizárás / Egyéb: a módtipp nem találhat (0 pont).
+-- Mások módtippje is csak a meccs végén látszik. Ellenőrzés: test-006.sql (egy „OK” sor).
 
 alter table picks add column if not exists method text;
 alter table picks drop constraint if exists picks_method_check;
@@ -20,8 +22,18 @@ language sql immutable as $$
   end;
 $$;
 
--- +1, ha a tippelt oldal nyert, és a tippelt mód megegyezik a tényleges móddal
-create or replace function pick_bonus(p_method text, p_side text, f_status text, f_winner text, f_method text) returns integer
+-- Egy tipp pontja: nincs mód → f_points; mód → dupla, ha talál, különben 0; rossz győztes → 0
+create or replace function pick_points(p_method text, p_side text, f_status text, f_winner text, f_method text, f_points integer) returns integer
+language sql immutable as $$
+  select case
+    when f_status is distinct from 'done' or f_winner is distinct from p_side then 0
+    when p_method is null then f_points
+    when p_method = method_cat(f_method) then 2 * f_points
+    else 0 end;
+$$;
+
+-- 1, ha a módtipp pontos volt (győztes + mód)
+create or replace function pick_exact(p_method text, p_side text, f_status text, f_winner text, f_method text) returns integer
 language sql immutable as $$
   select case when p_method is not null and f_status = 'done' and f_winner = p_side and p_method = method_cat(f_method) then 1 else 0 end;
 $$;
@@ -78,11 +90,10 @@ language sql stable security definer set search_path = public as $$
   select coalesce(json_agg(r order by r.points desc, r.correct desc, lower(r.nick)), '[]'::json)
   from (
     select pl.nick,
-           coalesce(sum(case when f.status = 'done' and f.winner = p.side then f.points else 0 end
-                        + pick_bonus(p.method, p.side, f.status, f.winner, f.method)), 0)::int as points,
+           coalesce(sum(pick_points(p.method, p.side, f.status, f.winner, f.method, f.points)), 0)::int as points,
            count(f.id) filter (where f.status = 'done' and f.winner = p.side)::int as correct,
            count(f.id) filter (where f.status = 'done' and f.winner in ('A', 'B'))::int as decided,
-           coalesce(sum(pick_bonus(p.method, p.side, f.status, f.winner, f.method)), 0)::int as bonus,
+           coalesce(sum(pick_exact(p.method, p.side, f.status, f.winner, f.method)), 0)::int as bonus,
            count(distinct f.event)::int as events
     from players pl
     left join picks p on p.player_id = pl.id
@@ -114,11 +125,10 @@ language sql stable security definer set search_path = public as $$
       select json_agg(r order by r.points desc, r.correct desc, lower(r.nick))
       from (
         select pl.nick,
-               coalesce(sum(case when f.status = 'done' and f.winner = p.side then f.points else 0 end
-                            + pick_bonus(p.method, p.side, f.status, f.winner, f.method)), 0)::int as points,
+               coalesce(sum(pick_points(p.method, p.side, f.status, f.winner, f.method, f.points)), 0)::int as points,
                count(f.id) filter (where f.status = 'done' and f.winner = p.side)::int as correct,
                count(f.id) filter (where f.status = 'done' and f.winner in ('A', 'B'))::int as decided,
-               coalesce(sum(pick_bonus(p.method, p.side, f.status, f.winner, f.method)), 0)::int as bonus,
+               coalesce(sum(pick_exact(p.method, p.side, f.status, f.winner, f.method)), 0)::int as bonus,
                count(f.id)::int as picks
         from players pl
         left join picks p on p.player_id = pl.id

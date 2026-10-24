@@ -344,6 +344,10 @@
     return { cls: 'open', text: 'Tippelhető' };
   }
 
+  // „Talált” jelzés: 0 pont = a győztes talált, de a tippelt mód nem
+  const resHit = (n, withMode) => (n > 0
+    ? `<span class="res res--hit">Talált, +${n} pont${withMode ? ' (a mód is)' : ''}</span>`
+    : '<span class="res res--miss">A győztes talált, a mód nem — 0 pont</span>');
   const MODES = ['KO/TKO', 'Feladás', 'Pontozás'];
   const setMyPicks = (r) => { state.picks = r.picks || {}; state.methods = r.methods || {}; };
   // a tényleges mód és a tippelt mód egyezik-e (a stats.js methodCat-ja a SQL-lel azonos kategóriákat ad)
@@ -356,12 +360,12 @@
     const mode = state.methods[f.id];
     if (!mine) return '';
     if (open) {
-      return `<div class="modes" role="group" aria-label="Hogyan nyer? Ha a mód is talál, +1 pont">
-        <span class="modes__q">Hogyan nyer? <small>+1 pont</small></span>
-        ${MODES.map((m) => `<button class="chip-mode ${mode === m ? 'is-picked' : ''}" type="button" data-mode="${esc(m)}" data-fight="${f.id}" aria-pressed="${mode === m}">${esc(m)}</button>`).join('')}
+      return `<div class="modes" role="group" aria-label="Hogyan nyer? Ha a mód is talál, dupla pont; ha nem, 0 pont">
+        <span class="modes__q">Hogyan nyer? <small>pontos mód: dupla pont, más: 0</small></span>
+        ${MODES.map((m) => `<button class="chip-mode ${mode === m ? 'is-picked' : ''}" type="button" data-mode="${esc(m)}" data-fight="${f.id}" aria-pressed="${mode === m}">${esc(m === 'Feladás' ? 'Submission (feladás)' : m)}</button>`).join('')}
       </div>`;
     }
-    return mode ? `<div class="modes modes--done"><span class="modes__q">Módtipp: <b>${esc(mode)}</b>${s.status === 'done' ? (modeHit(s, mine, mode) ? ' — talált, +1 pont' : '') : ''}</span></div>` : '';
+    return mode ? `<div class="modes modes--done"><span class="modes__q">Módtipp: <b>${esc(mode)}</b>${s.status === 'done' && s.winner === mine ? (modeHit(s, mine, mode) ? ' — pontos, dupla pont' : ' — a mód nem talált, 0 pont') : ''}</span></div>` : '';
   }
 
   function cornerHtml(f, side, s) {
@@ -396,7 +400,7 @@
     if (s && s.status === 'done') {
       if (s.winner === 'draw' || s.winner === 'nc') result = `<span class="res res--none">${s.winner === 'draw' ? 'Döntetlen' : 'Nem értékelt'}, nincs pont</span>`;
       else if (!mine) result = '<span class="res res--none">Nem tippeltél</span>';
-      else result = mine === s.winner ? `<span class="res res--hit">Talált, +${pts + (modeHit(s, mine, state.methods[f.id]) ? 1 : 0)} pont${modeHit(s, mine, state.methods[f.id]) ? ' (a mód is)' : ''}</span>` : '<span class="res res--miss">Nem talált</span>';
+      else result = mine === s.winner ? resHit(ST.score({ ...s, points: pts }, { side: mine, method: state.methods[f.id] }), !!state.methods[f.id]) : '<span class="res res--miss">Nem talált</span>';
     }
     const total = s ? s.count_total || 0 : 0;
     const split = s && s.status === 'done' && total
@@ -459,7 +463,7 @@
       const lb = state.overall && state.overall.kind === kind ? state.overall.rows : null;
       if (!lb) loadOverall(kind);
       const body = !lb ? '<div class="empty">Betöltés…</div>'
-        : lb.length ? `<ol class="lb">${lbRows(lb, (r) => `${r.correct}/${r.decided} talált${r.bonus ? `, ${r.bonus} mód` : ''}, ${r.events} gála`, lb.some((r) => r.decided))}</ol>`
+        : lb.length ? `<ol class="lb">${lbRows(lb, (r) => `${r.correct}/${r.decided} talált${r.bonus ? `, ${r.bonus} pontos mód` : ''}, ${r.events} gála`, lb.some((r) => r.decided))}</ol>`
         : '<div class="empty">Még senki nem csatlakozott.</div>';
       return `${tabs}${chips}${body}
         <p class="hint">Az összes eddigi gála pontjai együtt. Holtversenyben a több talált tipp dönt.</p>`;
@@ -469,7 +473,7 @@
     if (!lb.length) return `${tabs}<div class="empty">Még senki nem csatlakozott.</div>`;
     return `${tabs}
       <h2 class="section-h"><span>${esc(state.data.event.title.split(':')[0])}</span><time>${done}/${state.data.fights.length} meccs lement</time></h2>
-      <ol class="lb">${lbRows(lb, (r) => `${r.correct}/${r.decided} talált${r.bonus ? `, ${r.bonus} mód` : ''}, ${r.picks} tipp`, done)}</ol>
+      <ol class="lb">${lbRows(lb, (r) => `${r.correct}/${r.decided} talált${r.bonus ? `, ${r.bonus} pontos mód` : ''}, ${r.picks} tipp`, done)}</ol>
       ${done ? `<button class="btn btn--share" type="button" data-share="current">Ranglista megosztása képként</button>` : ''}
       <p class="hint">Holtversenyben a több talált tipp dönt; a sorrend minden eredmény után frissül.</p>`;
   }
@@ -592,7 +596,7 @@
     if (!done) res = '<span class="res res--none">Nem dőlt el</span>';
     else if (none) res = `<span class="res res--none">${f.winner === 'draw' ? 'Döntetlen' : 'Nem értékelt'}, nincs pont</span>`;
     else if (!mine) res = '<span class="res res--none">Nem tippeltél</span>';
-    else res = mine.side === f.winner ? `<span class="res res--hit">Talált, +${f.points + ST.bonus(f, mine)} pont${ST.bonus(f, mine) ? ' (a mód is)' : ''}</span>` : '<span class="res res--miss">Nem talált</span>';
+    else res = mine.side === f.winner ? resHit(ST.score(f, mine), !!mine.method) : '<span class="res res--miss">Nem talált</span>';
     const how = done && f.method ? `<span class="how">${esc(methodHu(f.method))}${f.round ? `, ${f.round}. menet` : ''}${f.time ? ` ${esc(f.time)}` : ''}</span>` : '';
     const side = (s) => {
       const x = s === 'A' ? f.a : f.b;

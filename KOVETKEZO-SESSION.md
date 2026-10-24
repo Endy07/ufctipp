@@ -23,7 +23,7 @@ ne próbálj belépni (2026-10-21-én egy gyorsítótárazott régi `api.js` mia
 - **⏳ FÜGGŐ (2026-10-24): `supabase/migrate-005-pontos-zaras.sql` NINCS élesben** (a Production Deploy tiltás miatt a felhasználó
   igenje kell az ablakában). Futtatás: SQL-szerkesztőben a migrate-005, majd `test-005.sql` (egy „OK” sor). Kód (sync.php lock_at=null,
   „Zárás most” gomb, `?v=8`) helyben kész. Háttér: a korai zárást a menetrendi `lock_at` és az ESPN `in`/period 0 okozta.
-- **⏳ FÜGGŐ (2026-10-24): `migrate-006-mod-tipp.sql` + `test-006.sql` NINCS élesben** — a módtipp (+1 pont) kódja (`js/`, `?v=9`) helyben kész; élesítés: SQL-szerkesztőben a migrate-006, majd test-006 (OK), utána push (GitHub Pages). A felhasználó igenje kell. Sorrend: előbb DB, aztán push.
+- **⏳ FÜGGŐ (2026-10-24): `migrate-006-mod-tipp.sql` + `test-006.sql` NINCS élesben** — a módtipp (pontos mód = dupla pont, rossz mód = 0) kódja (`js/`, `?v=9`) helyben kész; élesítés: SQL-szerkesztőben a migrate-006, majd test-006 (OK), utána push (GitHub Pages). A felhasználó igenje kell. Sorrend: előbb DB, aztán push.
 - **Automatika:** Supabase `pg_cron` `ufctipp-espn` percenként; a gépen a „UfcTipp szinkron” ütemezett feladat 5 percenként
   (utolsó ellenőrzött futás eredménye 0). Az admin-PIN a felhasználónál és a `tools/sync.local.json`-ban (gitignore).
 - **Tesztek:** `php tests/test-sync.php` 23/23 · `supabase/test-002.sql` OK · `supabase/test-003.sql` OK · `supabase/test-004.sql` OK (élesben futtatva) · `node tests/test-stats.js` 13/13.
