@@ -27,7 +27,7 @@ Szeretném, hogyha ezt teljesen kidolgoznád."
 - Az admin-PIN (6 jegyű) csak a Supabase-ben (hash) és a gépen a `tools/sync.local.json`-ban van; a játékos-PIN 4 jegyű, másik dolog.
 
 ## Döntések röviden (részletek: `docs/2026-10-21-terv.md`, `docs/2026-10-21-automatizalas-terv.md`)
-- Tipp pontokért (címmeccs 2 pont), pénz nincs; csatlakozás becenév + 4 jegyű PIN; mobil-első.
+- Tipp pontokért (minden meccs 1 pont; módtipp: pontos győztes+mód 2, rossz mód 0 — 2026-10-24), pénz nincs; csatlakozás becenév + 4 jegyű PIN; mobil-első.
 - Hol fut: GitHub Pages + Supabase (eldőlt 2026-10-21). Zárás és eredmény automatikus (ESPN), az admin csak felülbírál.
 - Mások tippje csak a meccs végén látszik; minden gála (számozott + Fight Night); beugrónál a tippek törlődnek.
 

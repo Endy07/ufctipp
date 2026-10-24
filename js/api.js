@@ -62,7 +62,7 @@ function demoApi(cfg) {
     if (!s) {
       s = { players: [], picks: {}, methods: {}, fights: {} };
       data.fights.forEach((f) => {
-        s.fights[f.id] = { status: 'open', lock_at: null, winner: null, method: null, round: null, time: null, points: f.titleBout ? 2 : 1 };
+        s.fights[f.id] = { status: 'open', lock_at: null, winner: null, method: null, round: null, time: null, points: 1 };
       });
     }
     return s;

@@ -25,12 +25,12 @@ Repó → Settings → Pages → Deploy from branch → `main`, `/ (root)`.
 `tools/sync.local.json` (minta: `sync.local.example.json`) — az `adminPin` mezőbe az admin-PIN; a fájl nincs verziókövetve.
 Windows Feladatütemező: „UfcTipp szinkron”, 5 percenként `wscript tools\sync-hidden.vbs` (ablak nélkül; kimaradt futást pótol).
 
-## Módtipp (dupla pont)
-Alapból csak a győztest tippeled: ha talál, a meccs pontját kapod (1, címmeccsen 2). Opcionálisan megadhatod, hogyan nyer is
-(„Hogyan nyer?”: KO/TKO, Submission (feladás), Pontozás). Ha a győztes ÉS a mód is talál: a meccs pontjának duplája (1 → 2, címmeccsen
-2 → 4). Ha a győztes talál, de a mód nem: 0 pont. Mód nélküli és régi tippek pontja nem változik. A KO és a TKO egy gomb, mert az
-ESPN és a UFC.com sem választja szét. A tényleges mód a `fights.method`-ból jön (ESPN / UFC.com / admin); `method_cat()` sorolja
-(orvosi leállítás: KO/TKO; Kizárás / Egyéb: a módtipp nem találhat). Mások módtippje is csak a meccs végén látszik.
+## Módtipp (pontos mód: 2 pont)
+Alapból csak a győztest tippeled: ha talál, 1 pont — a címmeccs sem ér többet (a felhasználó döntése, 2026-10-24; a `fights.points` egy
+trigger miatt mindig 1). Opcionálisan megadhatod, hogyan nyer is („Hogyan nyer?”: KO/TKO, Submission (feladás), Pontozás). Ha a győztes ÉS
+a mód is talál: 2 pont; ha a győztes talál, de a mód nem: 0 pont. Mód nélküli tippek pontja 1. A KO és a TKO egy gomb, mert az ESPN és a
+UFC.com sem választja szét. A tényleges mód a `fights.method`-ból jön (ESPN / UFC.com / admin); `method_cat()` sorolja (orvosi leállítás:
+KO/TKO; Kizárás / Egyéb: a módtipp nem találhat). Mások módtippje is csak a meccs végén látszik.
 SQL: `migrate-006-mod-tipp.sql` (`picks.method`, `pick_points()`, `place_pick` 5. paraméter, `my_picks.methods`, `bonus` = pontos módok száma).
 
 ## Automatika

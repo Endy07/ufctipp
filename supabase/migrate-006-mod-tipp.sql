@@ -1,12 +1,23 @@
 -- UfcTipp — 006: a győzelem módjának tippelése (2026-10-24). Újrafuttatható.
 -- Szabály (a felhasználó szavai szerint):
---   - csak a győztest tippeli (nincs mód): talál → a meccs pontja (1, címmeccsen 2), ahogy eddig;
---   - győztes + mód: a győztes ÉS a mód is talál → a meccs pontjának duplája (1 → 2, címmeccsen 2 → 4);
---     a győztes talál, de a mód nem → 0 pont; a győztes nem talál → 0 pont.
+--   - csak a győztest tippeli (nincs mód): talál → 1 pont;
+--   - győztes + mód: a győztes ÉS a mód is talál → 2 pont; a győztes talál, de a mód nem → 0 pont; a győztes nem talál → 0 pont.
+--   - a címmeccs sem ér többet (a felhasználó döntése, 2026-10-24): minden meccs 1 pont, a fights.points mindig 1
+--     (egy trigger tartja így, mert a gála-szinkron a címmeccsre 2-t írna). A régi címmeccsek pontja is 1-re módosul.
 -- Régi (mód nélküli) tippek pontja nem változik. A tényleges mód a fights.method-ból jön (ESPN / UFC.com / admin),
 -- method_cat() sorolja: KO/TKO (az adatforrások nem választják szét a KO-t és a TKO-t; orvosi leállítás is ide), Feladás,
 -- Pontozás (egyhangú / megosztott / többségi). Kizárás / Egyéb: a módtipp nem találhat (0 pont).
 -- Mások módtippje is csak a meccs végén látszik. Ellenőrzés: test-006.sql (egy „OK” sor).
+
+create or replace function fights_points_one() returns trigger
+language plpgsql as $$
+begin
+  new.points := 1;
+  return new;
+end $$;
+drop trigger if exists fights_points_one on fights;
+create trigger fights_points_one before insert or update on fights for each row execute function fights_points_one();
+update fights set points = 1 where points <> 1;
 
 alter table picks add column if not exists method text;
 alter table picks drop constraint if exists picks_method_check;
@@ -22,13 +33,13 @@ language sql immutable as $$
   end;
 $$;
 
--- Egy tipp pontja: nincs mód → f_points; mód → dupla, ha talál, különben 0; rossz győztes → 0
+-- Egy tipp pontja: nincs mód → 1; mód → 2, ha talál, különben 0; rossz győztes → 0 (az f_points paraméter nem számít)
 create or replace function pick_points(p_method text, p_side text, f_status text, f_winner text, f_method text, f_points integer) returns integer
 language sql immutable as $$
   select case
     when f_status is distinct from 'done' or f_winner is distinct from p_side then 0
-    when p_method is null then f_points
-    when p_method = method_cat(f_method) then 2 * f_points
+    when p_method is null then 1
+    when p_method = method_cat(f_method) then 2
     else 0 end;
 $$;
 

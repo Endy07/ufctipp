@@ -297,7 +297,7 @@
           <ul>
             <li>Minden meccsnél koppints arra, akit győztesnek tippelsz. Amíg a meccset le nem zárják, átírhatod.</li>
             <li>A tippelést az admin zárja le közvetlenül a meccs előtt.</li>
-            <li>Eltalált győztes: 1 pont, címmeccsen 2 pont.</li>
+            <li>Eltalált győztes: 1 pont. Ha azt is megtippeled, hogyan nyer (KO/TKO, submission, pontozás), és az is talál: 2 pont; ha a mód nem talál, 0 pont.</li>
             <li>Hogy ki kire tippelt, az a meccs végén, az eredménnyel együtt derül ki.</li>
           </ul>
         </div>
@@ -360,12 +360,12 @@
     const mode = state.methods[f.id];
     if (!mine) return '';
     if (open) {
-      return `<div class="modes" role="group" aria-label="Hogyan nyer? Ha a mód is talál, dupla pont; ha nem, 0 pont">
-        <span class="modes__q">Hogyan nyer? <small>pontos mód: dupla pont, más: 0</small></span>
+      return `<div class="modes" role="group" aria-label="Hogyan nyer? Ha a mód is talál, 2 pont; ha nem, 0 pont">
+        <span class="modes__q">Hogyan nyer? <small>pontos mód: 2 pont, más: 0</small></span>
         ${MODES.map((m) => `<button class="chip-mode ${mode === m ? 'is-picked' : ''}" type="button" data-mode="${esc(m)}" data-fight="${f.id}" aria-pressed="${mode === m}">${esc(m === 'Feladás' ? 'Submission (feladás)' : m)}</button>`).join('')}
       </div>`;
     }
-    return mode ? `<div class="modes modes--done"><span class="modes__q">Módtipp: <b>${esc(mode)}</b>${s.status === 'done' && s.winner === mine ? (modeHit(s, mine, mode) ? ' — pontos, dupla pont' : ' — a mód nem talált, 0 pont') : ''}</span></div>` : '';
+    return mode ? `<div class="modes modes--done"><span class="modes__q">Módtipp: <b>${esc(mode)}</b>${s.status === 'done' && s.winner === mine ? (modeHit(s, mine, mode) ? ' — pontos, 2 pont' : ' — a mód nem talált, 0 pont') : ''}</span></div>` : '';
   }
 
   function cornerHtml(f, side, s) {
@@ -394,7 +394,7 @@
   function fightRow(f) {
     const s = fightState(f.id);
     const st = statusLabel(s);
-    const pts = s ? s.points : (f.titleBout ? 2 : 1);
+    const pts = 1;
     const mine = state.picks[f.id];
     let result = '';
     if (s && s.status === 'done') {

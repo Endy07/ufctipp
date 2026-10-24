@@ -36,12 +36,11 @@
     if (t.startsWith('pontoz') || t.includes('decision')) return 'Pontozás';
     return null;
   }
-  // Egy tipp pontja (a SQL pick_points tükre): nincs mód → a meccs pontja; mód → dupla, ha talál, különben 0; rossz győztes → 0
+  // Egy tipp pontja (a SQL pick_points tükre): nincs mód → 1; mód → 2, ha talál, különben 0; rossz győztes → 0 (címmeccs sem ér többet)
   const score = (f, p) => {
     if (!p || f.status !== 'done' || f.winner !== p.side) return 0;
-    const base = f.points || 1;
-    if (!p.method) return base;
-    return p.method === methodCat(f.method) ? 2 * base : 0;
+    if (!p.method) return 1;
+    return p.method === methodCat(f.method) ? 2 : 0;
   };
   const exact = (f, p) => (p && p.method && f.status === 'done' && f.winner === p.side && p.method === methodCat(f.method) ? 1 : 0);
 

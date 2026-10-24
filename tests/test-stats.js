@@ -45,22 +45,22 @@ t('impliedPct és favorit', () => {
 t('gála-ranglista: pont, találat, holtverseny', () => {
   const tab = S.eventTable(e1);
   const by = Object.fromEntries(tab.map((r) => [r.nick, r]));
-  // Anna: 2. és 3. meccs talált = 2 pont, a címmeccsen nem; Bela: címmeccs (2) + 2. meccs (1) = 3; Cili: címmeccs (2)
+  // a címmeccs sem ér többet (1 pont): Anna: 2. és 3. meccs = 2; Bela: címmeccs + 2. meccs = 2; Cili: címmeccs = 1
   assert.deepStrictEqual([by.Anna.points, by.Anna.correct, by.Anna.decided], [2, 2, 3]);
-  assert.deepStrictEqual([by.Bela.points, by.Bela.correct, by.Bela.decided], [3, 2, 3]);
-  assert.deepStrictEqual([by.Cili.points, by.Cili.correct, by.Cili.decided], [2, 1, 3]);
-  assert.deepStrictEqual(tab.map((r) => r.nick + r.place), ['Bela1', 'Anna2', 'Cili2'].map((x) => x));
+  assert.deepStrictEqual([by.Bela.points, by.Bela.correct, by.Bela.decided], [2, 2, 3]);
+  assert.deepStrictEqual([by.Cili.points, by.Cili.correct, by.Cili.decided], [1, 1, 3]);
+  assert.deepStrictEqual(tab.map((r) => r.nick + r.place), ['Anna1', 'Bela1', 'Cili3'].map((x) => x));
   assert.strictEqual(by.Anna.picks, 4); // a döntetlenre adott tipp is „tipp", de nem eldőlt
 });
 
 t('győztes és befejezettség', () => {
-  assert.deepStrictEqual(S.eventWinners(e1), { complete: true, nicks: ['Bela'], points: 3 });
+  assert.deepStrictEqual(S.eventWinners(e1), { complete: true, nicks: ['Anna', 'Bela'], points: 2 });
   assert.strictEqual(S.eventWinners(e2).complete, false);
 });
 
 t('trófeák: csak befejezett gála számít', () => {
   const tr = S.trophies(h);
-  assert.deepStrictEqual(tr.table, [{ nick: 'Bela', n: 1 }]);
+  assert.deepStrictEqual(tr.table, [{ nick: 'Anna', n: 1 }, { nick: 'Bela', n: 1 }]);
   assert.strictEqual(tr.events[0].slug, 'e2'); // újabb elöl
 });
 
@@ -68,7 +68,7 @@ t('szezon: évenként összegez', () => {
   const s = S.season(h);
   assert.deepStrictEqual(Object.keys(s), ['2026']);
   const bela = s['2026'].find((r) => r.nick === 'Bela');
-  assert.strictEqual(bela.points, 3 + 1); // e1: 3, e2: 11. meccs talált (1), 12. nem
+  assert.strictEqual(bela.points, 2 + 1); // e1: 2, e2: 11. meccs talált (1), 12. nem
   assert.strictEqual(bela.events, 2);
 });
 
@@ -119,9 +119,9 @@ t('fej-fej mellett', () => {
   assert.strictEqual(r.common, 5);
   assert.strictEqual(r.bothHit + r.onlyA + r.onlyB + r.bothMiss, 5);
   assert.strictEqual(r.pointsA, 3);
-  assert.strictEqual(r.pointsB, 4);
-  // e1: Bela 3 – Anna 2; e2: 1 – 1 (döntetlen)
-  assert.deepStrictEqual([r.eventsA, r.eventsB, r.eventsTie], [0, 1, 1]);
+  assert.strictEqual(r.pointsB, 3);
+  // e1: 2 – 2; e2: 1 – 1 (mindkettő döntetlen)
+  assert.deepStrictEqual([r.eventsA, r.eventsB, r.eventsTie], [0, 0, 2]);
 });
 
 t('díjak: kevés mintánál nincs díj', () => {
@@ -146,7 +146,7 @@ t('demó-előzmények: értelmes arányok', () => {
   assert.ok(S.awards(d).length >= 4);
 });
 
-t('módtipp: pontos mód = dupla pont, rossz mód = 0, mód nélkül a sima pont', () => {
+t('módtipp: pontos mód = 2 pont, rossz mód = 0, mód nélkül 1 pont (címmeccsen is)', () => {
   assert.strictEqual(S.methodCat('Pontozás (egyhangú)'), 'Pontozás');
   assert.strictEqual(S.methodCat('Orvosi leállítás'), 'KO/TKO');
   assert.strictEqual(S.methodCat('Kizárás'), null);
@@ -155,10 +155,10 @@ t('módtipp: pontos mód = dupla pont, rossz mód = 0, mód nélkül a sima pont
   const row = (picks, nick) => S.eventTable(ev(picks)).find((r) => r.nick === nick);
   const picks = [{ nick: 'Jo', side: 'A', method: 'KO/TKO' }, { nick: 'Rossz', side: 'A', method: 'Feladás' },
                  { nick: 'Regi', side: 'A' }, { nick: 'Vesztes', side: 'B', method: 'KO/TKO' }];
-  assert.strictEqual(row(picks, 'Jo').points, 4);      // címmeccs: 2 × 2
+  assert.strictEqual(row(picks, 'Jo').points, 2);      // a címmeccs sem ér többet
   assert.strictEqual(row(picks, 'Jo').bonus, 1);
   assert.strictEqual(row(picks, 'Rossz').points, 0);   // győztes talált, a mód nem
-  assert.strictEqual(row(picks, 'Regi').points, 2);    // mód nélkül a meccs sima pontja
+  assert.strictEqual(row(picks, 'Regi').points, 1);    // mód nélkül 1 pont
   assert.strictEqual(row(picks, 'Vesztes').points, 0);
 });
 

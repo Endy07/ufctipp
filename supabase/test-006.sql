@@ -50,12 +50,13 @@ begin
     raise exception '(3) a tippek a meccs vége előtt látszanak';
   end if;
 
-  -- (4) pontozás: címmeccs (2 pont) · sima meccs · módtipp találat = dupla · rossz mód = 0 · mód nélkül = sima pont · rossz győztes = 0
-  update fights set status = 'done', winner = 'A', method = 'KO/TKO' where id = 990601;   -- a: 4 (pontos mód), b: 0 (rossz mód)
+  -- (4) pontozás: címmeccs is 1 pont · pontos mód = 2 · rossz mód = 0 · mód nélkül = 1 · rossz győztes = 0
+  if (select points from fights where id = 990601) <> 1 then raise exception '(4) a címmeccs pontja nem 1'; end if;
+  update fights set status = 'done', winner = 'A', method = 'KO/TKO' where id = 990601;   -- a: 2 (pontos mód), b: 0 (rossz mód)
   update fights set status = 'done', winner = 'A', method = 'Pontozás (egyhangú)' where id = 990602;  -- a: 2 (pontos), b: 1 (nincs mód)
   update fights set status = 'done', winner = 'A', method = 'Feladás' where id = 990603;  -- a: 0 (rossz oldal), b: 2 (pontos)
   lb := get_board('teszt-g6')->'leaderboard';
-  if (select (x->>'points')::int from json_array_elements(lb) x where x->>'nick' = 'teszt-g6a') <> 6
+  if (select (x->>'points')::int from json_array_elements(lb) x where x->>'nick' = 'teszt-g6a') <> 4
      or (select (x->>'bonus')::int from json_array_elements(lb) x where x->>'nick' = 'teszt-g6a') <> 2 then
     raise exception '(4) teszt-g6a pontja / pontos módjai hibásak: %', lb;
   end if;
@@ -73,7 +74,7 @@ begin
          json_array_elements(f->'picks') p where e->>'slug' = 'teszt-g6' and p->>'method' is not null) <> 5 then
     raise exception '(5) az előzmények nem mutatják a módokat';
   end if;
-  if (select (x->>'points')::int from json_array_elements(get_overall('fightnight')) x where x->>'nick' = 'teszt-g6a') < 6 then
+  if (select (x->>'points')::int from json_array_elements(get_overall('fightnight')) x where x->>'nick' = 'teszt-g6a') < 4 then
     raise exception '(5) az összesített nem számolja a módtippet';
   end if;
 
