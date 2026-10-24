@@ -31,8 +31,10 @@ Windows Feladatütemező: „UfcTipp szinkron”, 5 percenként `wscript tools\s
   2 órában és a gála alatt 10 percenként újraolvassa a kártyát, a gála alatt 5 percenként pontosítja az eredményeket.
   Kézi indítás: `tools\sync.cmd` (dupla katt). Napló: `tools/logs/`. Próbafuttatás: `php tools/sync.php card <slug> --dry`
   (a teljes küldeményt `tools/cache/sync-<slug>.sql`-be is kiírja; az SQL-szerkesztőben PIN nélkül lefuttatható).
-- **Zárás és eredmény** (a Supabase-ben, a géptől függetlenül): `pg_cron` percenként → `espn_tick` → ESPN → `espn_apply`.
-  A meccs kezdetekor zár, a végén rögzíti a győztest — csak egyértelmű jelzésből (döntetlen / NC az adminé).
+- **Zárás és eredmény** (a Supabase-ben, a géptől függetlenül): `pg_cron` → `espn_tick` → ESPN → `espn_apply`
+  (a `migrate-005` után 10 mp-enként, gála idején 8 mp-es ESPN-kérésközzel; előtte percenként).
+  Az 1. menet indulásakor zár (`period >= 1`; a pre-fight `in` állapot nem), menetrendi tartalék `lock_at` nincs; az admin
+  „Zárás most” gombja kézzel zár. A végén rögzíti a győztest, a végén rögzíti a győztest — csak egyértelmű jelzésből (döntetlen / NC az adminé).
   A UFC.com győztese ellenőrzi; eltérésnél visszavonja, és az admin dönt (az admin oldalon a napló sora jelzi).
 - **Versenyzőcsere:** nyitott meccsen a tippek törlődnek, a felület „tippelj újra” jelzést mutat; elmaradt nyitott meccs eltűnik.
   Lezárt / kész meccshez a szinkron nem nyúl. Ha egyszerre több mint 2 nyitott meccs tűnne el, a szinkron elutasítja.

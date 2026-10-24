@@ -1083,7 +1083,7 @@
           <span class="count" data-adm-count>${s.count_total ?? 0} tipp</span>
         </div>
         <div class="adm__row">
-          ${s.open !== false ? `<button class="btn btn--lock" type="button" data-adm="lock">Tippelés lezárása</button>`
+          ${s.open !== false ? `<button class="btn btn--lock" type="button" data-adm="lock">Zárás most</button>`
             : `<button class="btn btn--ghost" type="button" data-adm="open">Újranyitás</button>`}
         </div>
         <div class="adm__row adm__wrap">

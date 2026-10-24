@@ -97,10 +97,6 @@ function cmd_card(string $slug, bool $dry): void
     $match = $espn['match'] ?? [];
     logmsg(sprintf('ESPN: %s, párosítva %d/%d meccs', $espn ? $espn['event']['name'] : 'nincs találat', count($match), count($data['fights'])));
 
-    $startOf = [];
-    foreach ($data['event']['sections'] as $s) $startOf[$s['key']] = $s['start'];
-    $opener = [];
-    foreach ($data['fights'] as $f) $opener[$f['card']] = $f['id']; // a szekció utoljára listázott meccse nyit
     $fights = [];
     foreach ($data['fights'] as $f) {
         $fights[] = [
@@ -112,7 +108,7 @@ function cmd_card(string $slug, bool $dry): void
             'b_slug'     => $f['b']['slug'],
             'espn_id'    => $match[$f['id']]['espn_id'] ?? null,
             'espn_a'     => $match[$f['id']]['espn_a'] ?? null,
-            'lock_at'    => ($opener[$f['card']] === $f['id'] && !empty($startOf[$f['card']])) ? gmdate('c', $startOf[$f['card']]) : null,
+            'lock_at'    => null, // a menetrendi idő becslés: zárni csak az ESPN tényleges kezdése (espn_apply) vagy az admin zár
         ];
     }
     $payload = [

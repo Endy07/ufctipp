@@ -20,6 +20,9 @@ ne próbálj belépni (2026-10-21-én egy gyorsítótárazott régi `api.js` mia
 - **Élő:** https://endy07.github.io/ufctipp/ · repó: https://github.com/Endy07/ufctipp (publikus) · Supabase-projekt: `ufctipp`
   (Endy07's Org, Free, EU / Írország; URL és publishable kulcs: `js/config.js`).
 - **Adatbázis:** 1 gála (`ufc-333`, 14 meccs, ESPN-párosítás 14/14), 2 játékos, 1 tipp (2026-10-21 hajnali állapot; azóta nem néztem újra, a tippek száma nőhetett).
+- **⏳ FÜGGŐ (2026-10-24): `supabase/migrate-005-pontos-zaras.sql` NINCS élesben** (a Production Deploy tiltás miatt a felhasználó
+  igenje kell az ablakában). Futtatás: SQL-szerkesztőben a migrate-005, majd `test-005.sql` (egy „OK” sor). Kód (sync.php lock_at=null,
+  „Zárás most” gomb, `?v=8`) helyben kész. Háttér: a korai zárást a menetrendi `lock_at` és az ESPN `in`/period 0 okozta.
 - **Automatika:** Supabase `pg_cron` `ufctipp-espn` percenként; a gépen a „UfcTipp szinkron” ütemezett feladat 5 percenként
   (utolsó ellenőrzött futás eredménye 0). Az admin-PIN a felhasználónál és a `tools/sync.local.json`-ban (gitignore).
 - **Tesztek:** `php tests/test-sync.php` 23/23 · `supabase/test-002.sql` OK · `supabase/test-003.sql` OK · `supabase/test-004.sql` OK (élesben futtatva) · `node tests/test-stats.js` 13/13.
