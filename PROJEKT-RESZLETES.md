@@ -9,8 +9,8 @@
 3. **Kártyaváltozás:** a gála napján egyre sűrűbben újraolvassa a kártyát. Beugrónál a nyitott meccs tippjei törlődnek
    („tippelj újra”), elmaradt nyitott meccs eltűnik, sarokcserénél a tippek is átfordulnak; lezárt meccshez nem nyúl.
 4. **Csatlakozás és tippelés:** meghívó link → becenév + 4 jegyű PIN; meccsenként A vagy B oldal, módosítható a zárásig.
-5. **Zárás és eredmény (a felhőben, percenként):** az adatbázis időzítője lekéri az ESPN-t; a meccs kezdetekor zárja a
-   tippelést, a végén rögzíti a győztest, a módot, a menetet. A következő meccs is zárul, amint az előző véget ért.
+5. **Zárás és eredmény (a felhőben, 10 másodpercenként):** az adatbázis időzítője lekéri az ESPN-t; a meccs 1. menetének
+   indulásakor zárja a tippelést (a bevonulás alatt még nyitott), a végén rögzíti a győztest, a módot, a menetet.
 6. **Kereszt-ellenőrzés:** a UFC.com eredménye pontosítja a módot, és ha a győztes eltér, az automata eredményt visszavonja —
    az admin dönt. A kézi admin-döntést az automata nem írja felül.
 7. **Felület:** mobil-első oldal; a meccsek A/B oldallal, a versenyzők valós magasság szerint egy talpvonalon; összevetés

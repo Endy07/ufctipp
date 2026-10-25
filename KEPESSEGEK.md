@@ -1,7 +1,7 @@
 # UfcTipp — képességek mások számára
 
 **Mit tud:** UFC-gálák hivatalos adatai géppel olvasható formában, és élő eredménykövetés.
-**Frissítve:** 2026-10-21 · **Projekt:** `C:\xampp\htdocs\2026\UfcTipp` · Élő app: https://endy07.github.io/ufctipp/
+**Frissítve:** 2026-10-25 · **Projekt:** `C:\xampp\htdocs\2026\UfcTipp` · Élő app: https://endy07.github.io/ufctipp/
 **Képesség-kártya:** `docs/kepessegek/ufc-gala-adatok.md` (a pult kártyás keresője és az Obsidian ebből dolgozik).
 
 ## 1. UFC-gála kártyája és a versenyzők statisztikái (UFC.com)
@@ -15,7 +15,8 @@
 ## 2. ESPN ingyenes UFC-adatfolyama (élő állapot, győztes)
 - Kulcs nélkül: `https://site.api.espn.com/apis/site/v2/sports/mma/ufc/scoreboard?dates=ÉÉÉÉHHNN` — meccsenként
   `status.type.state` (`pre` / `in` / `post`), `completed`, `competitors[].winner`, menet (`status.period`), idő (`displayClock`).
-  Nem hivatalos nyilvános API: bármikor változhat.
+  Nem hivatalos nyilvános API: bármikor változhat. Figyelem: a bevonulás alatt a meccs `state` értéke már `in`, de `period` 0 —
+  a harc tényleges kezdetét a `period >= 1` jelzi (a tippjáték zárása is erre megy).
 - `tools/lib/espn.php` — `espn_match()`: UFC.com-meccs ↔ ESPN-meccs párosítás (teljes név, egyértelmű vezetéknév;
   figyel arra, hogy az ESPN néha fordítva sorolja a sarkokat), `espn_find_event()`.
 
