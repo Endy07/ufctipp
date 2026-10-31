@@ -5,4 +5,7 @@ window.UFCTIPP_CONFIG = {
   supabaseUrl: 'https://facvpkfrscaxkpnxujxz.supabase.co',
   supabaseKey: 'sb_publishable_GvuApPKwydD37pUBooyK1g_19AqT3ym',
   event: 'ufc-333',
+  // Módtipp (KO/TKO, Feladás, Pontozás + pontos mód bónusz). false = a felületen nem látszik, a tipp mód nélkül megy.
+  // Szerveroldalon a picks_method_off trigger is nullázza (supabase/migrate-007). Visszakapcsolás: mindkettő.
+  METHOD_TIPS: false,
 };

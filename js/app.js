@@ -297,7 +297,7 @@
           <ul>
             <li>Minden meccsnél koppints arra, akit győztesnek tippelsz. Amíg a meccset le nem zárják, átírhatod.</li>
             <li>A tippelést az admin zárja le közvetlenül a meccs előtt.</li>
-            <li>Eltalált győztes: 1 pont. Ha azt is megtippeled, hogyan nyer (KO/TKO, submission, pontozás), és az is talál: 2 pont; ha a mód nem talál, 0 pont.</li>
+            <li>${METHOD_TIPS ? 'Eltalált győztes: 1 pont. Ha azt is megtippeled, hogyan nyer (KO/TKO, submission, pontozás), és az is talál: 2 pont; ha a mód nem talál, 0 pont.' : 'Eltalált győztes: 1 pont.'}</li>
             <li>Hogy ki kire tippelt, az a meccs végén, az eredménnyel együtt derül ki.</li>
           </ul>
         </div>
@@ -349,7 +349,8 @@
     ? `<span class="res res--hit">Talált, +${n} pont${withMode ? ' (a mód is)' : ''}</span>`
     : '<span class="res res--miss">A győztes talált, a mód nem — 0 pont</span>');
   const MODES = ['KO/TKO', 'Feladás', 'Pontozás'];
-  const setMyPicks = (r) => { state.picks = r.picks || {}; state.methods = r.methods || {}; };
+  const METHOD_TIPS = !!(window.UFCTIPP_CONFIG && window.UFCTIPP_CONFIG.METHOD_TIPS);
+  const setMyPicks = (r) => { state.picks = r.picks || {}; state.methods = METHOD_TIPS ? (r.methods || {}) : {}; };
   // a tényleges mód és a tippelt mód egyezik-e (a stats.js methodCat-ja a SQL-lel azonos kategóriákat ad)
   const modeHit = (s, side, mode) => !!mode && s.status === 'done' && s.winner === side && mode === ST.methodCat(s.method);
 
@@ -358,7 +359,7 @@
     const mine = state.picks[f.id];
     const open = !s || s.open;
     const mode = state.methods[f.id];
-    if (!mine) return '';
+    if (!METHOD_TIPS || !mine) return '';
     if (open) {
       return `<div class="modes" role="group" aria-label="Hogyan nyer? Ha a mód is talál, 2 pont; ha nem, 0 pont">
         <span class="modes__q">Hogyan nyer? <small>pontos mód: 2 pont, más: 0</small></span>
@@ -463,7 +464,7 @@
       const lb = state.overall && state.overall.kind === kind ? state.overall.rows : null;
       if (!lb) loadOverall(kind);
       const body = !lb ? '<div class="empty">Betöltés…</div>'
-        : lb.length ? `<ol class="lb">${lbRows(lb, (r) => `${r.correct}/${r.decided} talált${r.bonus ? `, ${r.bonus} pontos mód` : ''}, ${r.events} gála`, lb.some((r) => r.decided))}</ol>`
+        : lb.length ? `<ol class="lb">${lbRows(lb, (r) => `${r.correct}/${r.decided} talált${METHOD_TIPS && r.bonus ? `, ${r.bonus} pontos mód` : ''}, ${r.events} gála`, lb.some((r) => r.decided))}</ol>`
         : '<div class="empty">Még senki nem csatlakozott.</div>';
       return `${tabs}${chips}${body}
         <p class="hint">Az összes eddigi gála pontjai együtt. Holtversenyben a több talált tipp dönt.</p>`;
@@ -473,7 +474,7 @@
     if (!lb.length) return `${tabs}<div class="empty">Még senki nem csatlakozott.</div>`;
     return `${tabs}
       <h2 class="section-h"><span>${esc(state.data.event.title.split(':')[0])}</span><time>${done}/${state.data.fights.length} meccs lement</time></h2>
-      <ol class="lb">${lbRows(lb, (r) => `${r.correct}/${r.decided} talált${r.bonus ? `, ${r.bonus} pontos mód` : ''}, ${r.picks} tipp`, done)}</ol>
+      <ol class="lb">${lbRows(lb, (r) => `${r.correct}/${r.decided} talált${METHOD_TIPS && r.bonus ? `, ${r.bonus} pontos mód` : ''}, ${r.picks} tipp`, done)}</ol>
       ${done ? `<button class="btn btn--share" type="button" data-share="current">Ranglista megosztása képként</button>` : ''}
       <p class="hint">Holtversenyben a több talált tipp dönt; a sorrend minden eredmény után frissül.</p>`;
   }
@@ -1241,7 +1242,7 @@
     if (next) state.picks[id] = next; else { delete state.picks[id]; delete state.methods[id]; }
     rerenderFight(id);
     try {
-      await state.api.pick(state.me.nick, state.me.pin, id, next, next ? prevMode : null);
+      await state.api.pick(state.me.nick, state.me.pin, id, next, METHOD_TIPS && next ? prevMode : null);
       const f = state.data.fights.find((x) => x.id === id);
       toast(next ? `Tipped: ${(next === 'A' ? f.a : f.b).name}` : 'Tipp visszavonva', 'ok');
       state.board = await loadBoard().catch(() => state.board);
