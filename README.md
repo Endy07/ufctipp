@@ -12,7 +12,7 @@ A CSS/JS hivatkozások `?v=N` verziót kapnak (`index.html`); módosítás után
 ## Telepítés (egyszer; 2026-10-21-én megtörtént)
 ### 1. Supabase
 1. Az **SQL Editor**-ban sorban: `supabase/schema.sql`, `supabase/seed-ufc-333.sql`, `supabase/migrate-002-automatizalas.sql`,
-   `supabase/migrate-003-javitasok.sql`, majd `migrate-005-pontos-zaras.sql`, `migrate-006-mod-tipp.sql`. Ellenőrzés: `supabase/test-002.sql` és `test-003.sql` — egy-egy „OK” sor (a 005-höz `test-005.sql`, a 006-hoz `test-006.sql`).
+   `supabase/migrate-003-javitasok.sql`, majd `migrate-005-pontos-zaras.sql`, `migrate-006-mod-tipp.sql`, `migrate-007-modtipp-ki.sql` (a módtipp kikapcsolása), `migrate-008-espn-mod-egyertelmu.sql` (kétértelmű ESPN-módnál nincs mód; 2026-11-05-én még élesre vár; teszt: `test-008.sql`). Ellenőrzés: `supabase/test-002.sql` és `test-003.sql` — egy-egy „OK” sor (a 005-höz `test-005.sql`, a 006-hoz `test-006.sql`).
 2. Admin-PIN (ugyanott; a `…` helyére a saját PIN — ez **nem** kerül a repóba):
    ```sql
    insert into settings (key, value) values ('admin_pin_hash', extensions.crypt('…', extensions.gen_salt('bf')))
@@ -25,7 +25,10 @@ Repó → Settings → Pages → Deploy from branch → `main`, `/ (root)`.
 `tools/sync.local.json` (minta: `sync.local.example.json`) — az `adminPin` mezőbe az admin-PIN; a fájl nincs verziókövetve.
 Windows Feladatütemező: „UfcTipp szinkron”, 5 percenként `wscript tools\sync-hidden.vbs` (ablak nélkül; kimaradt futást pótol).
 
-## Módtipp (pontos mód: 2 pont)
+## Módtipp (pontos mód: 2 pont) — **2026-10-31 óta KIKAPCSOLVA** (a felhasználó döntése: „csak tegyük inaktívvá”)
+Felület: `js/config.js` → `METHOD_TIPS: false` (a kód megmaradt). Szerver: a `picks_method_off` trigger minden tipp `method`-ját nullázza
+(`supabase/migrate-007-modtipp-ki.sql`, élesben fut). Visszakapcsolás: `drop trigger picks_method_off on picks;` ÉS `METHOD_TIPS: true` (+ `?v=N`).
+Alább a (most inaktív) szabály leírása.
 Alapból csak a győztest tippeled: ha talál, 1 pont — a címmeccs sem ér többet (a felhasználó döntése, 2026-10-24; a `fights.points` egy
 trigger miatt mindig 1). Opcionálisan megadhatod, hogyan nyer is („Hogyan nyer?”: KO/TKO, Submission (feladás), Pontozás). Ha a győztes ÉS
 a mód is talál: 2 pont; ha a győztes talál, de a mód nem: 0 pont. Mód nélküli tippek pontja 1. A KO és a TKO egy gomb, mert az ESPN és a

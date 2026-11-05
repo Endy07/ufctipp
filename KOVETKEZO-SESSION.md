@@ -1,35 +1,28 @@
 # UfcTipp — következő session
 
-## 🧭 BELÉPÉSI PONT — 2026-10-25
-**Javasolt folytatás:** a következő élő meccsnél **mérjük meg a zárás késését**: a `fights.updated_at` (auto zárás) és az ESPN
-1. menet kezdete (period=1) különbsége; várható ~8–20 s (még nem mértem). Nézzük meg az éles módtippeket is: rögzülnek-e, és
-helyesen pontoz-e az eredménynél (1 / 2 / 0); jó-e a Történet, a Statisztika, a Profil. Utána a halasztott apróságok.
-**Élesben (2026-10-25, pusholva, main = origin/main b9d2f10, `?v=9`):** (1) pontos zárás: csak az ESPN period>=1 (vagy post) zár, nincs
-tartalék `lock_at`, nincs „előző meccs eredménye → a következő zár” szabály, `pg_cron` 10 másodpercenként, admin „Zárás most” gomb;
-(2) módtipp: sima győztes 1 pont, pontos győztes+mód (KO/TKO, Feladás, Pontozás) 2 pont, rossz mód 0, a címmeccs is 1 pont (trigger: `fights.points` mindig 1).
-A migrate-005/006-ot a felhasználó kérésére én futtattam az SQL-szerkesztőben; `test-005` és `test-006` OK. Terv: `C:\xampp\htdocs\Claude\docs\2026-10-24-ufctipp-zaras-terv.md`.
-Korábban (2026-10-22, ?v=7): Történet, Statisztika, Szezon, megosztás képként, naptár-emlékeztető, csak megnézhető játékosprofil (`#profil/<becenév>`).
-**Félretéve (a felhasználó választ):**
-- A végső ellenőrzés halasztott apróságai (lent, „Ismert apróságok”).
-- Valódi push-értesítés (szerver-oldali VAPID / edge function; iPhone-on telepített PWA kellene) — most csak az .ics.
-**Döntésre vár:** nincs nyitott döntés.
-**Először olvasd:** ez a fájl; `README.md` (működés); `docs/2026-10-21-automatizalas-terv.md` (a döntések).
-**Figyelj:** élesben tesztelni csak `?demo`-val vagy `teszt-` slugú gálán szabad; a felhasználó valódi becenevével („Endy”)
-ne próbálj belépni (2026-10-21-én egy gyorsítótárazott régi `api.js` miatt egyszer megtörtént — 1 hibás PIN-próba lett belőle).
-A Supabase SQL-szerkesztő tabja háttérben screenshotot nem ad (időtúllépés): az eredményt DOM-ból olvasd; a „Potential issue” ablakot csak saját `teszt-` adat törlésénél / a migráció saját `drop`-jainál erősítsd meg.
+## 🧭 BELÉPÉSI PONT — 2026-11-05
+**Javasolt folytatás:** (1) a pult futtatja élesben a `migrate-008`-at (kétértelmű ESPN-módnál nem ír módot), utána a `test-008.sql`-t (egy „OK” sor) — csak ezután a push (`bbf6fb3` helyi, nem pusholt); (2) a 2026-11-07-i Fight Night (Cortes Acosta vs Walker, 14 meccs) kártyájának felkerülése: a UFC.com apránként adja ki a meccsek `data-fmid`-ját (11-05-én 3/14 volt fent), a szinkron magától felveszi; ha péntek (11-06) estig nincs meg mind, a hiányzókat kézzel (admin) kell pótolni.
+**Élesben (2026-11-05):** a módtipp KI (`METHOD_TIPS: false`, `?v=10`, pusholva a0edd24 + a `picks_method_off` trigger, `migrate-007`); minden meccs 1 pont, csak a győztes számít. A 2026-10-31-i gála (Moicano vs Nolan) 12/12 meccse a UFC.com-mal egyezik (a győztesek jók voltak; 5 meccs idejét a `sync.php details` javította); ranglista: TiTi 10, MRK 8, Endy 7, Csator024 0.
+**Félretéve (a felhasználó választ):** a módtipp visszahozása később („majd lehet alakítunk ezen”); valódi push-értesítés; az „Ismert apróságok”.
+**Döntésre vár:** nincs nyitott döntés (a migrate-008 az 1) változattal jóváhagyva a pulton: „Szuper, mehet minden ahogy javasoljátok”; élesbe tétel csak a gála vége után — a gála véget ért).
+**Először olvasd:** ez a fájl; `supabase/migrate-007-modtipp-ki.sql`, `migrate-008-espn-mod-egyertelmu.sql`, `test-008.sql`; `README.md`.
+**Figyelj:** a UFC.com a kártya meccseit azonosító (`data-fmid`) nélkül kiteszi — a szinkron ezeket átugorja (naplóban „egy meccset sem találtam”, ha egy sincs), ez normális a gála előtti napokban; kitalált azonosítót ne vigyél fel (beugrónál a tippek törlődnének). Az ESPN-nél a `Unofficial Winner` részletből a kétértelmű eset (Kotko + Decision egyszerre) a 005-ben rossz módot adott (008 javítja). A UFC.com időt eltelt időként adja (ESPN: hátralévő).
 
-## Állapot (2026-10-25, main = origin/main)
+## Korábban (2026-10-25)
+Pontos zárás (migrate-005) és módtipp (migrate-006) élesben (a módtipp azóta KI van kapcsolva, lásd fent); Történet, Statisztika, Szezon, megosztás, .ics, profil; a zárás késésének mérése még hátravan.
+
+## Állapot (2026-11-05; main = a0edd24 pusholva + bbf6fb3 helyi, nem pusholt)
 - **Élő:** https://endy07.github.io/ufctipp/ · repó: https://github.com/Endy07/ufctipp (publikus) · Supabase-projekt: `ufctipp`
   (Endy07's Org, Free, EU / Írország; URL és publishable kulcs: `js/config.js`).
-- **Adatbázis:** 1 gála (`ufc-333`, 14 meccs, ESPN-párosítás 14/14), 2 játékos, 1 tipp (2026-10-21 hajnali állapot; azóta nem néztem újra, a tippek száma nőhetett).
-- **Adatbázis-migrációk:** `migrate-001`–`006` élesben (2026-10-25: 005 és 006). A korai zárást a menetrendi `lock_at` és az ESPN `in`/period 0 okozta (javítva).
+- **Adatbázis:** több gála (a legutóbbi `ufc-fight-night-october-31-2026`, 12 meccs, 4 játékos); a pontos játékos-/tippszám a `get_board`-ból kérdezhető le.
+- **Adatbázis-migrációk:** `schema.sql` + `migrate-002`–`007` élesben (001 nincs külön fájl; `schema.sql` az alap) (007: módtipp ki, 2026-10-31); `008` megírva, élesre vár. A korai zárást a menetrendi `lock_at` és az ESPN `in`/period 0 okozta (javítva).
 - **Automatika:** Supabase `pg_cron` `ufctipp-espn` 10 másodpercenként (`espn_tick`; gála idején ≤ 8 s-onként kér az ESPN-től, egyébként 55 s);
   a gépen a „UfcTipp szinkron” ütemezett feladat 5 percenként (`lock_at` már nem kerül be). Az admin-PIN a felhasználónál és a `tools/sync.local.json`-ban (gitignore).
 - **Tesztek:** `php tests/test-sync.php` 23/23 · `supabase/test-002`…`test-006.sql` OK (élesben futtatva) · `node tests/test-stats.js` 14/14.
   Visszajátszás a 2026-10-17-i Fight Nighttal: 13/13 helyes győztes; élő `pg_net`-próba: HTTP 200, helyes eredmény.
 
 ## A felhasználó döntései (2026-10-21)
-- GitHub Pages + Supabase („megfelel”); tipp pontokért, pénz nincs; minden meccs 1 pont (a címmeccs sem ér többet, 2026-10-24); módtipp: pontos győztes+mód 2 pont, rossz mód 0.
+- GitHub Pages + Supabase („megfelel”); tipp pontokért, pénz nincs; minden meccs 1 pont (a címmeccs sem ér többet, 2026-10-24); módtipp: pontos győztes+mód 2 pont, rossz mód 0 (**2026-10-31-től inaktív** — a felhasználó: „csak tegyük inaktívvá… majd később lehet alakítunk ezen”).
 - Mások tippje **csak a meccs végén** látszik („Legyen úgy, hogy csak a meccs végén fedődik fel.”).
 - **Teljes automatika** („Teljesen automatikusan legyen minden. Nekünk csak szavazgatni kelljen.”): UFC.com + az ESPN ingyenes
   adatfolyama („van egy ingyenes adatforrás, az nagyon jó”); a gépén fut a kártyaszinkron.
@@ -48,6 +41,7 @@ A Supabase SQL-szerkesztő tabja háttérben screenshotot nem ad (időtúllépé
 | Nem zárul / nem kap eredményt egy meccs a gála alatt | ESPN-hiba (`settings.espn_last_error`) vagy nem párosult | `select * from settings where key like 'espn%'`; `select * from cron.job_run_details order by start_time desc limit 5`; kézi admin (a „Zárás most” gomb zár, az eredményt is kézzel lehet rögzíteni) |
 | Üres Történet / Statisztika / Profil | még nincs eldőlt meccs, vagy a `get_history()` nem fut | első gála előtt ez normális; egyébként `supabase/test-004.sql`, `curl .../rpc/get_history` |
 | A `#profil/<becenév>` „még nem tippelt eldőlt meccsre” | a játékosnak még nincs eldőlt tippje (a profil a `get_history()`-ból számol) | normális; az első lejátszott gála után megjelenik |
+| `egy meccset sem találtam` a gála előtti napokban (új gála) | a UFC.com még nem adott meccs-azonosítót (`data-fmid`) a kártyának; apránként jön | várni (a szinkron 5 percenként újra próbál); ha a gála előtti estig hiányzik, admin kézzel pótolja |
 | Módosítás után a böngésző a régi felületet mutatja | gyorsítótár | emeld a `?v=N`-t az `index.html`-ben |
 | `git checkout` / merge: „unable to unlink tools/sync-hidden.vbs” | az ütemezett szinkron épp fut, zárolja a fájlt | várj, vagy átmenetileg tiltsd le a feladatot; a félbemaradt állapotot `git status`-szal nézd meg |
 | A Supabase „Potential issue detected” ablakot dob | `delete` / `drop` a lekérdezésben | csak saját tesztadat törlésénél erősítsd meg |
