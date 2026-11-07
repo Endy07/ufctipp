@@ -10,6 +10,8 @@
   és versenyzők (rekord, kor, magasság/karfesztáv cm-ben, ütés-/birkózás-statisztikák, győzelmek módja, utolsó 3 UFC-meccs).
 - Függvénytár: `tools/lib/ufc.php` — `parse_event()`, `parse_athlete()`, `parse_results()` (lement meccsek győztese, módja,
   menete, ideje), `upcoming_events()` (a következő gálák a ufc.com/events oldalról), `build_event_data()`.
+  **Figyelem (2026-11-07):** a `parse_event()` az azonosító (`data-fmid`) nélküli meccseket is visszaadja, **negatív, ideiglenes `id`-vel**
+  (a versenyzőpár slugjaiból képzett crc32, a sarkoktól független); a valódi UFC.com-azonosítót csak a pozitív `id` jelenti.
 - Esemény-slug: a UFC.com címéből (pl. `ufc-333`, `ufc-fight-night-october-31-2026`).
 
 ## 2. ESPN ingyenes UFC-adatfolyama (élő állapot, győztes)

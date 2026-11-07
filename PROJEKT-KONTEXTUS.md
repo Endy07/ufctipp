@@ -1,7 +1,7 @@
 ---
 slug: ufctipp
 nev: UfcTipp — UFC tippjáték webapp a barátoknak
-frissitve: 2026-11-05
+frissitve: 2026-11-07
 aliasok: ufctipp, ufc tipp, ufc tippjáték, ufc fogadás, ufc meccs, ufc est, ufc-est
 ---
 

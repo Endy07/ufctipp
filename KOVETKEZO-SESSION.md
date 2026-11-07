@@ -5,21 +5,21 @@
 **Javasolt folytatás:** (1) a gála után ellenőrizd, hogy a meccsek lezártak/eldőltek-e (ESPN 14/14 volt párosítva), és hogy az átkulcsolás megtörtént-e, ha a UFC.com közben azonosítót adott (`select id from fights where event like '%november-07%'`, negatív id ne maradjon az eldőlt meccseken); (2) a „Félretéve” és „Ismert apróságok” lista változatlan.
 **Élesben (2026-11-05):** a módtipp KI (`METHOD_TIPS: false`, `?v=10`, pusholva a0edd24 + a `picks_method_off` trigger, `migrate-007`); minden meccs 1 pont, csak a győztes számít. A 2026-10-31-i gála (Moicano vs Nolan) 12/12 meccse a UFC.com-mal egyezik (a győztesek jók voltak; 5 meccs idejét a `sync.php details` javította); ranglista: TiTi 10, MRK 8, Endy 7, Csator024 0.
 **Félretéve (a felhasználó választ):** a módtipp visszahozása később („majd lehet alakítunk ezen”); valódi push-értesítés; az „Ismert apróságok”.
-**Döntésre vár:** nincs nyitott döntés (a migrate-008 az 1) változattal jóváhagyva a pulton: „Szuper, mehet minden ahogy javasoljátok”; élesbe tétel csak a gála vége után — a gála véget ért).
-**Először olvasd:** ez a fájl; `supabase/migrate-007-modtipp-ki.sql`, `migrate-008-espn-mod-egyertelmu.sql`, `test-008.sql`; `README.md`.
-**Figyelj:** a UFC.com a kártya meccseit azonosító (`data-fmid`) nélkül kiteszi — a szinkron ezeket átugorja (naplóban „egy meccset sem találtam”, ha egy sincs), ez normális a gála előtti napokban; kitalált azonosítót ne vigyél fel (beugrónál a tippek törlődnének). Az ESPN-nél a `Unofficial Winner` részletből a kétértelmű eset (Kotko + Decision egyszerre) a 005-ben rossz módot adott (008 javítja). A UFC.com időt eltelt időként adja (ESPN: hátralévő).
+**Döntésre vár:** nincs nyitott döntés (a migrate-008 és 009 élesben; a felhasználó 2026-11-07-én mindent jóváhagyott).
+**Először olvasd:** ez a fájl; `supabase/migrate-009-ideiglenes-meccs.sql`, `test-009.sql`, `migrate-008-espn-mod-egyertelmu.sql`; `README.md`.
+**Figyelj:** a UFC.com a kártya meccseit gyakran azonosító (`data-fmid`) nélkül teszi ki — 2026-11-07 óta a szinkron ezeket **ideiglenes negatív azonosítóval** felveszi (migrate-009), és a valódi megérkezésekor átkulcsolja (a tipp megmarad); a negatív id szándékos, ne töröld és ne cseréld kézzel (a tippek törlődnének). A `parse_event()` negatív-id ágára nincs automata teszt (csak `test-009.sql` az SQL-oldalra). Az ESPN-nél a `Unofficial Winner` részletből a kétértelmű eset (Kotko + Decision egyszerre) a 005-ben rossz módot adott (008 javítja). A UFC.com időt eltelt időként adja (ESPN: hátralévő).
 
 ## Korábban (2026-10-25)
 Pontos zárás (migrate-005) és módtipp (migrate-006) élesben (a módtipp azóta KI van kapcsolva, lásd fent); Történet, Statisztika, Szezon, megosztás, .ics, profil; a zárás késésének mérése még hátravan.
 
-## Állapot (2026-11-05; main = a0edd24 pusholva + bbf6fb3 helyi, nem pusholt)
+## Állapot (2026-11-07; main = origin/main, minden pusholva)
 - **Élő:** https://endy07.github.io/ufctipp/ · repó: https://github.com/Endy07/ufctipp (publikus) · Supabase-projekt: `ufctipp`
   (Endy07's Org, Free, EU / Írország; URL és publishable kulcs: `js/config.js`).
 - **Adatbázis:** több gála (a legutóbbi `ufc-fight-night-october-31-2026`, 12 meccs, 4 játékos); a pontos játékos-/tippszám a `get_board`-ból kérdezhető le.
-- **Adatbázis-migrációk:** `schema.sql` + `migrate-002`–`007` élesben (001 nincs külön fájl; `schema.sql` az alap) (007: módtipp ki, 2026-10-31); `008` megírva, élesre vár. A korai zárást a menetrendi `lock_at` és az ESPN `in`/period 0 okozta (javítva).
+- **Adatbázis-migrációk:** `schema.sql` + `migrate-002`–`009` élesben (001 nincs külön fájl; `schema.sql` az alap) (007: módtipp ki, 2026-10-31; 008 + 009: 2026-11-07). A korai zárást a menetrendi `lock_at` és az ESPN `in`/period 0 okozta (javítva).
 - **Automatika:** Supabase `pg_cron` `ufctipp-espn` 10 másodpercenként (`espn_tick`; gála idején ≤ 8 s-onként kér az ESPN-től, egyébként 55 s);
   a gépen a „UfcTipp szinkron” ütemezett feladat 5 percenként (`lock_at` már nem kerül be). Az admin-PIN a felhasználónál és a `tools/sync.local.json`-ban (gitignore).
-- **Tesztek:** `php tests/test-sync.php` 23/23 · `supabase/test-002`…`test-006.sql` OK (élesben futtatva) · `node tests/test-stats.js` 14/14.
+- **Tesztek:** `php tests/test-sync.php` 23/23 · `supabase/test-002`…`test-006.sql`, `test-008.sql`, `test-009.sql` OK (élesben futtatva) · `node tests/test-stats.js` 14/14.
   Visszajátszás a 2026-10-17-i Fight Nighttal: 13/13 helyes győztes; élő `pg_net`-próba: HTTP 200, helyes eredmény.
 
 ## A felhasználó döntései (2026-10-21)
@@ -42,7 +42,7 @@ Pontos zárás (migrate-005) és módtipp (migrate-006) élesben (a módtipp az�
 | Nem zárul / nem kap eredményt egy meccs a gála alatt | ESPN-hiba (`settings.espn_last_error`) vagy nem párosult | `select * from settings where key like 'espn%'`; `select * from cron.job_run_details order by start_time desc limit 5`; kézi admin (a „Zárás most” gomb zár, az eredményt is kézzel lehet rögzíteni) |
 | Üres Történet / Statisztika / Profil | még nincs eldőlt meccs, vagy a `get_history()` nem fut | első gála előtt ez normális; egyébként `supabase/test-004.sql`, `curl .../rpc/get_history` |
 | A `#profil/<becenév>` „még nem tippelt eldőlt meccsre” | a játékosnak még nincs eldőlt tippje (a profil a `get_history()`-ból számol) | normális; az első lejátszott gála után megjelenik |
-| `egy meccset sem találtam` a gála előtti napokban (új gála) | a UFC.com még nem adott meccs-azonosítót (`data-fmid`) a kártyának; apránként jön | várni (a szinkron 5 percenként újra próbál); ha a gála előtti estig hiányzik, admin kézzel pótolja |
+| `egy meccset sem találtam` a gála előtti napokban (új gála) | a UFC.com még nem adott meccs-azonosítót (`data-fmid`) a kártyának; 2026-11-07 óta a szinkron ideiglenes negatív azonosítóval felveszi, és a valódi megérkezésekor átkulcsolja (migrate-009) | nincs teendő; ha egy eldőlt meccsnél negatív `fights.id` maradt, a UFC.com nem adott neki azonosítót — ártalmatlan |
 | Módosítás után a böngésző a régi felületet mutatja | gyorsítótár | emeld a `?v=N`-t az `index.html`-ben |
 | `git checkout` / merge: „unable to unlink tools/sync-hidden.vbs” | az ütemezett szinkron épp fut, zárolja a fájlt | várj, vagy átmenetileg tiltsd le a feladatot; a félbemaradt állapotot `git status`-szal nézd meg |
 | A Supabase „Potential issue detected” ablakot dob | `delete` / `drop` a lekérdezésben | csak saját tesztadat törlésénél erősítsd meg |
