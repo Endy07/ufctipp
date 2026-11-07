@@ -29,7 +29,7 @@ GitHub Pages · Supabase · PostgreSQL · RPC · Row Level Security · pg_cron �
 - Történet (múltbeli gálák), statisztika (találati arány, széria, díjak, fej-fej), szezonranglista, megosztás képként, naptár-emlékeztető, csak megnézhető játékosprofil (#profil/<becenév>) — élesben (2026-10-22)
 
 ## Ami hátra van / most ezen dolgozunk
-- A migrate-008 élesbe tétele (a pult) + push; a 2026-11-07-i gála (Cortes Acosta vs Walker) kártyájának felkerülése (a UFC.com apránként adja a meccs-azonosítókat); a Történet / Statisztika / Profil számainak ellenőrzése az éles adaton
+- A 2026-11-07-i gála (Cortes Acosta vs Walker) 14 meccse fent van, 11 ideiglenes negatív azonosítóval (migrate-009; a valódi azonosító megérkezésekor átkulcsolódik, a tipp megmarad) — a gála után ellenőrizni; migrate-008 és 009 élesben; a Történet / Statisztika / Profil számainak ellenőrzése az éles adaton
 
 ## Jövőbeni tervek
 - Bónusztippek (győzelem módja, menet) — a módtipp megépült, de 2026-10-31-től inaktív; a felhasználó később dönt a visszahozásáról

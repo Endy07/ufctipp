@@ -12,7 +12,7 @@ A CSS/JS hivatkozások `?v=N` verziót kapnak (`index.html`); módosítás után
 ## Telepítés (egyszer; 2026-10-21-én megtörtént)
 ### 1. Supabase
 1. Az **SQL Editor**-ban sorban: `supabase/schema.sql`, `supabase/seed-ufc-333.sql`, `supabase/migrate-002-automatizalas.sql`,
-   `supabase/migrate-003-javitasok.sql`, majd `migrate-005-pontos-zaras.sql`, `migrate-006-mod-tipp.sql`, `migrate-007-modtipp-ki.sql` (a módtipp kikapcsolása), `migrate-008-espn-mod-egyertelmu.sql` (kétértelmű ESPN-módnál nincs mód; 2026-11-05-én még élesre vár; teszt: `test-008.sql`). Ellenőrzés: `supabase/test-002.sql` és `test-003.sql` — egy-egy „OK” sor (a 005-höz `test-005.sql`, a 006-hoz `test-006.sql`).
+   `supabase/migrate-003-javitasok.sql`, majd `migrate-005-pontos-zaras.sql`, `migrate-006-mod-tipp.sql`, `migrate-007-modtipp-ki.sql` (a módtipp kikapcsolása), `migrate-008-espn-mod-egyertelmu.sql` (kétértelmű ESPN-módnál nincs mód; élesben 2026-11-07 óta; teszt: `test-008.sql`), `migrate-009-ideiglenes-meccs.sql` (azonosító nélküli UFC.com-meccs ideiglenes negatív id-vel kerül fel, a valódi megérkezésekor átkulcsolódik, a tipp megmarad; élesben 2026-11-07 óta; teszt: `test-009.sql`, visszagörget). Ellenőrzés: `supabase/test-002.sql` és `test-003.sql` — egy-egy „OK” sor (a 005-höz `test-005.sql`, a 006-hoz `test-006.sql`).
 2. Admin-PIN (ugyanott; a `…` helyére a saját PIN — ez **nem** kerül a repóba):
    ```sql
    insert into settings (key, value) values ('admin_pin_hash', extensions.crypt('…', extensions.gen_salt('bf')))
