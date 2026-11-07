@@ -104,7 +104,7 @@ function parse_event(string $html): array
     usort($sections, fn($a, $b) => $a['line'] <=> $b['line']);
 
     $fights = [];
-    foreach ($x->query("//div[" . cls('c-listing-fight') . " and @data-fmid]") as $f) {
+    foreach ($x->query("//div[" . cls('c-listing-fight') . "]") as $f) {
         $card = null;
         foreach ($sections as $s) if ($s['line'] < $f->getLineNo()) $card = $s['key'];
         if (!$card) continue;
@@ -130,8 +130,17 @@ function parse_event(string $html): array
                 'odds'    => $odds[$i] ?? '',
             ];
         };
+        // Ha a UFC.com még nem adott azonosítót (data-fmid), ideiglenes, negatív azonosítót képzünk a versenyzőpárból
+        // (sarkoktól függetlenül stabil); a valódi megérkezésekor a Supabase átkulcsolja, a tippek megmaradnak (migrate-009).
+        $fmid = (int) $f->getAttribute('data-fmid');
+        if ($fmid <= 0) {
+            $pair = [$side('red', 0)['slug'], $side('blue', 1)['slug']];
+            if ($pair[0] === '' || $pair[1] === '') continue;
+            sort($pair);
+            $fmid = -(1 + crc32(implode('|', $pair)) % 2000000000);
+        }
         $fights[] = [
-            'id'          => (int) $f->getAttribute('data-fmid'),
+            'id'          => $fmid,
             'card'        => $card,
             'weightClass' => $classText,
             'titleBout'   => stripos($classText, 'title') !== false,
