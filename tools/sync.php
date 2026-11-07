@@ -94,6 +94,45 @@ function cmd_card(string $slug, bool $dry): void
     $start = $starts ? min($starts) : time();
 
     $espn = espn_find_event($data['fights'], $start);
+
+    // Védelem a hibás UFC.com-sablon ellen (2026-11-07: két meccs „Hub import" nyers sablonban jelent meg, c-listing-fight
+    // nélkül, a szinkron elmaradtnak hitte és törölte őket a tippekkel együtt): az előző kártyáról átvesszük azt a meccset,
+    // amely az oldalról eltűnt, de az ESPN-en még szerepel (az ESPN-en nem szereplő, tényleg elmaradt meccs így is törlődik).
+    if ($espn && !$dry) {
+        try {
+            $prev = rpc('get_event', []);
+            $prevData = (($prev['slug'] ?? '') === $slug) ? ($prev['data'] ?? null) : null;
+            // a meccs azonosságát a versenyzőpár adja (nem az id: az ideiglenes id a valódira cserélődik)
+            $pairKey = function (array $f): string {
+                $p = [$f['a']['slug'], $f['b']['slug']];
+                sort($p);
+                return implode('|', $p);
+            };
+            $havePairs = array_map($pairKey, $data['fights']);
+            $missing = array_values(array_filter($prevData['fights'] ?? [], fn($f) => !in_array($pairKey($f), $havePairs, true)));
+            $kept = [];
+            foreach ($missing as $mf) {
+                if (espn_match([$mf], $espn['event'])) $kept[] = $mf;
+            }
+            if ($kept) {
+                $all = $data['fights'];
+                usort($kept, fn($a, $b) => $a['order'] <=> $b['order']);
+                foreach ($kept as $mf) array_splice($all, min(max($mf['order'] - 1, 0), count($all)), 0, [$mf]);
+                foreach ($all as $i => &$fx) $fx['order'] = $i + 1;
+                unset($fx);
+                $data['fights'] = $all;
+                foreach ($kept as $mf) foreach (['a', 'b'] as $k) {
+                    $s = $mf[$k]['slug'];
+                    if ($s !== '' && !isset($data['athletes'][$s]) && isset($prevData['athletes'][$s])) $data['athletes'][$s] = $prevData['athletes'][$s];
+                }
+                logmsg('átvett meccs az előző kártyáról (a UFC.com-oldalról hiányzik, az ESPN-en megvan): '
+                    . implode(', ', array_map(fn($f) => $f['a']['slug'] . ' vs ' . $f['b']['slug'], $kept)));
+            }
+        } catch (Throwable $e) {
+            logmsg('előző kártya átvétele kihagyva: ' . $e->getMessage());
+        }
+    }
+    if ($espn) $espn['match'] = espn_match($data['fights'], $espn['event']);
     $match = $espn['match'] ?? [];
     logmsg(sprintf('ESPN: %s, párosítva %d/%d meccs', $espn ? $espn['event']['name'] : 'nincs találat', count($match), count($data['fights'])));
 
