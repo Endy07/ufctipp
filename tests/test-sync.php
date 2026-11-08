@@ -32,6 +32,23 @@ test('test_parse_event_333', function () use ($fx) {
     check('test_parse_event_333: címmeccs jelölve', $ev['fights'][0]['titleBout'] === true);
 });
 
+test('test_parse_event_azonosito_nelkul', function () use ($fx) {
+    // a UFC.com néha azonosító (data-fmid) nélkül adja a meccseket → ideiglenes, versenyzőpárból képzett negatív id
+    $html = preg_replace('/\sdata-fmid="[^"]*"/', '', file_get_contents("$fx/ufc-333.html"));
+    $ev = parse_event($html);
+    $ids = array_column($ev['fights'], 'id');
+    check('test_parse_event_azonosito_nelkul: 14 meccs marad', count($ev['fights']) === 14, (string) count($ev['fights']));
+    check('test_parse_event_azonosito_nelkul: minden id negatív', count(array_filter($ids, fn($i) => $i < 0)) === 14);
+    check('test_parse_event_azonosito_nelkul: az id-k egyediek', count(array_unique($ids)) === 14);
+    $f = $ev['fights'][0];
+    $pair = [$f['a']['slug'], $f['b']['slug']];
+    sort($pair);
+    $want = -(1 + crc32(implode('|', $pair)) % 2000000000);
+    check('test_parse_event_azonosito_nelkul: id = a rendezett pár crc32-je', $f['id'] === $want, $f['id'] . ' vs ' . $want);
+    $ev2 = parse_event($html);
+    check('test_parse_event_azonosito_nelkul: determinisztikus', array_column($ev2['fights'], 'id') === $ids);
+});
+
 test('test_parse_results_past', function () use ($fx) {
     $res = parse_results(file_get_contents("$fx/ufc-332.html"));
     $withWinner = array_filter($res, fn($r) => in_array($r['winner'], ['A', 'B'], true));
