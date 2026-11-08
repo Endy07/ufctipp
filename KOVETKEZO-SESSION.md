@@ -21,7 +21,7 @@ Pontos zárás (migrate-005) és módtipp (migrate-006) élesben (a módtipp az�
 - **Adatbázis-migrációk:** `schema.sql` + `migrate-002`–`009` élesben (001 nincs külön fájl; `schema.sql` az alap) (007: módtipp ki, 2026-10-31; 008 + 009: 2026-11-07). A korai zárást a menetrendi `lock_at` és az ESPN `in`/period 0 okozta (javítva).
 - **Automatika:** Supabase `pg_cron` `ufctipp-espn` 10 másodpercenként (`espn_tick`; gála idején ≤ 8 s-onként kér az ESPN-től, egyébként 55 s);
   a gépen a „UfcTipp szinkron” ütemezett feladat 5 percenként (`lock_at` már nem kerül be). Az admin-PIN a felhasználónál és a `tools/sync.local.json`-ban (gitignore).
-- **Tesztek:** `php tests/test-sync.php` 28/28 (11-08: + a `parse_event()` azonosító nélküli ága) · `supabase/test-002`…`test-006.sql`, `test-008.sql`, `test-009.sql` OK (élesben futtatva) · `node tests/test-stats.js` 14/14.
+- **Tesztek:** `php tests/test-sync.php` 28/28 (11-08: + a `parse_event()` azonosító nélküli ága) · `supabase/test-002`…`test-006.sql`, `test-008.sql`, `test-009.sql`, `test-011.sql` OK (élesben futtatva) · `node tests/test-stats.js` 14/14.
   Visszajátszás a 2026-10-17-i Fight Nighttal: 13/13 helyes győztes; élő `pg_net`-próba: HTTP 200, helyes eredmény.
 
 ## A felhasználó döntései (2026-10-21)
